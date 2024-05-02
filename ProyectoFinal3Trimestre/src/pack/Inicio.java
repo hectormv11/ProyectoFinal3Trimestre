@@ -18,6 +18,7 @@ import java.awt.Font;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 
 public class Inicio extends JFrame {
 	
@@ -46,6 +47,8 @@ public class Inicio extends JFrame {
 	 * Create the frame.
 	 */
 	public Inicio() {
+		setTitle("LA HUCHA DEL C€RDITO");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Inicio.class.getResource("/resources/presupuesto (1).png")));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 600);
