@@ -24,11 +24,12 @@ public class UsuariosBD {
 
 		if(rs != null) {
 			rs.next();
+			int id = rs.getInt(1);
 			//Me salto la conrtaseña
 			String nombre = rs.getString(3);
 			String email = rs.getString(4);
 
-			Usuario user_devolver = new Usuario(rs.getString(2), nombre, email);
+			Usuario user_devolver = new Usuario(id, rs.getString(2), nombre, email);
 
 			return user_devolver;
 		}

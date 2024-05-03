@@ -53,7 +53,7 @@ public class Inicio extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Inicio.class.getResource("/resources/presupuesto (1).png")));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(650, 100, 500, 600);
+		setBounds(700, 100, 500, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
