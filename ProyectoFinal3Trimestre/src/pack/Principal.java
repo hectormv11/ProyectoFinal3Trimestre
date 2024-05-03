@@ -173,16 +173,24 @@ public class Principal extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JButton btnNewButton_1 = new JButton("Añadir");
-		btnNewButton_1.setBounds(213, 439, 66, 66);
-		contentPane.add(btnNewButton_1);
 		Border bordeBotonAñadir = BorderFactory.createLineBorder(Color.WHITE, 0);
-		btnNewButton_1.setBorder(bordeBotonAñadir);
+		
+		JLabel lblNewLabel_6 = new JLabel("");
+		lblNewLabel_6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				
+				
+			}
+		});
+		lblNewLabel_6.setIcon(new ImageIcon(Principal.class.getResource("/resources/mas (1).png")));
+		lblNewLabel_6.setBounds(210, 440, 64, 64);
+		contentPane.add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_5 = new JLabel("");
 		lblNewLabel_5.setForeground(new Color(0, 0, 0));
-		lblNewLabel_5.setBounds(10, 114, 464, 300);
+		lblNewLabel_5.setBounds(10, 92, 464, 337);
 		contentPane.add(lblNewLabel_5);
 		
 		Border border = BorderFactory.createLineBorder(Color.WHITE, 2);
@@ -192,7 +200,7 @@ public class Principal extends JFrame {
 		lblNewLabel_6_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_6_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_6_1.setFont(new Font("Dialog", Font.PLAIN, 24));
-		lblNewLabel_6_1.setBounds(118, 52, 263, 40);
+		lblNewLabel_6_1.setBounds(111, 48, 263, 40);
 		contentPane.add(lblNewLabel_6_1);
 		
 		JLabel fondo = new JLabel("");
