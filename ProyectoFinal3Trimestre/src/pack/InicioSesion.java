@@ -32,6 +32,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
 
 public class InicioSesion extends JFrame {
 
@@ -70,6 +71,7 @@ public class InicioSesion extends JFrame {
 		contentPane.setLayout(null);
 
 		textoContraseña = new JPasswordField();
+		textoContraseña.setEchoChar('*');
 		textoContraseña.setBounds(162, 215, 160, 20);
 		contentPane.add(textoContraseña);
 
@@ -123,29 +125,6 @@ public class InicioSesion extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon(InicioSesion.class.getResource("/resources/fondo-pantalla-fondo-concepto-negocio-patrones-fisuras-finanzas-o-economia_78677-9986 (1) (1).jpg")));
 		lblNewLabel.setBounds(0, 0, 484, 561);
 		contentPane.add(lblNewLabel);
-		
-		//Intento de key listener
-		
-		contentPane.setFocusable(true);
-		
-		contentPane.addKeyListener(new KeyListener(){
-            public void keyTyped(KeyEvent e){
-                //Aqui no funcionara
-            }
-            public void keyPressed(KeyEvent e){
-                if(e.getKeyCode()==KeyEvent.VK_ENTER){
-                    //JOptionPane.showMessageDialog(contentPane, "Has pulsado Enter");
-                	
-                	btnNewButton.doClick(0);
-                }
-                /*if(e.getKeyCode()==KeyEvent.VK_ESCAPE){
-                    System.exit(0);
-                }*/
-            }
-            public void keyReleased(KeyEvent e){
-                //Aqui tambien puedes insertar el codigo
-            }
-        });
 	}
 	
 }

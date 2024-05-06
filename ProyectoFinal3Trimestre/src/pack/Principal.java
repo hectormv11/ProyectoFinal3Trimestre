@@ -56,7 +56,8 @@ public class Principal extends JFrame {
 		setJMenuBar(menuBar);
 		
 		JMenu mnNewMenu = new JMenu("");
-		mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/resources/menu.png")));
+		mnNewMenu.setContentAreaFilled(false);
+		mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/resources/menu (1).png")));
 		mnNewMenu.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mnNewMenu.setFont(new Font("Gill Sans MT", Font.PLAIN, 20));
 		menuBar.add(mnNewMenu);
@@ -68,6 +69,11 @@ public class Principal extends JFrame {
 		lblNewLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
+				PerfilDeUsuario ibc = new PerfilDeUsuario(usuario_logeado);
+				ibc.show();
+				dispose();
+				
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -148,7 +154,7 @@ public class Principal extends JFrame {
 		lblNewLabel_3.setFont(new Font("Gill Sans MT", Font.PLAIN, 17));
 		mnNewMenu.add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_4 = new JLabel("           ");
+		JLabel lblNewLabel_4 = new JLabel("                        ");
 		menuBar.add(lblNewLabel_4);
 		
 		JComboBox comboBox = new JComboBox();
@@ -159,11 +165,13 @@ public class Principal extends JFrame {
 		String[] listado = CuentasBD.getCuentas(usuario_logeado);
 		comboBox.setModel(new DefaultComboBoxModel(listado));
 		
-		JLabel lblNewLabel_4_1 = new JLabel("      ");
+		JLabel lblNewLabel_4_1 = new JLabel("            ");
 		menuBar.add(lblNewLabel_4_1);
 		
 		JButton btnNewButton = new JButton("");
-		btnNewButton.setIcon(new ImageIcon(Principal.class.getResource("/resources/transaccion (2).png")));
+		btnNewButton.setBorderPainted(false);
+		btnNewButton.setContentAreaFilled(false);
+		btnNewButton.setIcon(new ImageIcon(Principal.class.getResource("/resources/archivos.png")));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}

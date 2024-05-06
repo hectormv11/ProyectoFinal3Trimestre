@@ -38,7 +38,7 @@ public class UsuariosBD {
 
 	}
 	
-	public static int registrarse(String usuario, String contraseña, String email) throws SQLException {
+	public static int registrarse(String nombre, String contraseña, String email) throws SQLException {
 
 		Conexion con = new Conexion();
 		Connection link = con.abrirConsulta();
@@ -47,9 +47,9 @@ public class UsuariosBD {
 
 		PreparedStatement ps = link.prepareStatement(consulta);
 
-		ps.setString(2, contraseña);
-		ps.setString(3, usuario);
-		ps.setString(4, email);
+		ps.setString(1, contraseña);
+		ps.setString(2, nombre);
+		ps.setString(3, email);
 
 		if(ps.execute()) {
 			return 1;
@@ -57,6 +57,26 @@ public class UsuariosBD {
 
 		return 0;
 
+	}
+	
+	public static int actualizarContraseña(Usuario usuario, String contraseña) throws SQLException {
+		
+		Conexion con = new Conexion();
+		Connection link = con.abrirConsulta();
+
+		String consulta = "UPDATE usuarios SET password = ? WHERE id_usuario = ?";
+
+		PreparedStatement ps = link.prepareStatement(consulta);
+
+		ps.setString(1, contraseña);
+		ps.setInt(2, usuario.getId());
+
+		if(ps.execute()) {
+			return 1;
+		}
+
+		return 0;
+		
 	}
 
 }
