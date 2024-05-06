@@ -11,28 +11,12 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-import javax.swing.JToolBar;
 import javax.swing.JButton;
-import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
-import javax.swing.JMenu;
-import javax.swing.JList;
-import javax.swing.JSeparator;
-import javax.swing.JFormattedTextField;
-import javax.swing.JScrollBar;
-import javax.swing.JProgressBar;
-import javax.swing.JTable;
-import javax.swing.JEditorPane;
-import javax.swing.JComboBox;
-import javax.swing.JToggleButton;
-import javax.swing.DefaultSingleSelectionModel;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyAdapter;
 
 public class InicioSesion extends JFrame {
 

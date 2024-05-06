@@ -1,34 +1,39 @@
 package pack;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
 public class TransaccionesBD {
 	
-	public static Transaccion doLogin(String usuario, String contraseña) throws SQLException {
+	public static Transaccion[] getTransacciones(String nombreCuenta) throws SQLException {
+		
+		
 
 		Conexion con = new Conexion();
 		Connection link = con.abrirConsulta();
 
-		String consulta = "SELECT * FROM usuarios WHERE nombre = ? AND BINARY password = ?";
+		String consulta = "SELECT * FROM transaccion WHERE cuenta = ?";
 
 		PreparedStatement ps = link.prepareStatement(consulta);
 
-		ps.setString(1, usuario);
-		ps.setString(2, contraseña);
+		ps.setString(1, nombreCuenta);
 
 		ResultSet rs = ps.executeQuery();
 
 		if(rs != null) {
 			rs.next();
 			int id = rs.getInt(1);
-			//Me salto la conrtaseña
-			String nombre = rs.getString(3);
-			String email = rs.getString(4);
+			Double cant = rs.getDouble(2);
+			String cuenta = rs.getString(3);
+			String categoria = rs.getString(4);
+			Date fecha = rs.getDate(5);
+			String tipo = rs.getString(6);
 
-			Usuario user_devolver = new Usuario(id, rs.getString(2), nombre, email);
+			Transaccion transaccion_devolver = new Transaccion(id, cant, null, null, fecha, categoria, tipo);
 
 			return null;
 		}

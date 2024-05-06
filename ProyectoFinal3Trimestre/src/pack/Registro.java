@@ -159,12 +159,12 @@ public class Registro extends JFrame {
 				if(numPulsaciones%2 == 0) {
 					passwordField.setEchoChar('*');
 					passwordField_2.setEchoChar('*');
-					ImageIcon icono = new ImageIcon("src/resources/ojo.png");
+					ImageIcon icono = new ImageIcon("ProyectoFinal3Trimestre/src/resources/ojo.png");
 					btnNewButton_1.setIcon(icono);
 				}else {
 					passwordField.setEchoChar((char)0);
 					passwordField_2.setEchoChar((char)0);
-					ImageIcon icono = new ImageIcon("src/resources/ojo (1).png");
+					ImageIcon icono = new ImageIcon("ProyectoFinal3Trimestre/src/resources/ojo (1).png");
 					btnNewButton_1.setIcon(icono);
 				}
 				

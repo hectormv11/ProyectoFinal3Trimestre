@@ -1,13 +1,16 @@
 package pack;
 
+import java.sql.Date;
+
 public class Transaccion {
 	
 	private int id;
 	private double cantidad;
-	private Usuario user;
+	private String cuenta;
 	private Categoria cat;
 	private String comentario;
-	private char tipo;
+	private String tipo;
+	private Date fecha;
 	
 	public String getComentario() {
 		return comentario;
@@ -15,10 +18,10 @@ public class Transaccion {
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}
-	public char getTipo() {
+	public String getTipo() {
 		return tipo;
 	}
-	public void setTipo(char tipo) {
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 	public int getId() {
@@ -33,11 +36,11 @@ public class Transaccion {
 	public void setCantidad(double cantidad) {
 		this.cantidad = cantidad;
 	}
-	public Usuario getUser() {
-		return user;
+	public Cuenta getUser() {
+		return cuenta;
 	}
-	public void setUser(Usuario user) {
-		this.user = user;
+	public void setUser(Cuenta cuenta) {
+		this.cuenta = cuenta;
 	}
 	public Categoria getCat() {
 		return cat;
@@ -46,17 +49,25 @@ public class Transaccion {
 		this.cat = cat;
 	}
 	
-	public Transaccion(int id, double cantidad, Usuario user, Categoria cat, String comentario, char tipo) {
+	public Transaccion(int id, double cantidad, Cuenta cuenta, Categoria cat, Date fecha, String comentario, String tipo) {
 		
 		this.id = id;
 		this.cantidad = cantidad;
-		this.user = user;
+		this.cuenta = cuenta;
 		this.cat = cat;
 		this.comentario = comentario;
 		this.tipo = tipo;
+		this.fecha = fecha;
 	}
+	
 	@Override
 	public String toString() {
 		return "Transaccion: " + id + ", cantidad -> " + cantidad + ", + Categoria -> " + cat + "]";
+	}
+	public Date getFecha() {
+		return fecha;
+	}
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 }

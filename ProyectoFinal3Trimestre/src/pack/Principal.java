@@ -5,18 +5,23 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-
+import javax.swing.border.EtchedBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JLabel;
 import java.awt.Rectangle;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
+
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -29,6 +34,10 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.border.LineBorder;
+import javax.swing.Box;
 
 
 public class Principal extends JFrame {
@@ -183,6 +192,13 @@ public class Principal extends JFrame {
 		contentPane.setLayout(null);
 		Border bordeBotonAñadir = BorderFactory.createLineBorder(Color.WHITE, 0);
 		
+		JLabel lblNewLabel_6_1 = new JLabel("Ultimas transacciones");
+		lblNewLabel_6_1.setForeground(new Color(255, 255, 255));
+		lblNewLabel_6_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_6_1.setFont(new Font("Dialog", Font.PLAIN, 24));
+		lblNewLabel_6_1.setBounds(111, 48, 263, 40);
+		contentPane.add(lblNewLabel_6_1);
+		
 		JLabel lblNewLabel_6 = new JLabel("");
 		lblNewLabel_6.addMouseListener(new MouseAdapter() {
 			@Override
@@ -196,20 +212,20 @@ public class Principal extends JFrame {
 		lblNewLabel_6.setBounds(210, 440, 64, 64);
 		contentPane.add(lblNewLabel_6);
 		
-		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setForeground(new Color(0, 0, 0));
-		lblNewLabel_5.setBounds(10, 92, 464, 337);
-		contentPane.add(lblNewLabel_5);
+		JPanel panelContenedor = new JPanel();
+		panelContenedor.setBounds(10, 99, 464, 330);
+		contentPane.add(panelContenedor);
+		panelContenedor.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		Border border = BorderFactory.createLineBorder(Color.WHITE, 2);
-		lblNewLabel_5.setBorder(border);
+		JScrollPane scrollPane = new JScrollPane();
+		panelContenedor.add(scrollPane);
 		
-		JLabel lblNewLabel_6_1 = new JLabel("Ultimas transacciones");
-		lblNewLabel_6_1.setForeground(new Color(255, 255, 255));
-		lblNewLabel_6_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_6_1.setFont(new Font("Dialog", Font.PLAIN, 24));
-		lblNewLabel_6_1.setBounds(111, 48, 263, 40);
-		contentPane.add(lblNewLabel_6_1);
+		Box container = Box.createVerticalBox();
+		scrollPane.setViewportView(container);
+		
+		for(int i=0;i<10;i++) {
+			container.add(getExamplePanel());
+		}
 		
 		JLabel fondo = new JLabel("");
 		fondo.setIcon(new ImageIcon(Principal.class.getResource("/resources/fondoPizarra.jpg")));
@@ -218,15 +234,53 @@ public class Principal extends JFrame {
 		
 	}
 	
-	public void reproducirSonido(String filePath) {
-        try {
-            File file = new File(filePath);
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	public JPanel getExamplePanel(Transaccion trans) {
+		
+		JPanel examplePanel = new JPanel();
+		examplePanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		
+		JLabel imagen_1 = new JLabel("" + trans.getCantidad());
+		
+		JLabel nombreProducto_1 = new JLabel("Coca Cola 2L.");
+		nombreProducto_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		nombreProducto_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		
+		JLabel precioProducto_1 = new JLabel("2.49 €");
+		precioProducto_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		
+		
+		GroupLayout gl_examplePanel = new GroupLayout(examplePanel);
+		gl_examplePanel.setHorizontalGroup(
+			gl_examplePanel.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 271, Short.MAX_VALUE)
+				.addGroup(gl_examplePanel.createSequentialGroup()
+					.addGap(8)
+					.addComponent(imagen_1, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+					.addGap(10)
+					.addGroup(gl_examplePanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(nombreProducto_1, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE)
+						.addComponent(precioProducto_1, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_examplePanel.createSequentialGroup()
+							.addGap(102))))
+		);
+		gl_examplePanel.setVerticalGroup(
+			gl_examplePanel.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 91, Short.MAX_VALUE)
+				.addGroup(gl_examplePanel.createSequentialGroup()
+					.addGap(9)
+					.addGroup(gl_examplePanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(imagen_1, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_examplePanel.createSequentialGroup()
+							.addComponent(nombreProducto_1, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+							.addGap(3)
+							.addComponent(precioProducto_1)
+							.addGap(12))))
+		);
+		examplePanel.setLayout(gl_examplePanel);
+		return examplePanel;
+	}
+	
+	/*
+	
+	*/
 }
