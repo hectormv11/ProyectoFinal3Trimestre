@@ -1,7 +1,5 @@
 package pack;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -119,25 +117,39 @@ public class AñadirCuenta extends JFrame {
 			}
 		}
 
-		textField.setText(c.getNombre());
-		String saldo = String.valueOf(c.getSaldo());
-		textField_1.setText(saldo);
-		
 		comboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
+				
+				Cuenta[] listado = null;
+				try {
+					listado = CuentasBD.getCuentas(usuario_logeado);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				String[] cuentasS = new String[listado.length];
 
+				for (int i = 0; i < cuentasS.length; i++) {
+					cuentasS[i] = listado[i].toString();
+				}
+				
 				for (int i = 0; i < listado.length; i++) {
 					if(listado[i].toString().equals(comboBox.getSelectedItem())) {
 						c = listado[i];
 
 					}
 				}
+				
 				textField.setText(c.getNombre());
 				String saldo = String.valueOf(c.getSaldo());
 				textField_1.setText(saldo);
 
 			}
 		});
+		
+		textField.setText(c.getNombre());
+		String saldo = String.valueOf(c.getSaldo());
+		textField_1.setText(saldo);
 		
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {

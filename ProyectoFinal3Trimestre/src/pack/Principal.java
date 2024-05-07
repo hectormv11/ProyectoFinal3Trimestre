@@ -289,68 +289,6 @@ public class Principal extends JFrame {
 		
 	}
 	
-    /*public JPanel getExamplePanel(Transaccion trans) {
-        JPanel examplePanel = new JPanel();
-        examplePanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-
-        JLabel cantidadLabel = new JLabel("Cantidad:");
-        JLabel cantidadValueLabel = new JLabel(String.valueOf(trans.getCantidad()));
-
-        JLabel categoriaLabel = new JLabel("Categoría:");
-        JLabel categoriaValueLabel = new JLabel(trans.getCat().getNombre());
-
-        JLabel comentarioLabel = new JLabel("Comentario:");
-        JLabel comentarioValueLabel = new JLabel(trans.getComentario());
-
-        JLabel fechaLabel = new JLabel("Fecha:");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        JLabel fechaValueLabel = new JLabel(dateFormat.format(trans.getFecha()));
-
-        GroupLayout layout = new GroupLayout(examplePanel);
-        examplePanel.setLayout(layout);
-
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(cantidadLabel)
-                        .addComponent(categoriaLabel)
-                        .addComponent(comentarioLabel)
-                        .addComponent(fechaLabel))
-                    .addGap(18, 18, 18)
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(cantidadValueLabel)
-                        .addComponent(categoriaValueLabel)
-                        .addComponent(comentarioValueLabel)
-                        .addComponent(fechaValueLabel))
-                    .addContainerGap(150, Short.MAX_VALUE))
-        );
-
-        layout.setVerticalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(cantidadLabel)
-                        .addComponent(cantidadValueLabel))
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(categoriaLabel)
-                        .addComponent(categoriaValueLabel))
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(comentarioLabel)
-                        .addComponent(comentarioValueLabel))
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(fechaLabel)
-                        .addComponent(fechaValueLabel))
-                    .addContainerGap(26, Short.MAX_VALUE))
-        );
-
-        return examplePanel;
-    }*/
 	
 	public JPanel getExamplePanel(Transaccion trans) {
 		
