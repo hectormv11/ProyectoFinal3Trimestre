@@ -38,7 +38,7 @@ import java.awt.event.ItemEvent;
 public class Principal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+	private JPanel panelTransacciones;
 	private JLabel lblNewLabel;
 	Cuenta c;
 
@@ -165,8 +165,8 @@ public class Principal extends JFrame {
 		JComboBox comboBox = new JComboBox();
 		comboBox.setFont(new Font("Dialog", Font.PLAIN, 13));
 		menuBar.add(comboBox);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panelTransacciones = new JPanel();
+		panelTransacciones.setBorder(new EmptyBorder(5, 5, 5, 5));
 		Cuenta[] listado = CuentasBD.getCuentas(usuario_logeado);
 		String[] cuentasS = new String[listado.length];
 		
@@ -191,8 +191,8 @@ public class Principal extends JFrame {
 		btnNewButton.setFont(new Font("Dialog", Font.PLAIN, 15));
 		menuBar.add(btnNewButton);
 
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		setContentPane(panelTransacciones);
+		panelTransacciones.setLayout(null);
 		Border bordeBotonAñadir = BorderFactory.createLineBorder(Color.WHITE, 0);
 		
 		JLabel lblNewLabel_6_1 = new JLabel("Ultimas transacciones");
@@ -200,7 +200,7 @@ public class Principal extends JFrame {
 		lblNewLabel_6_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_6_1.setFont(new Font("Dialog", Font.PLAIN, 24));
 		lblNewLabel_6_1.setBounds(111, 48, 263, 40);
-		contentPane.add(lblNewLabel_6_1);
+		panelTransacciones.add(lblNewLabel_6_1);
 		
 		JLabel lblNewLabel_6 = new JLabel("");
 		lblNewLabel_6.addMouseListener(new MouseAdapter() {
@@ -213,11 +213,11 @@ public class Principal extends JFrame {
 		});
 		lblNewLabel_6.setIcon(new ImageIcon(Principal.class.getResource("/resources/mas (1).png")));
 		lblNewLabel_6.setBounds(210, 440, 64, 64);
-		contentPane.add(lblNewLabel_6);
+		panelTransacciones.add(lblNewLabel_6);
 		
 		JPanel panelContenedor = new JPanel();
 		panelContenedor.setBounds(10, 99, 464, 330);
-		contentPane.add(panelContenedor);
+		panelTransacciones.add(panelContenedor);
 		panelContenedor.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -238,8 +238,8 @@ public class Principal extends JFrame {
 		comboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				
-				
 				container.removeAll();
+				container.setVisible(false);
 				for (int i = 0; i < listado.length; i++) {
 					if(listado[i].toString().equals(comboBox.getSelectedItem())) {
 						c = listado[i];
@@ -264,7 +264,7 @@ public class Principal extends JFrame {
 		        	container.add(getExamplePanel(trans[i]));
 		        }
 				
-				
+		    	container.setVisible(true);
 			}
 		});
 		
@@ -283,7 +283,7 @@ public class Principal extends JFrame {
 		JLabel fondo = new JLabel("");
 		fondo.setIcon(new ImageIcon(Principal.class.getResource("/resources/fondoPizarra.jpg")));
 		fondo.setBounds(0, -32, 484, 561);
-		contentPane.add(fondo);
+		panelTransacciones.add(fondo);
 		
 		
 		
