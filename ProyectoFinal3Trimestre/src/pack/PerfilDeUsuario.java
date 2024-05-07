@@ -22,23 +22,12 @@ public class PerfilDeUsuario extends JFrame {
 	private JPanel contentPane;
 	private JPasswordField passwordTexto;
 	int numPulsaciones = 0;
-	static Usuario user;
+	
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PerfilDeUsuario frame = new PerfilDeUsuario(user);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
@@ -71,6 +60,28 @@ public class PerfilDeUsuario extends JFrame {
 
 			}
 		});
+		
+		JButton añadirCuenta = new JButton("");
+		añadirCuenta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					AñadirCuenta ac = new AñadirCuenta(user);
+					ac.show();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				dispose();
+				
+			}
+		});
+		añadirCuenta.setIcon(new ImageIcon(PerfilDeUsuario.class.getResource("/resources/cuenta-bancaria.png")));
+		añadirCuenta.setContentAreaFilled(false);
+		añadirCuenta.setBorderPainted(false);
+		añadirCuenta.setBounds(209, 440, 64, 64);
+		contentPane.add(añadirCuenta);
 		btnNewButton.setIcon(new ImageIcon(PerfilDeUsuario.class.getResource("/resources/izquierda.png")));
 		btnNewButton.setContentAreaFilled(false);
 		btnNewButton.setBounds(10, 11, 64, 64);
