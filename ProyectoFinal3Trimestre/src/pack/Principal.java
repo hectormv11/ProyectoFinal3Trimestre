@@ -1,8 +1,5 @@
 package pack;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -16,8 +13,6 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JLabel;
-import java.awt.Rectangle;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -25,19 +20,19 @@ import java.awt.GridLayout;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.awt.Cursor;
-import java.awt.Insets;
-import java.awt.Point;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
-import javax.swing.JSpinner;
-import javax.swing.border.LineBorder;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle;
 import javax.swing.Box;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 
 public class Principal extends JFrame {
@@ -45,7 +40,7 @@ public class Principal extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JLabel lblNewLabel;
-	
+	Cuenta c;
 
 	/**
 	 * Launch the application.
@@ -56,6 +51,7 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
+	@SuppressWarnings("rawtypes")
 	public Principal(Usuario usuario_logeado) throws SQLException {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -171,8 +167,15 @@ public class Principal extends JFrame {
 		menuBar.add(comboBox);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		String[] listado = CuentasBD.getCuentas(usuario_logeado);
-		comboBox.setModel(new DefaultComboBoxModel(listado));
+		Cuenta[] listado = CuentasBD.getCuentas(usuario_logeado);
+		String[] cuentasS = new String[listado.length];
+		
+		for (int i = 0; i < cuentasS.length; i++) {
+			cuentasS[i] = listado[i].toString();
+		}
+		
+		comboBox.setModel(new DefaultComboBoxModel(cuentasS));
+		
 		
 		JLabel lblNewLabel_4_1 = new JLabel("            ");
 		menuBar.add(lblNewLabel_4_1);
@@ -223,64 +226,130 @@ public class Principal extends JFrame {
 		Box container = Box.createVerticalBox();
 		scrollPane.setViewportView(container);
 		
-		for(int i=0;i<10;i++) {
-			container.add(getExamplePanel());
+		
+		
+		for (int i = 0; i < listado.length; i++) {
+			if(listado[i].toString().equals(comboBox.getSelectedItem())) {
+				c = listado[i];
+				
+			}
 		}
 		
+		comboBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				
+				
+				container.removeAll();
+				for (int i = 0; i < listado.length; i++) {
+					if(listado[i].toString().equals(comboBox.getSelectedItem())) {
+						c = listado[i];
+						
+					}
+				}
+				Transaccion[] trans = null;
+				try {
+					trans = TransaccionesBD.getTransacciones(c, usuario_logeado);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				int startIndex = 0;
+				
+				if(trans.length > 10) {
+					startIndex = trans.length - 10;
+				}
+				
+		        for (int i = startIndex; i < trans.length; i++) {
+		        	container.add(getExamplePanel(trans[i]));
+		        }
+				
+				
+			}
+		});
+		
+		Transaccion[] trans = TransaccionesBD.getTransacciones(c, usuario_logeado);
+		
+		int startIndex = 0;
+		
+		if(trans.length > 10) {
+			startIndex = trans.length - 10;
+		}
+		
+        for (int i = startIndex; i < trans.length; i++) {
+        	container.add(getExamplePanel(trans[i]));
+        }
+	
 		JLabel fondo = new JLabel("");
 		fondo.setIcon(new ImageIcon(Principal.class.getResource("/resources/fondoPizarra.jpg")));
 		fondo.setBounds(0, -32, 484, 561);
 		contentPane.add(fondo);
 		
+		
+		
 	}
 	
-	public JPanel getExamplePanel(Transaccion trans) {
-		
-		JPanel examplePanel = new JPanel();
-		examplePanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		
-		JLabel imagen_1 = new JLabel("" + trans.getCantidad());
-		
-		JLabel nombreProducto_1 = new JLabel("Coca Cola 2L.");
-		nombreProducto_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		nombreProducto_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		
-		JLabel precioProducto_1 = new JLabel("2.49 €");
-		precioProducto_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		
-		
-		GroupLayout gl_examplePanel = new GroupLayout(examplePanel);
-		gl_examplePanel.setHorizontalGroup(
-			gl_examplePanel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 271, Short.MAX_VALUE)
-				.addGroup(gl_examplePanel.createSequentialGroup()
-					.addGap(8)
-					.addComponent(imagen_1, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
-					.addGap(10)
-					.addGroup(gl_examplePanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(nombreProducto_1, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE)
-						.addComponent(precioProducto_1, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_examplePanel.createSequentialGroup()
-							.addGap(102))))
-		);
-		gl_examplePanel.setVerticalGroup(
-			gl_examplePanel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 91, Short.MAX_VALUE)
-				.addGroup(gl_examplePanel.createSequentialGroup()
-					.addGap(9)
-					.addGroup(gl_examplePanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(imagen_1, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_examplePanel.createSequentialGroup()
-							.addComponent(nombreProducto_1, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-							.addGap(3)
-							.addComponent(precioProducto_1)
-							.addGap(12))))
-		);
-		examplePanel.setLayout(gl_examplePanel);
-		return examplePanel;
-	}
+    public JPanel getExamplePanel(Transaccion trans) {
+        JPanel examplePanel = new JPanel();
+        examplePanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+
+        JLabel cantidadLabel = new JLabel("Cantidad:");
+        JLabel cantidadValueLabel = new JLabel(String.valueOf(trans.getCantidad()));
+
+        JLabel categoriaLabel = new JLabel("Categoría:");
+        JLabel categoriaValueLabel = new JLabel(trans.getCat().getNombre());
+
+        JLabel comentarioLabel = new JLabel("Comentario:");
+        JLabel comentarioValueLabel = new JLabel(trans.getComentario());
+
+        JLabel fechaLabel = new JLabel("Fecha:");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        JLabel fechaValueLabel = new JLabel(dateFormat.format(trans.getFecha()));
+
+        GroupLayout layout = new GroupLayout(examplePanel);
+        examplePanel.setLayout(layout);
+
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(cantidadLabel)
+                        .addComponent(categoriaLabel)
+                        .addComponent(comentarioLabel)
+                        .addComponent(fechaLabel))
+                    .addGap(18, 18, 18)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(cantidadValueLabel)
+                        .addComponent(categoriaValueLabel)
+                        .addComponent(comentarioValueLabel)
+                        .addComponent(fechaValueLabel))
+                    .addContainerGap(150, Short.MAX_VALUE))
+        );
+
+        layout.setVerticalGroup(
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(cantidadLabel)
+                        .addComponent(cantidadValueLabel))
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(categoriaLabel)
+                        .addComponent(categoriaValueLabel))
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(comentarioLabel)
+                        .addComponent(comentarioValueLabel))
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(fechaLabel)
+                        .addComponent(fechaValueLabel))
+                    .addContainerGap(26, Short.MAX_VALUE))
+        );
+
+        return examplePanel;
+    }
 	
-	/*
-	
-	*/
 }

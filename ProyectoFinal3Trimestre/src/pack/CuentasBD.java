@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public class CuentasBD {
 	
-	public static String[] getCuentas(Usuario user) throws SQLException {
+	public static Cuenta[] getCuentas(Usuario user) throws SQLException {
 		
-		ArrayList<String> lista = new ArrayList<String>();
+		ArrayList<Cuenta> lista = new ArrayList<Cuenta>();
 
 		Conexion con = new Conexion();
 		Connection link = con.abrirConsulta();
@@ -25,14 +25,16 @@ public class CuentasBD {
 		
 		if(rs != null) {
 			while(rs.next()) {
-				//Me salto la conrtaseña
-				String nombre = rs.getString(1);
-				String saldo = rs.getString(3);
-				lista.add(nombre + " - " + saldo +"€");					
+				int id = rs.getInt(1);
+				String nombre = rs.getString(2);
+				double saldo = rs.getDouble(4);
+				
+				Cuenta c = new Cuenta(id, nombre, user, saldo);
+				lista.add(c);					
 			}
 		}
 		
-		String[] array = new String[lista.size()];
+		Cuenta[] array = new Cuenta[lista.size()];
 
 		for (int i = 0; i < array.length; i++) {
 
@@ -42,6 +44,37 @@ public class CuentasBD {
 
 		return array;
 
+	}
+	
+	public static Cuenta getCuenta(int numCuenta, Usuario user) throws SQLException {
+		
+
+		Conexion con = new Conexion();
+		Connection link = con.abrirConsulta();
+
+		String consulta = "SELECT * FROM cuentas WHERE id_cuenta = ?";
+
+		PreparedStatement ps = link.prepareStatement(consulta);
+
+		ps.setInt(1, numCuenta);
+
+		ResultSet rs = ps.executeQuery();
+		
+		Cuenta c = null;
+		
+		if(rs != null) {
+			while(rs.next()) {
+				int id = rs.getInt(1);
+				String nombre = rs.getString(2);
+				double saldo = rs.getDouble(4);
+				
+				c = new Cuenta(id, nombre, user, saldo);
+			}
+		}
+		
+
+		return c;
+		
 	}
 
 }

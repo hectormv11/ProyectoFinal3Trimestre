@@ -2,6 +2,7 @@ package pack;
 
 public class Cuenta {
 	
+	private int id;
 	private String nombre;
 	private Usuario user;
 	private double saldo;
@@ -25,15 +26,29 @@ public class Cuenta {
 		this.saldo = saldo;
 	}
 	
-	public Cuenta(String nombre, Usuario user, double saldo) {
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public Cuenta(int id, String nombre, Usuario user, double saldo) {
 		
+		this.id = id;
 		this.nombre = nombre;
 		this.user = user;
 		this.saldo = saldo;
 	}
+	
+	public Cuenta() {
+		
+	}
 	@Override
 	public String toString() {
-		return "Cuenta [nombre=" + nombre + ", user=" + user + ", saldo=" + saldo + "]";
+		return nombre + " - " + saldo;
 	}
-
+	
+	
+	
 }

@@ -13,7 +13,7 @@ public class UsuariosBD {
 		Conexion con = new Conexion();
 		Connection link = con.abrirConsulta();
 
-		String consulta = "SELECT * FROM usuarios WHERE nombre = ? AND BINARY password = ?";
+		String consulta = "SELECT * FROM usuarios WHERE nombre = ? AND BINARY contraseña = ?";
 
 		PreparedStatement ps = link.prepareStatement(consulta);
 
@@ -43,12 +43,12 @@ public class UsuariosBD {
 		Conexion con = new Conexion();
 		Connection link = con.abrirConsulta();
 
-		String consulta = "INSERT INTO usuarios (password, nombre, email) VALUES (?, ?, ?)";
+		String consulta = "INSERT INTO usuarios (nombre, contraseña, email) VALUES (?, ?, ?)";
 
 		PreparedStatement ps = link.prepareStatement(consulta);
 
-		ps.setString(1, contraseña);
-		ps.setString(2, nombre);
+		ps.setString(2, contraseña);
+		ps.setString(1, nombre);
 		ps.setString(3, email);
 
 		if(ps.execute()) {
@@ -64,7 +64,7 @@ public class UsuariosBD {
 		Conexion con = new Conexion();
 		Connection link = con.abrirConsulta();
 
-		String consulta = "UPDATE usuarios SET password = ? WHERE id_usuario = ?";
+		String consulta = "UPDATE usuarios SET contraseña = ? WHERE id_usuario = ?";
 
 		PreparedStatement ps = link.prepareStatement(consulta);
 

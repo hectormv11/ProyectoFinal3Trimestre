@@ -5,13 +5,14 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 public class TransaccionesBD {
-	
-	public static Transaccion[] getTransacciones(String nombreCuenta) throws SQLException {
-		
-		
+
+	public static Transaccion[] getTransacciones(Cuenta c, Usuario user) throws SQLException {
+
+		ArrayList<Transaccion> lista = new ArrayList<Transaccion>();
 
 		Conexion con = new Conexion();
 		Connection link = con.abrirConsulta();
@@ -20,25 +21,34 @@ public class TransaccionesBD {
 
 		PreparedStatement ps = link.prepareStatement(consulta);
 
-		ps.setString(1, nombreCuenta);
+		ps.setInt(1, c.getId());
 
 		ResultSet rs = ps.executeQuery();
 
 		if(rs != null) {
-			rs.next();
-			int id = rs.getInt(1);
-			Double cant = rs.getDouble(2);
-			String cuenta = rs.getString(3);
-			String categoria = rs.getString(4);
-			Date fecha = rs.getDate(5);
-			String tipo = rs.getString(6);
+			while(rs.next()) {
+				int id = rs.getInt(1);
+				Double cant = rs.getDouble(2);
+				String nombreCategoria = rs.getString(4);
+				Date fecha = rs.getDate(5);
+				String comentario = rs.getString(6);
+				String tipo = rs.getString(7);
 
-			Transaccion transaccion_devolver = new Transaccion(id, cant, null, null, fecha, categoria, tipo);
+				Categoria ca = new Categoria(nombreCategoria, user);
 
-			return null;
+				Transaccion actual = new Transaccion(id, cant, c, ca, fecha, comentario, tipo);
+
+				lista.add(actual);					
+			}
 		}
 
-		return null;
+		Transaccion[] array = new Transaccion[lista.size()];
+
+		for (int i = 0; i < array.length; i++) {
+			array[i] = lista.get(i);
+		}		
+
+		return array;
 
 	}	
 
