@@ -15,6 +15,9 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.Cursor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
 
 public class PerfilDeUsuario extends JFrame {
 
@@ -164,6 +167,24 @@ public class PerfilDeUsuario extends JFrame {
 		contentPane.add(chincheta);
 
 		JLabel iconoPerfil = new JLabel("");
+		iconoPerfil.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				
+				ImageIcon i = new ImageIcon(PerfilDeUsuario.class.getResource("/resources/real-madrid (1).png"));
+				iconoPerfil.setIcon(i);
+				chincheta.setVisible(false);
+				
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				
+				ImageIcon i = new ImageIcon(PerfilDeUsuario.class.getResource("/resources/usuario (1).png"));
+				iconoPerfil.setIcon(i);
+				chincheta.setVisible(true);
+				
+			}
+		});
 		iconoPerfil.setIcon(new ImageIcon(PerfilDeUsuario.class.getResource("/resources/usuario (1).png")));
 		iconoPerfil.setBounds(178, 102, 128, 128);
 		contentPane.add(iconoPerfil);

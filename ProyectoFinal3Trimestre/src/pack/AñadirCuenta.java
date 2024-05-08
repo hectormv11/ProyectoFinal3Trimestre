@@ -176,7 +176,10 @@ public class AñadirCuenta extends JFrame {
 					for (int i = 0; i < cuentasS.length; i++) {
 						cuentasS[i] = listado[i].toString();
 					}
+					
 					comboBox.setModel(new DefaultComboBoxModel(cuentasS));
+					String elegido = textField.getText()+ " - "+Double.parseDouble(textField_1.getText());
+					comboBox.setSelectedItem(elegido);
 					comboBox.setVisible(true);
 
 				}
