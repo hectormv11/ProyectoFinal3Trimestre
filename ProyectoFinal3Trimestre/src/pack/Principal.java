@@ -102,6 +102,9 @@ public class Principal extends JFrame {
 		lblNewLabel_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
+				
+				
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -124,7 +127,11 @@ public class Principal extends JFrame {
 		lblNewLabel_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			}@Override
+				
+				
+				
+			}
+			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblNewLabel_2.setForeground(Color.BLUE);
 			}
@@ -159,7 +166,7 @@ public class Principal extends JFrame {
 		lblNewLabel_3.setFont(new Font("Gill Sans MT", Font.PLAIN, 17));
 		mnNewMenu.add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_4 = new JLabel("                        ");
+		JLabel lblNewLabel_4 = new JLabel("                    ");
 		menuBar.add(lblNewLabel_4);
 		
 		JComboBox comboBox = new JComboBox();
@@ -195,7 +202,20 @@ public class Principal extends JFrame {
 		panelTransacciones.setLayout(null);
 		Border bordeBotonAñadir = BorderFactory.createLineBorder(Color.WHITE, 0);
 		
-		JLabel lblNewLabel_6_1 = new JLabel("Ultimas transacciones");
+		JButton btnNewButton_1 = new JButton("");
+		btnNewButton_1.setIcon(new ImageIcon(Principal.class.getResource("/resources/lupa.png")));
+		btnNewButton_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btnNewButton_1.setContentAreaFilled(false);
+		btnNewButton_1.setBorderPainted(false);
+		btnNewButton_1.setBounds(427, 27, 32, 32);
+		panelTransacciones.add(btnNewButton_1);
+		
+		JLabel lblNewLabel_5 = new JLabel("New label");
+		lblNewLabel_5.setIcon(new ImageIcon(Principal.class.getResource("/resources/circulo (2).png")));
+		lblNewLabel_5.setBounds(410, 11, 64, 64);
+		panelTransacciones.add(lblNewLabel_5);
+		
+		JLabel lblNewLabel_6_1 = new JLabel("Transacciones");
 		lblNewLabel_6_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_6_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_6_1.setFont(new Font("Dialog", Font.PLAIN, 24));
@@ -367,5 +387,4 @@ public class Principal extends JFrame {
         );
 		return examplePanel;
     }
-	
 }

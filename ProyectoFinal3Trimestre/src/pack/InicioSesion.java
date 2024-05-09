@@ -53,32 +53,48 @@ public class InicioSesion extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		JButton btnNewButton_1 = new JButton("");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Inicio i = new Inicio();
+				i.show();
+				dispose();
+				
+			}
+		});
+		btnNewButton_1.setIcon(new ImageIcon(InicioSesion.class.getResource("/resources/izquierda.png")));
+		btnNewButton_1.setContentAreaFilled(false);
+		btnNewButton_1.setBorderPainted(false);
+		btnNewButton_1.setBounds(10, 11, 64, 64);
+		contentPane.add(btnNewButton_1);
 
 		textoContraseña = new JPasswordField();
 		textoContraseña.setEchoChar('*');
-		textoContraseña.setBounds(162, 215, 160, 20);
+		textoContraseña.setBounds(162, 257, 160, 20);
 		contentPane.add(textoContraseña);
 
 		textoUsuario = new JTextField();
-		textoUsuario.setBounds(162, 135, 160, 20);
+		textoUsuario.setBounds(162, 177, 160, 20);
 		contentPane.add(textoUsuario);
 		textoUsuario.setColumns(10);
 
 		JLabel contraseñaLabel = new JLabel("Contraseña");
 		contraseñaLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		contraseñaLabel.setFont(new Font("Consolas", Font.PLAIN, 20));
-		contraseñaLabel.setBounds(182, 174, 120, 30);
+		contraseñaLabel.setBounds(182, 216, 120, 30);
 		contentPane.add(contraseñaLabel);
 
 		JLabel usuarioLabel = new JLabel("Usuario");
 		usuarioLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		usuarioLabel.setFont(new Font("Consolas", Font.PLAIN, 20));
-		usuarioLabel.setBounds(182, 94, 120, 30);
+		usuarioLabel.setBounds(182, 136, 120, 30);
 		contentPane.add(usuarioLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(InicioSesion.class.getResource("/resources/resumen-superficie-texturas-muro-piedra-hormigon-blanco (1).jpg")));
-		lblNewLabel_1.setBounds(143, 93, 200, 150);
+		lblNewLabel_1.setBounds(143, 135, 200, 150);
 		contentPane.add(lblNewLabel_1);
 
 		JButton btnNewButton = new JButton("Entrar");
@@ -102,7 +118,7 @@ public class InicioSesion extends JFrame {
 			}
 		});
 		
-		btnNewButton.setBounds(201, 269, 89, 23);
+		btnNewButton.setBounds(201, 311, 89, 23);
 		contentPane.add(btnNewButton);
 
 		lblNewLabel = new JLabel("");
@@ -110,5 +126,4 @@ public class InicioSesion extends JFrame {
 		lblNewLabel.setBounds(0, 0, 484, 561);
 		contentPane.add(lblNewLabel);
 	}
-	
 }
