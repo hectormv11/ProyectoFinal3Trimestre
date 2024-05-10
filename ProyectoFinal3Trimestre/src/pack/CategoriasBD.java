@@ -9,46 +9,41 @@ import java.util.ArrayList;
 
 public class CategoriasBD {
 	
-	/*public static ArrayList<Categoria> getTransacciones(Usuario user) throws SQLException {
+	public static ArrayList<Categoria> getTransacciones(Usuario user) throws SQLException {
 
-		ArrayList<Transaccion> lista = new ArrayList<Transaccion>();
+		ArrayList<Categoria> lista = new ArrayList<Categoria>();
 
 		Conexion con = new Conexion();
 		Connection link = con.abrirConsulta();
 
-		String consulta = "SELECT * FROM transaccion WHERE cuenta = ?";
+		String consulta = "SELECT * FROM categorias WHERE id_usuario = ?";
 
 		PreparedStatement ps = link.prepareStatement(consulta);
 
-		ps.setInt(1, c.getId());
+		ps.setInt(1, user.getId());
 
 		ResultSet rs = ps.executeQuery();
 
 		if(rs != null) {
 			while(rs.next()) {
+				
 				int id = rs.getInt(1);
-				Double cant = rs.getDouble(2);
+				
 				String nombreCategoria = rs.getString(4);
-				Date fecha = rs.getDate(5);
-				String comentario = rs.getString(6);
+				
 				String tipo = rs.getString(7);
 
 				Categoria ca = new Categoria(nombreCategoria, user);
 
-				Transaccion actual = new Transaccion(id, cant, c, ca, fecha, comentario, tipo);
+				
 
-				lista.add(actual);					
+				lista.add(lista);					
 			}
 		}
+		
 
-		Transaccion[] array = new Transaccion[lista.size()];
+		return lista;
 
-		for (int i = 0; i < array.length; i++) {
-			array[i] = lista.get(i);
-		}		
-
-		return array;
-
-	}*/
+	}
 
 }

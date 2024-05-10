@@ -9,10 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JLabel;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -21,15 +21,12 @@ import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.awt.Cursor;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.LayoutStyle;
 import javax.swing.Box;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
@@ -227,7 +224,13 @@ public class Principal extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				NuevaTransaccion nt = new NuevaTransaccion();
+				NuevaTransaccion nt = null;
+				try {
+					nt = new NuevaTransaccion(usuario_logeado, c);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				nt.show();
 				dispose();
 
@@ -238,7 +241,7 @@ public class Principal extends JFrame {
 		panelTransacciones.add(lblNewLabel_6);
 
 		JPanel panelContenedor = new JPanel();
-		panelContenedor.setBounds(10, 87, 464, 342);
+		panelContenedor.setBounds(8, 87, 467, 342);
 		panelTransacciones.add(panelContenedor);
 		panelContenedor.setLayout(new GridLayout(0, 1, 0, 0));
 
@@ -272,7 +275,7 @@ public class Principal extends JFrame {
 				try {
 					trans = TransaccionesBD.getTransacciones(c, usuario_logeado);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
+
 					e1.printStackTrace();
 				}
 
@@ -307,108 +310,110 @@ public class Principal extends JFrame {
 		fondo.setBounds(0, -32, 484, 561);
 		panelTransacciones.add(fondo);
 
-
-
 	}
-
 
 	public JPanel getExamplePanel(Transaccion trans) {
 
-		JPanel examplePanel = new JPanel();
-		examplePanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		//--------------------------------------------------------------------------------------------------------------------------//
+
+		JPanel panel = new JPanel();
+		Border border = BorderFactory.createLineBorder(Color.BLACK);
+        panel.setBorder(border);
 		
-		JLabel cornerLabel = new JLabel("Esquina");
-	    cornerLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-	    cornerLabel.setVerticalAlignment(SwingConstants.TOP);
-	    
-		JLabel cantidadLabel = new JLabel("Cantidad:");
-		JLabel cantidadValueLabel = new JLabel(String.valueOf(trans.getCantidad()));
-
-		JLabel categoriaLabel = new JLabel("Categoría:");
-		JLabel categoriaValueLabel = new JLabel(trans.getCat().getNombre());
-
-		JLabel comentarioLabel = new JLabel("Comentario:");
-		JLabel comentarioValueLabel = new JLabel(trans.getComentario());
-
-		JLabel fechaLabel = new JLabel("Fecha:");
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		JLabel fechaValueLabel = new JLabel(dateFormat.format(trans.getFecha()));
-
-		GroupLayout layout = new GroupLayout(examplePanel);
-		examplePanel.setLayout(layout);
-
-		JButton boton = new JButton("Editar");
-		boton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				
-
-			}
-		});
+		JLabel cantidad = new JLabel("Cantidad:");
 		
+		JLabel fecha = new JLabel("Fecha:");
 		
+		JLabel comentario = new JLabel("Comentario:");
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		
+		JLabel lblNewLabel_2_1 = new JLabel("New label");
+		
+		JButton btnNewButton = new JButton("Editar");
+		
+		JLabel categoria = new JLabel("Categoria:");
+		categoria.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JLabel lblNewLabel_5 = new JLabel("");
+		lblNewLabel_5.setIcon(new ImageIcon(Ajustes.class.getResource("/resources/hogar.png")));
+		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane_1.setViewportView(scrollPane);
+		
+		JLabel lblNewLabel = new JLabel("");
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(10)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(cantidad, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+								.addComponent(fecha, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+								.addComponent(comentario, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
+							.addGap(10)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addGap(206)
+									.addComponent(categoria, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)))
+							.addGap(5)
+							.addComponent(lblNewLabel_5))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 338, GroupLayout.PREFERRED_SIZE)
+							.addGap(15)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addGap(36)
+									.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))))))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(11)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(cantidad)
+							.addGap(11)
+							.addComponent(fecha)
+							.addGap(11)
+							.addComponent(comentario))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(lblNewLabel_1)
+							.addGap(11)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblNewLabel_2_1)
+								.addComponent(categoria)))
+						.addComponent(lblNewLabel_5))
+					.addGap(11)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(9)
+							.addComponent(btnNewButton)
+							.addGap(10)
+							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))))
+		);
+		panel.setLayout(gl_panel);
 
-		layout.setHorizontalGroup(
-				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-						.addContainerGap(0, Short.MAX_VALUE)
-						.addComponent(cornerLabel))
-				/*.addGroup(layout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addComponent(cantidadLabel)
-								.addComponent(categoriaLabel)
-								.addComponent(comentarioLabel)
-								.addComponent(fechaLabel))
-						.addGap(18, 18, 18)
-						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addComponent(cantidadValueLabel)
-								.addComponent(categoriaValueLabel)
-								.addComponent(comentarioValueLabel)
-								.addComponent(fechaValueLabel))
-						.addContainerGap(150, Short.MAX_VALUE))
-				.addGroup(layout.createSequentialGroup()
-						.addContainerGap(250, Short.MAX_VALUE)
-						.addComponent(boton)
-						.addContainerGap())*/
-				);
-
-		layout.setVerticalGroup(
-				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-						.addContainerGap(0, Short.MAX_VALUE)
-						.addComponent(cornerLabel))
-				/*.addGroup(layout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-								.addComponent(cantidadLabel)
-								.addComponent(cantidadValueLabel))
-						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-								.addComponent(categoriaLabel)
-								.addComponent(categoriaValueLabel))
-						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-								.addComponent(comentarioLabel)
-								.addComponent(comentarioValueLabel))
-						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-								.addComponent(fechaLabel)
-								.addComponent(fechaValueLabel))
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(boton)
-						.addContainerGap())*/
-				);
-
-		if(trans.getTipo().equals("g")) {
-			Color miColorEspecifico = new Color(255, 129, 129);
-			examplePanel.setBackground(miColorEspecifico);
+		if(trans.getTipo().equals("i")) {
+			Color backgroundColor = new Color(168, 255, 150);
+			panel.setBackground(backgroundColor);
 		}else {
-			Color miColorEspecifico = new Color(129, 255, 148);
-			examplePanel.setBackground(miColorEspecifico);
+			Color backgroundColor = new Color(255, 150, 150);
+			panel.setBackground(backgroundColor);
 		}
-		
 
-		return examplePanel;
+
+		//--------------------------------------------------------------------------------------------------------------------------//
+
+		return panel;
 	}
 }

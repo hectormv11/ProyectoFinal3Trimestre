@@ -25,6 +25,8 @@ public class AñadirCuenta extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	Cuenta c;
+	private JTextField textField_2;
+	private JTextField textField_3;
 
 
 	/**
@@ -55,6 +57,55 @@ public class AñadirCuenta extends JFrame {
 
 			}
 		});
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setLayout(null);
+		panel_1.setBounds(10, 270, 464, 137);
+		contentPane.add(panel_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setText("");
+		textField_2.setColumns(10);
+		textField_2.setBounds(80, 65, 334, 17);
+		panel_1.add(textField_2);
+		
+		textField_3 = new JTextField();
+		textField_3.setText((String) null);
+		textField_3.setColumns(10);
+		textField_3.setBounds(80, 41, 334, 17);
+		panel_1.add(textField_3);
+		
+		JLabel lblNewLabel_2 = new JLabel("Nombre:");
+		lblNewLabel_2.setFont(new Font("Consolas", Font.PLAIN, 15));
+		lblNewLabel_2.setBounds(10, 39, 60, 23);
+		panel_1.add(lblNewLabel_2);
+		
+		JLabel lblSaldo_1 = new JLabel("Saldo:");
+		lblSaldo_1.setFont(new Font("Consolas", Font.PLAIN, 15));
+		lblSaldo_1.setBounds(10, 64, 60, 23);
+		panel_1.add(lblSaldo_1);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("Añadir cuentas");
+		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_1.setFont(new Font("Consolas", Font.PLAIN, 15));
+		lblNewLabel_1_1.setBounds(10, 11, 444, 25);
+		panel_1.add(lblNewLabel_1_1);
+		
+		JButton btnGuardar_1 = new JButton("Guardar");
+		btnGuardar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+			}
+		});
+		btnGuardar_1.setBounds(185, 98, 89, 23);
+		panel_1.add(btnGuardar_1);
+		
+		JLabel fondo1_1 = new JLabel("");
+		fondo1_1.setIcon(new ImageIcon(AñadirCuenta.class.getResource("/resources/maxresdefault (1).jpg")));
+		fondo1_1.setBounds(0, 0, 464, 137);
+		panel_1.add(fondo1_1);
 		btnNewButton.setIcon(new ImageIcon(AñadirCuenta.class.getResource("/resources/izquierda.png")));
 		btnNewButton.setContentAreaFilled(false);
 		btnNewButton.setBorderPainted(false);
