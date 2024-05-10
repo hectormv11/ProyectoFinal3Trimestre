@@ -25,10 +25,11 @@ public class Categoria {
 	public void setRuta(String ruta) {
 		this.ruta = ruta;
 	}
-	public Categoria(String nombre, Usuario user) {
+	public Categoria(String nombre, Usuario user, String ruta) {
 		
 		this.nombre = nombre;
 		this.user = user;
+		this.ruta = ruta;
 	}
 	
 	

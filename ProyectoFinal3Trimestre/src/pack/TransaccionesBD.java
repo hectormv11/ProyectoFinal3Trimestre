@@ -34,7 +34,8 @@ public class TransaccionesBD {
 				String comentario = rs.getString(6);
 				String tipo = rs.getString(7);
 
-				Categoria ca = new Categoria(nombreCategoria, user);
+				Categoria cat = CategoriasBD.getCategoria(nombreCategoria, user);
+				Categoria ca = new Categoria(nombreCategoria, user, cat.getRuta());
 
 				Transaccion actual = new Transaccion(id, cant, c, ca, fecha, comentario, tipo);
 

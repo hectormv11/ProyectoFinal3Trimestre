@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class CategoriasBD {
 	
-	public static ArrayList<Categoria> getTransacciones(Usuario user) throws SQLException {
+	public static ArrayList<Categoria> getCategorias(Usuario user) throws SQLException {
 
 		ArrayList<Categoria> lista = new ArrayList<Categoria>();
 
@@ -27,23 +27,42 @@ public class CategoriasBD {
 		if(rs != null) {
 			while(rs.next()) {
 				
-				int id = rs.getInt(1);
-				
-				String nombreCategoria = rs.getString(4);
-				
-				String tipo = rs.getString(7);
+				String nombreCategoria = rs.getString(1);
+				String ruta = rs.getString(3);
+				Categoria ca = new Categoria(nombreCategoria, user, ruta);
 
-				Categoria ca = new Categoria(nombreCategoria, user);
-
-				
-
-				lista.add(lista);					
+				lista.add(ca);					
 			}
 		}
 		
 
 		return lista;
 
+	}
+	
+	public static Categoria getCategoria(String nombre, Usuario user) throws SQLException {
+		
+		Conexion con = new Conexion();
+		Connection link = con.abrirConsulta();
+		Categoria ca = null;
+
+		String consulta = "SELECT * FROM categorias WHERE nombre = ?";
+		PreparedStatement ps = link.prepareStatement(consulta);
+
+		ps.setString(1, nombre);
+		ResultSet rs = ps.executeQuery();
+		
+		if(rs != null) {
+			while(rs.next()) {
+								
+				String ruta = rs.getString(3);
+
+				ca = new Categoria(nombre, user, ruta);
+				
+			}
+		}
+		return ca;
+		
 	}
 
 }
