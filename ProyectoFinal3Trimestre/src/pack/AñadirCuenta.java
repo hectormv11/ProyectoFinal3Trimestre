@@ -17,6 +17,8 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class AñadirCuenta extends JFrame {
 
@@ -58,6 +60,19 @@ public class AñadirCuenta extends JFrame {
 			}
 		});
 		
+		JLabel labelFotoCheck = new JLabel("");
+		labelFotoCheck.setVisible(false);
+		labelFotoCheck.setIcon(new ImageIcon(AñadirCuenta.class.getResource("/resources/registrarse.png")));
+		labelFotoCheck.setHorizontalAlignment(SwingConstants.CENTER);
+		labelFotoCheck.setBounds(10, 430, 464, 64);
+		contentPane.add(labelFotoCheck);
+		
+		JLabel lblNewLabel_3_1 = new JLabel("");
+		lblNewLabel_3_1.setIcon(new ImageIcon(AñadirCuenta.class.getResource("/resources/maxresdefault (1).jpg")));
+		lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_3_1.setBounds(180, 430, 121, 64);
+		contentPane.add(lblNewLabel_3_1);
+		
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
 		panel_1.setBounds(10, 270, 464, 137);
@@ -70,6 +85,14 @@ public class AñadirCuenta extends JFrame {
 		panel_1.add(textField_2);
 		
 		textField_3 = new JTextField();
+		textField_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				labelFotoCheck.setVisible(false);
+				
+			}
+		});
 		textField_3.setText((String) null);
 		textField_3.setColumns(10);
 		textField_3.setBounds(80, 41, 334, 17);
@@ -95,8 +118,18 @@ public class AñadirCuenta extends JFrame {
 		btnGuardar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				
-				
+				if(!textField_3.getText().equals("") && !textField_2.getText().equals("")) {
+					double saldo = Double.parseDouble(textField_2.getText());
+					try {
+						CuentasBD.registrarCuenta(textField_3.getText(), usuario_logeado, saldo);
+						textField_3.setText("");
+						textField_2.setText("");
+						labelFotoCheck.setVisible(true);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
 			}
 		});
 		btnGuardar_1.setBounds(185, 98, 89, 23);

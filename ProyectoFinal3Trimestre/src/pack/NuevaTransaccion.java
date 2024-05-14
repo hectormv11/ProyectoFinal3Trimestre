@@ -151,53 +151,6 @@ public class NuevaTransaccion extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				JPanel añadido = new JPanel();
-				añadido.setPreferredSize(new Dimension(tamañoMinimo,tamañoMinimo));
-				añadido.setLayout(new BorderLayout());
-				JLabel lblNewLabel_3_1 = new JLabel("");
-				lblNewLabel_3_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.CENTER);
-				
-				
-				
-				JFileChooser chooser = new JFileChooser();
-				FileNameExtensionFilter filter = new FileNameExtensionFilter(
-						"Imágenes PNG y JPG", "jpg", "png"); //Creamos un filtro de archivos
-				chooser.setFileFilter(filter); //Aplicamos el filtro de archivos
-				int returnVal = chooser.showOpenDialog(contentPane); //Abrimos el selector de archivos
-				
-				String nombreArchivo = "";
-				
-				if(returnVal == JFileChooser.APPROVE_OPTION) { //si se selecciona correctamente el archivo
-					
-					nombreArchivo = chooser.getSelectedFile().getName(); //ejemplo: foto.png
-					String rutaArchivo = chooser.getSelectedFile().getAbsolutePath(); //ejemplo: C:/User/Pablo/Escritorio/foto.png
-					//textArea.append("Copiando a la carpeta \"resources\"...");
-					File origen = new File(rutaArchivo);
-					File destino = new File(NuevaTransaccion.class.getResource("/resources/").getPath()+nombreArchivo);
-					//textArea.append("\n");
-					
-					try {
-						copiarArchivo(origen, destino); //copiamos el archivo
-						//textArea.append("COPIADO!");
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-					
-					lblNewLabel_3_1.setIcon(new ImageIcon(NuevaTransaccion.class.getResource("/resources/"+nombreArchivo)));
-					añadido.add(lblNewLabel_3_1);
-					añadido.setBackground(new Color(204, 255, 255));
-					panelprincipal.add(añadido);
-					panelprincipal.setVisible(false);
-					panelprincipal.setVisible(true);
-
-					
-				}else {
-					//si se cancela la subida
-					//...
-				}
-				
-				
 				
 				
 			}
@@ -210,20 +163,6 @@ public class NuevaTransaccion extends JFrame {
 		contentPane.add(fondo);
 	}
 
-	private JPanel createFixedSizePanel(int width, int height) {
-		JPanel panel = new JPanel();
-		panel.setPreferredSize(new Dimension(width, height)); // Establecer tamaño mínimo
-		panel.setLayout(new BorderLayout()); // Layout para centrar componentes si es necesario
-		JLabel lblNewLabel_3_1 = new JLabel("");
-		lblNewLabel_3_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_3_1.setIcon(new ImageIcon(NuevaTransaccion.class.getResource("/resources/cartera.png")));
-		panel.add(lblNewLabel_3_1);
-		return panel;
-	}
-
-	private static void copiarArchivo(File source, File dest) throws IOException {
-		Files.copy(source.toPath(), dest.toPath());
-	}
+	
 
 }

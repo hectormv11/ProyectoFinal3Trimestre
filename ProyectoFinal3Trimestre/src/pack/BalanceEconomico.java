@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class Transacciones extends JFrame {
+public class BalanceEconomico extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -18,19 +18,20 @@ public class Transacciones extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Transacciones frame = new Transacciones();
+					BalanceEconomico frame = new BalanceEconomico();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-		});
+		}); 
+
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public Transacciones() {
+	public BalanceEconomico() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(650, 100, 500, 600);
 		contentPane = new JPanel();

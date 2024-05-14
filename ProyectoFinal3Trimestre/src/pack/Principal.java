@@ -27,6 +27,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.Box;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
@@ -58,6 +59,7 @@ public class Principal extends JFrame {
 		setJMenuBar(menuBar);
 
 		JMenu mnNewMenu = new JMenu("");
+		mnNewMenu.setToolTipText("Menú");
 		mnNewMenu.setContentAreaFilled(false);
 		mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/resources/menu (1).png")));
 		mnNewMenu.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -185,6 +187,8 @@ public class Principal extends JFrame {
 		menuBar.add(lblNewLabel_4_1);
 
 		JButton btnNewButton = new JButton("");
+		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnNewButton.setToolTipText("Balance económico");
 		btnNewButton.setBorderPainted(false);
 		btnNewButton.setContentAreaFilled(false);
 		btnNewButton.setIcon(new ImageIcon(Principal.class.getResource("/resources/archivos.png")));
@@ -200,6 +204,13 @@ public class Principal extends JFrame {
 		Border bordeBotonAñadir = BorderFactory.createLineBorder(Color.WHITE, 0);
 
 		JButton btnNewButton_1 = new JButton("");
+		btnNewButton_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnNewButton_1.setToolTipText("Filtros");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
 		btnNewButton_1.setIcon(new ImageIcon(Principal.class.getResource("/resources/lupa.png")));
 		btnNewButton_1.setFont(new Font("Dialog", Font.PLAIN, 15));
 		btnNewButton_1.setContentAreaFilled(false);
@@ -326,23 +337,25 @@ public class Principal extends JFrame {
 		
 		JLabel comentario = new JLabel("Comentario:");
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
+		String texto = String.valueOf(trans.getCantidad());
+		JLabel cantidadTexto = new JLabel(texto);
 		
-		JLabel lblNewLabel_2_1 = new JLabel("New label");
+		String texto1 = String.valueOf(trans.getFecha());
+		JLabel fechaTexto = new JLabel(texto1);
 		
-		JButton btnNewButton = new JButton("Editar");
+		JButton editar = new JButton("Editar");
+		editar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		JLabel categoria = new JLabel("Categoria:");
 		categoria.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setIcon(new ImageIcon(Ajustes.class.getResource("/resources/hogar.png")));
+		lblNewLabel_5.setIcon(new ImageIcon(Principal.class.getResource("/resources/"+trans.getCat().getRuta())));
 		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane_1.setViewportView(scrollPane);
+		
 		
 		JLabel lblNewLabel = new JLabel("");
 		GroupLayout gl_panel = new GroupLayout(panel);
@@ -358,8 +371,8 @@ public class Principal extends JFrame {
 								.addComponent(comentario, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
 							.addGap(10)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
+								.addComponent(cantidadTexto, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
+								.addComponent(fechaTexto, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
 								.addGroup(gl_panel.createSequentialGroup()
 									.addGap(206)
 									.addComponent(categoria, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)))
@@ -369,7 +382,7 @@ public class Principal extends JFrame {
 							.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 338, GroupLayout.PREFERRED_SIZE)
 							.addGap(15)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+								.addComponent(editar, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
 								.addGroup(gl_panel.createSequentialGroup()
 									.addGap(36)
 									.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))))))
@@ -386,10 +399,10 @@ public class Principal extends JFrame {
 							.addGap(11)
 							.addComponent(comentario))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(lblNewLabel_1)
+							.addComponent(cantidadTexto)
 							.addGap(11)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblNewLabel_2_1)
+								.addComponent(fechaTexto)
 								.addComponent(categoria)))
 						.addComponent(lblNewLabel_5))
 					.addGap(11)
@@ -397,12 +410,27 @@ public class Principal extends JFrame {
 						.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(9)
-							.addComponent(btnNewButton)
+							.addComponent(editar)
 							.addGap(10)
 							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))))
 		);
+		JTextArea textArea = new JTextArea();
+		scrollPane_1.setViewportView(textArea);
+		textArea.setText(trans.getComentario());
+		textArea.setEditable(false);
+		
+		
+		editar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				Editor ed = new Editor(trans);
+				ed.show();
+				dispose();
+				
+			}
+		});
 		panel.setLayout(gl_panel);
-
 		if(trans.getTipo().equals("i")) {
 			Color backgroundColor = new Color(168, 255, 150);
 			panel.setBackground(backgroundColor);
