@@ -64,5 +64,24 @@ public class CategoriasBD {
 		return ca;
 		
 	}
+	
+	public static void añadirCategoria(String nombre, Usuario user, String ruta) throws SQLException {
+		
+		Conexion con = new Conexion();
+		Connection link = con.abrirConsulta();
+
+		String consulta = "INSERT INTO categorias (nombre, id_usuario, imagen) VALUES (?, ?, ?)";
+
+		PreparedStatement ps = link.prepareStatement(consulta);
+
+		ps.setInt(2, user.getId());
+		ps.setString(1, nombre);
+		ps.setString(3, ruta);
+
+		ps.execute();
+		
+	}
+	
+	
 
 }

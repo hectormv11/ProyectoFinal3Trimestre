@@ -52,5 +52,25 @@ public class TransaccionesBD {
 		return array;
 
 	}	
+	
+	public static void añadirTransaccion(Transaccion trans) throws SQLException {
+		
+		Conexion con = new Conexion();
+		Connection link = con.abrirConsulta();
+
+		String consulta = "INSERT INTO transaccion (cantidad, cuenta, categoria, fecha, comentario, tipo) VALUES (?, ?, ?, ?, ?, ?)";
+
+		PreparedStatement ps = link.prepareStatement(consulta);
+
+		ps.setDouble(1, trans.getCantidad());
+		ps.setInt(2, trans.getCuenta().getId());
+		ps.setString(3, trans.getCat().getNombre());
+		ps.setDate(4, trans.getFecha());
+		ps.setString(5, trans.getComentario());
+		ps.setString(6, trans.getTipo());
+
+		ps.execute();
+		
+	}
 
 }
