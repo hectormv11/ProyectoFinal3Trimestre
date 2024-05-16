@@ -1,6 +1,5 @@
 package pack;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,7 +15,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.SwingConstants;
-import javax.swing.JComboBox;
+
 import javax.swing.JFileChooser;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
@@ -29,17 +28,14 @@ import java.net.URI;
 import java.nio.file.Files;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
+
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.GroupLayout.Group;
 
 import java.awt.Cursor;
 import java.awt.Desktop;
@@ -62,7 +58,6 @@ public class NuevaTransaccion extends JFrame {
 	int tamañoMinimo = 90;
 	int numSeleccionados = 0;
 	Categoria catSelect = null;
-
 	String nombreDelArchivo = "";
 	String tipo = "";
 
@@ -84,23 +79,23 @@ public class NuevaTransaccion extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-				JLabel linkLabel = new JLabel("<html><a href=''>Sugerencia de iconos para tus nuevas categorias\r\n</a></html>");
-				linkLabel.setFont(new Font("Dialog", Font.PLAIN, 15));
-				linkLabel.setForeground(new Color(255, 255, 255));
-				linkLabel.setBackground(new Color(255, 255, 255));
-				linkLabel.setHorizontalAlignment(SwingConstants.CENTER);
-				linkLabel.setBounds(10, 187, 464, 20);
-				linkLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-				linkLabel.addMouseListener(new MouseAdapter() {
-				    @Override
-				    public void mouseClicked(MouseEvent e) {
-				        abrirEnlace("https://www.flaticon.es/");
-				    }
-				});
-				
-				        // Añadir el JLabel al JFrame
-				        getContentPane().add(linkLabel);
+
+		JLabel linkLabel = new JLabel("<html><a href=''>Sugerencia de iconos para tus nuevas categorias\r\n</a></html>");
+		linkLabel.setFont(new Font("Dialog", Font.PLAIN, 15));
+		linkLabel.setForeground(new Color(255, 255, 255));
+		linkLabel.setBackground(new Color(255, 255, 255));
+		linkLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		linkLabel.setBounds(10, 187, 464, 20);
+		linkLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		linkLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				abrirEnlace("https://www.flaticon.es/");
+			}
+		});
+
+		// Añadir el JLabel al JFrame
+		getContentPane().add(linkLabel);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 143, 464, 34);
@@ -246,14 +241,22 @@ public class NuevaTransaccion extends JFrame {
 					//textArea.append("\n");
 
 					try {
-						copiarArchivo(origen, destino); //copiamos el archivo
-						//textArea.append("COPIADO!");
+						copiarArchivo(origen, destino); 
+						
+						NuevaCategoria nv = new NuevaCategoria(nombreArchivo, usuario_logeado);
+						nv.show();
+
+						int valor = consultaCategoria(usuario_logeado, rutaArchivo);
+
+						if(valor == 0) {
+							//return;
+						}
+						
 					} catch (IOException e1) {
-						//e1.printStackTrace();
+						
 					}
+
 					
-					NuevaCategoria nv = new NuevaCategoria(nombreArchivo, usuario_logeado);
-					nv.show();
 
 					lblNewLabel_3_1.setIcon(new ImageIcon(NuevaTransaccion.class.getResource("/resources/"+nombreArchivo)));
 					añadido.add(lblNewLabel_3_1);
@@ -344,7 +347,7 @@ public class NuevaTransaccion extends JFrame {
 							TransaccionesBD.añadirTransaccion(trans);
 						}
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
+
 						e1.printStackTrace();
 					}
 
@@ -358,7 +361,7 @@ public class NuevaTransaccion extends JFrame {
 						}
 
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
+
 						e1.printStackTrace();
 					}
 
@@ -397,7 +400,7 @@ public class NuevaTransaccion extends JFrame {
 		lblNewLabel_1_1_2_1.setFont(new Font("Consolas", Font.PLAIN, 20));
 		lblNewLabel_1_1_2_1.setBounds(10, 11, 464, 34);
 		contentPane.add(lblNewLabel_1_1_2_1);
-		
+
 		JLabel linkLabel_1 = new JLabel("");
 		linkLabel_1.setIcon(new ImageIcon(NuevaTransaccion.class.getResource("/resources/maxresdefault (1).jpg")));
 		linkLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -406,24 +409,35 @@ public class NuevaTransaccion extends JFrame {
 		linkLabel_1.setBackground(Color.WHITE);
 		linkLabel_1.setBounds(10, 188, 464, 20);
 		contentPane.add(linkLabel_1);
-		
-		
-				JLabel fondo = new JLabel("");
-				fondo.setIcon(new ImageIcon(NuevaTransaccion.class.getResource("/resources/fondoPizarra.jpg")));
-				fondo.setBounds(0, 0, 484, 561);
-				contentPane.add(fondo);
+
+
+		JLabel fondo = new JLabel("");
+		fondo.setIcon(new ImageIcon(NuevaTransaccion.class.getResource("/resources/fondoPizarra.jpg")));
+		fondo.setBounds(0, 0, 484, 561);
+		contentPane.add(fondo);
 	}
 
 	private static void copiarArchivo(File source, File dest) throws IOException {
 		Files.copy(source.toPath(), dest.toPath());
 	}
-	
-	 private void abrirEnlace(String url) {
-	        try {
-	            Desktop desktop = Desktop.getDesktop();
-	            desktop.browse(new URI(url));
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
-	    }
+
+	private void abrirEnlace(String url) {
+		try {
+			Desktop desktop = Desktop.getDesktop();
+			desktop.browse(new URI(url));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public int consultaCategoria(Usuario usuario_logeado, String rutaArchivo) {
+		try {
+			CategoriasBD.añadirCategoria(NuevaCategoria.getTexto(), usuario_logeado, rutaArchivo);
+			return 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
 }

@@ -231,20 +231,19 @@ public class Principal extends JFrame {
 		panelTransacciones.add(lblNewLabel_6_1);
 
 		JLabel lblNewLabel_6 = new JLabel("");
+		lblNewLabel_6.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblNewLabel_6.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				NuevaTransaccion nt = null;
 				try {
-					nt = new NuevaTransaccion(usuario_logeado, c);
+					NuevaTransaccion nt = new NuevaTransaccion(usuario_logeado, c);
+					nt.show();
+					dispose();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				}
-				nt.show();
-				dispose();
-
 			}
 		});
 		lblNewLabel_6.setIcon(new ImageIcon(Principal.class.getResource("/resources/documento.png")));
@@ -318,7 +317,7 @@ public class Principal extends JFrame {
 
 		JLabel fondo = new JLabel("");
 		fondo.setIcon(new ImageIcon(Principal.class.getResource("/resources/fondoPizarra.jpg")));
-		fondo.setBounds(0, -32, 484, 561);
+		fondo.setBounds(0, -32, 484, 550);
 		panelTransacciones.add(fondo);
 
 	}
@@ -329,109 +328,109 @@ public class Principal extends JFrame {
 
 		JPanel panel = new JPanel();
 		Border border = BorderFactory.createLineBorder(Color.BLACK);
-        panel.setBorder(border);
-		
+		panel.setBorder(border);
+
 		JLabel cantidad = new JLabel("Cantidad:");
-		
+
 		JLabel fecha = new JLabel("Fecha:");
-		
+
 		JLabel comentario = new JLabel("Comentario:");
-		
+
 		String texto = String.valueOf(trans.getCantidad());
 		JLabel cantidadTexto = new JLabel(texto);
-		
+
 		String texto1 = String.valueOf(trans.getFecha());
 		JLabel fechaTexto = new JLabel(texto1);
-		
+
 		JButton editar = new JButton("Editar");
 		editar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		
+
 		JLabel categoria = new JLabel("Categoria:");
 		categoria.setHorizontalAlignment(SwingConstants.CENTER);
-		
+
 		JLabel lblNewLabel_5 = new JLabel("");
 		lblNewLabel_5.setIcon(new ImageIcon(Principal.class.getResource("/resources/"+trans.getCat().getRuta())));
 		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
-		
+
 		JScrollPane scrollPane_1 = new JScrollPane();
-		
-		
-		
+
+
+
 		JLabel lblNewLabel = new JLabel("");
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
+				gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(10)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(cantidad, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-								.addComponent(fecha, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-								.addComponent(comentario, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
-							.addGap(10)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(cantidadTexto, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
-								.addComponent(fechaTexto, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
+						.addGap(10)
+						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panel.createSequentialGroup()
-									.addGap(206)
-									.addComponent(categoria, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)))
-							.addGap(5)
-							.addComponent(lblNewLabel_5))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 338, GroupLayout.PREFERRED_SIZE)
-							.addGap(15)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(editar, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+												.addComponent(cantidad, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+												.addComponent(fecha, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+												.addComponent(comentario, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
+										.addGap(10)
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+												.addComponent(cantidadTexto, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
+												.addComponent(fechaTexto, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
+												.addGroup(gl_panel.createSequentialGroup()
+														.addGap(206)
+														.addComponent(categoria, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)))
+										.addGap(5)
+										.addComponent(lblNewLabel_5))
 								.addGroup(gl_panel.createSequentialGroup()
-									.addGap(36)
-									.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))))))
-		);
+										.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 338, GroupLayout.PREFERRED_SIZE)
+										.addGap(15)
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+												.addComponent(editar, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+												.addGroup(gl_panel.createSequentialGroup()
+														.addGap(36)
+														.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))))))
+				);
 		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
+				gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(11)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(cantidad)
-							.addGap(11)
-							.addComponent(fecha)
-							.addGap(11)
-							.addComponent(comentario))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(cantidadTexto)
-							.addGap(11)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(fechaTexto)
-								.addComponent(categoria)))
-						.addComponent(lblNewLabel_5))
-					.addGap(11)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(9)
-							.addComponent(editar)
-							.addGap(10)
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))))
-		);
+						.addGap(11)
+						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel.createSequentialGroup()
+										.addComponent(cantidad)
+										.addGap(11)
+										.addComponent(fecha)
+										.addGap(11)
+										.addComponent(comentario))
+								.addGroup(gl_panel.createSequentialGroup()
+										.addComponent(cantidadTexto)
+										.addGap(11)
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+												.addComponent(fechaTexto)
+												.addComponent(categoria)))
+								.addComponent(lblNewLabel_5))
+						.addGap(11)
+						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel.createSequentialGroup()
+										.addGap(9)
+										.addComponent(editar)
+										.addGap(10)
+										.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))))
+				);
 		JTextArea textArea = new JTextArea();
 		scrollPane_1.setViewportView(textArea);
 		textArea.setText(trans.getComentario());
 		textArea.setEditable(false);
-		
-		
+
+
 		editar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 				Editor ed = new Editor(trans);
 				ed.show();
 				dispose();
-				
+
 			}
 		});
 		panel.setLayout(gl_panel);
-		if(trans.getTipo().equals("i")) {
+		if(trans.getTipo().equals("I")) {
 			Color backgroundColor = new Color(168, 255, 150);
 			panel.setBackground(backgroundColor);
 		}else {

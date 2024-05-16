@@ -1,7 +1,5 @@
 package pack;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -12,7 +10,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class NuevaCategoria extends JFrame {
@@ -25,7 +22,7 @@ public class NuevaCategoria extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	
+
 
 	/**
 	 * Create the frame.
@@ -38,45 +35,39 @@ public class NuevaCategoria extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setBounds(10, 87, 414, 83);
 		lblNewLabel_2.setIcon(new ImageIcon(NuevaTransaccion.class.getResource("/resources/"+img)));
 		contentPane.add(lblNewLabel_2);
-		
+
 		textField = new JTextField();
 		textField.setBounds(10, 51, 414, 25);
 		contentPane.add(textField);
 		textField.setColumns(10);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Indique el nombre de su nueva categoria");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Consolas", Font.PLAIN, 15));
 		lblNewLabel_1.setBounds(10, 11, 414, 37);
 		contentPane.add(lblNewLabel_1);
-		
+
 		JButton btnNewButton = new JButton("Guerdar y cerrar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				try {
-					texto = textField.getText();
-					CategoriasBD.añadirCategoria(textField.getText(), user, img);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				texto = textField.getText();
 				dispose();
 			}
 		});
 		btnNewButton.setBounds(155, 186, 125, 23);
 		contentPane.add(btnNewButton);
-		
+
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(NuevaCategoria.class.getResource("/resources/maxresdefault (1).jpg")));
 		lblNewLabel.setBounds(0, 0, 434, 261);
 		contentPane.add(lblNewLabel);
-		
+
 	}
 
 	public static String getTexto() {
