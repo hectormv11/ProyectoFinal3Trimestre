@@ -134,18 +134,14 @@ public class Registro extends JFrame {
 				if(passwordField.getText().equals(passwordField_2.getText()) && passwordField.getText().length() != 0) {
 					try {
 						UsuariosBD.registrarse(textUsuario.getText(), passwordField.getText(), textCorreo.getText());
+						Usuario user = UsuariosBD.obtenerUsuario(textUsuario.getText());
+						CuentasBD.registrarCuenta("default", user, 0.0);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					iconoVerificar.setVisible(true);
 					Inicio i = new Inicio();
-					try {
-						Thread.sleep(2000);
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
 					i.show();
 					dispose();
 				}

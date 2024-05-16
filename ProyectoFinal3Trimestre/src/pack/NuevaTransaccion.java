@@ -25,6 +25,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.nio.file.Files;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -41,23 +42,27 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout.Group;
 
 import java.awt.Cursor;
+import java.awt.Desktop;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class NuevaTransaccion extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtYyyymmdd;
 	int tamañoMinimo = 90;
 	int numSeleccionados = 0;
 	Categoria catSelect = null;
-	
+
 	String nombreDelArchivo = "";
 	String tipo = "";
 
@@ -79,9 +84,26 @@ public class NuevaTransaccion extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+				JLabel linkLabel = new JLabel("<html><a href=''>Sugerencia de iconos para tus nuevas categorias\r\n</a></html>");
+				linkLabel.setFont(new Font("Dialog", Font.PLAIN, 15));
+				linkLabel.setForeground(new Color(255, 255, 255));
+				linkLabel.setBackground(new Color(255, 255, 255));
+				linkLabel.setHorizontalAlignment(SwingConstants.CENTER);
+				linkLabel.setBounds(10, 187, 464, 20);
+				linkLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				linkLabel.addMouseListener(new MouseAdapter() {
+				    @Override
+				    public void mouseClicked(MouseEvent e) {
+				        abrirEnlace("https://www.flaticon.es/");
+				    }
+				});
+				
+				        // Añadir el JLabel al JFrame
+				        getContentPane().add(linkLabel);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 143, 464, 64);
+		scrollPane.setBounds(10, 143, 464, 34);
 		contentPane.add(scrollPane);
 
 		JTextArea textArea = new JTextArea();
@@ -94,38 +116,46 @@ public class NuevaTransaccion extends JFrame {
 		lblNewLabel_1_1_1.setBounds(10, 123, 464, 20);
 		contentPane.add(lblNewLabel_1_1_1);
 
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(122, 91, 155, 20);
-		contentPane.add(textField_1);
+		txtYyyymmdd = new JTextField();
+		txtYyyymmdd.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+
+				if(txtYyyymmdd.getText().equals("")) {
+					txtYyyymmdd.setText("yyyy-mm-dd");
+				}
+
+			}
+		});
+		txtYyyymmdd.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(txtYyyymmdd.getText().equals("yyyy-mm-dd")) {
+					txtYyyymmdd.setText("");
+				}
+			}
+		});
+		txtYyyymmdd.setText("yyyy-mm-dd");
+		txtYyyymmdd.setColumns(10);
+		txtYyyymmdd.setBounds(176, 91, 133, 20);
+		contentPane.add(txtYyyymmdd);
 
 		JLabel lblNewLabel_2 = new JLabel("Categorias:");
 		lblNewLabel_2.setFont(new Font("Consolas", Font.PLAIN, 15));
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setBounds(10, 217, 464, 20);
+		lblNewLabel_2.setBounds(10, 213, 464, 20);
 		contentPane.add(lblNewLabel_2);
-
-		JLabel lblNewLabel_1 = new JLabel("Cuenta:");
-		lblNewLabel_1.setFont(new Font("Consolas", Font.PLAIN, 15));
-		lblNewLabel_1.setForeground(new Color(255, 255, 255));
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1.setBounds(23, 55, 89, 20);
-		contentPane.add(lblNewLabel_1);
-
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(122, 53, 155, 22);
-		contentPane.add(comboBox);
 
 		JLabel lblNewLabel = new JLabel("EUR");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Consolas", Font.PLAIN, 20));
 		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setBounds(279, 19, 57, 24);
+		lblNewLabel.setBounds(263, 56, 57, 24);
 		contentPane.add(lblNewLabel);
 
 		textField = new JTextField();
-		textField.setBounds(192, 18, 85, 20);
+		textField.setBounds(176, 55, 85, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
 
@@ -166,7 +196,7 @@ public class NuevaTransaccion extends JFrame {
 			nuevo.add(labelFoto);
 			nuevo.setBackground(new Color(204, 255, 255));
 			panelprincipal.add(nuevo);
-			
+
 			Categoria actual = categoriaArray.get(i);
 			nuevo.addMouseListener(new MouseAdapter() {
 
@@ -215,15 +245,15 @@ public class NuevaTransaccion extends JFrame {
 					File destino = new File(NuevaTransaccion.class.getResource("/resources/").getPath()+nombreArchivo);
 					//textArea.append("\n");
 
-					NuevaCategoria nv = new NuevaCategoria(nombreArchivo, usuario_logeado);
-					nv.show();
-
 					try {
 						copiarArchivo(origen, destino); //copiamos el archivo
 						//textArea.append("COPIADO!");
 					} catch (IOException e1) {
 						//e1.printStackTrace();
 					}
+					
+					NuevaCategoria nv = new NuevaCategoria(nombreArchivo, usuario_logeado);
+					nv.show();
 
 					lblNewLabel_3_1.setIcon(new ImageIcon(NuevaTransaccion.class.getResource("/resources/"+nombreArchivo)));
 					añadido.add(lblNewLabel_3_1);
@@ -259,7 +289,7 @@ public class NuevaTransaccion extends JFrame {
 
 			}
 		});
-		
+
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("Ingreso");
 		rdbtnNewRadioButton.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
@@ -274,67 +304,74 @@ public class NuevaTransaccion extends JFrame {
 		rdbtnNewRadioButton.setFont(new Font("Consolas", Font.PLAIN, 15));
 		rdbtnNewRadioButton.setForeground(new Color(255, 255, 255));
 		rdbtnNewRadioButton.setContentAreaFilled(false);
-		rdbtnNewRadioButton.setBounds(316, 53, 158, 23);
+		rdbtnNewRadioButton.setBounds(326, 54, 85, 23);
 		contentPane.add(rdbtnNewRadioButton);
 
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Gasto");
 		rdbtnNewRadioButton_1.setFont(new Font("Consolas", Font.PLAIN, 15));
 		rdbtnNewRadioButton_1.setForeground(new Color(255, 255, 255));
 		rdbtnNewRadioButton_1.setContentAreaFilled(false);
-		rdbtnNewRadioButton_1.setBounds(316, 90, 158, 23);
+		rdbtnNewRadioButton_1.setBounds(326, 93, 85, 23);
 		contentPane.add(rdbtnNewRadioButton_1);
 
 		ButtonGroup ingresosGastos = new ButtonGroup();
 		ingresosGastos.add(rdbtnNewRadioButton_1);
 		ingresosGastos.add(rdbtnNewRadioButton);
 
-		JButton btnNewButton = new JButton("Guardar");
+		JButton btnNewButton = new JButton("Añadir");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double numero = 0;
-				
-				if(numSeleccionados == 1) {
-					
+
+				if(numSeleccionados == 1 && !txtYyyymmdd.getText().equals("") && (rdbtnNewRadioButton.isSelected() || rdbtnNewRadioButton_1.isSelected())) {
+
 					if(!textField.getText().equals("")) {
 						numero = Double.parseDouble(textField.getText());
 					}
-					String fechaStr = textField_1.getText();  // La cadena que representa la fecha en formato yyyy-MM-dd
-			        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");  // Define el formato de la fecha
-			        Date sqlDate = null;
-			        try {
-			            LocalDate localDate = LocalDate.parse(fechaStr, formato);  // Convierte la cadena a LocalDate
-			            sqlDate = Date.valueOf(localDate);  // Convierte LocalDate a java.sql.Date
-			           
-			        } catch (DateTimeParseException e1) {
-			            e1.printStackTrace();  // Maneja la excepción si la cadena no tiene el formato correcto
-			        }
-			        Transaccion trans = new Transaccion(0,numero, c, catSelect, sqlDate, textArea.getText(), tipo);
+					String fechaStr = txtYyyymmdd.getText();  // La cadena que representa la fecha en formato yyyy-MM-dd
+					DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");  // Define el formato de la fecha
+					Date sqlDate = null;
 					try {
-						TransaccionesBD.añadirTransaccion(trans);
+						LocalDate localDate = LocalDate.parse(fechaStr, formato);  // Convierte la cadena a LocalDate
+						sqlDate = Date.valueOf(localDate);  // Convierte LocalDate a java.sql.Date
+
+					} catch (DateTimeParseException e1) {
+						e1.printStackTrace();  // Maneja la excepción si la cadena no tiene el formato correcto
+					}
+					Transaccion trans = new Transaccion(0,numero, c, catSelect, sqlDate, textArea.getText(), tipo);
+					try {
+						if(numero != 0) {
+							TransaccionesBD.añadirTransaccion(trans);
+						}
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					
+
 					try {
-						Principal p = new Principal(usuario_logeado);
-						p.show();
-						dispose();
+						if(numero != 0) {
+							Principal p = new Principal(usuario_logeado);
+							p.show();
+							dispose();
+						}else {
+							JOptionPane.showMessageDialog(null, "Algun campo vacio");
+						}
+
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					
-				}else if(numSeleccionados == 0 || numero == 0 || textField_1.getText().equals("") || (!rdbtnNewRadioButton.isSelected() && !rdbtnNewRadioButton_1.isSelected())){
-					JOptionPane.showMessageDialog(null, "Algun campo vacio");
-				}else {
+
+				}else if(numSeleccionados > 1){
 					JOptionPane.showMessageDialog(null, "Más de una categoria seleccionada");
+				}else {
+					JOptionPane.showMessageDialog(null, "Algun campo vacio");
 				}
-				
-				
-				
-				
-				
+
+
+
+
+
 			}
 		});
 		btnNewButton.setBounds(192, 531, 89, 23);
@@ -344,20 +381,49 @@ public class NuevaTransaccion extends JFrame {
 		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_1_1.setForeground(Color.WHITE);
 		lblNewLabel_1_1.setFont(new Font("Consolas", Font.PLAIN, 15));
-		lblNewLabel_1_1.setBounds(23, 92, 89, 20);
+		lblNewLabel_1_1.setBounds(77, 92, 89, 20);
 		contentPane.add(lblNewLabel_1_1);
 
+		JLabel lblNewLabel_1_1_2 = new JLabel("Canidad:");
+		lblNewLabel_1_1_2.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_1_1_2.setForeground(Color.WHITE);
+		lblNewLabel_1_1_2.setFont(new Font("Consolas", Font.PLAIN, 15));
+		lblNewLabel_1_1_2.setBounds(77, 56, 89, 20);
+		contentPane.add(lblNewLabel_1_1_2);
+
+		JLabel lblNewLabel_1_1_2_1 = new JLabel("Nueva transacción");
+		lblNewLabel_1_1_2_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_1_2_1.setForeground(Color.WHITE);
+		lblNewLabel_1_1_2_1.setFont(new Font("Consolas", Font.PLAIN, 20));
+		lblNewLabel_1_1_2_1.setBounds(10, 11, 464, 34);
+		contentPane.add(lblNewLabel_1_1_2_1);
 		
-
-
-		JLabel fondo = new JLabel("");
-		fondo.setIcon(new ImageIcon(NuevaTransaccion.class.getResource("/resources/fondoPizarra.jpg")));
-		fondo.setBounds(0, 0, 484, 561);
-		contentPane.add(fondo);
+		JLabel linkLabel_1 = new JLabel("");
+		linkLabel_1.setIcon(new ImageIcon(NuevaTransaccion.class.getResource("/resources/maxresdefault (1).jpg")));
+		linkLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		linkLabel_1.setForeground(Color.WHITE);
+		linkLabel_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+		linkLabel_1.setBackground(Color.WHITE);
+		linkLabel_1.setBounds(10, 188, 464, 20);
+		contentPane.add(linkLabel_1);
+		
+		
+				JLabel fondo = new JLabel("");
+				fondo.setIcon(new ImageIcon(NuevaTransaccion.class.getResource("/resources/fondoPizarra.jpg")));
+				fondo.setBounds(0, 0, 484, 561);
+				contentPane.add(fondo);
 	}
 
 	private static void copiarArchivo(File source, File dest) throws IOException {
 		Files.copy(source.toPath(), dest.toPath());
 	}
-
+	
+	 private void abrirEnlace(String url) {
+	        try {
+	            Desktop desktop = Desktop.getDesktop();
+	            desktop.browse(new URI(url));
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
 }

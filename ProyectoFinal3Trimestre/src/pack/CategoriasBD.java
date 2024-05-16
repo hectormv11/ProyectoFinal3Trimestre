@@ -16,7 +16,7 @@ public class CategoriasBD {
 		Conexion con = new Conexion();
 		Connection link = con.abrirConsulta();
 
-		String consulta = "SELECT * FROM categorias WHERE id_usuario = ?";
+		String consulta = "SELECT * FROM categorias WHERE id_usuario IN (-1, ?)";
 
 		PreparedStatement ps = link.prepareStatement(consulta);
 

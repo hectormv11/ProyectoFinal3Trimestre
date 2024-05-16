@@ -78,5 +78,35 @@ public class UsuariosBD {
 		return 0;
 		
 	}
+	
+	public static Usuario obtenerUsuario(String nom) throws SQLException {
+		
+		Conexion con = new Conexion();
+		Connection link = con.abrirConsulta();
+
+		String consulta = "SELECT * FROM usuarios WHERE nombre = ?";
+
+		PreparedStatement ps = link.prepareStatement(consulta);
+
+		ps.setString(1, nom);
+		
+
+		ResultSet rs = ps.executeQuery();
+
+		if(rs != null) {
+			rs.next();
+			int id = rs.getInt(1);
+			//Me salto la conrtaseña
+			String nombre = rs.getString(3);
+			String email = rs.getString(4);
+
+			Usuario user_devolver = new Usuario(id, rs.getString(2), nombre, email);
+
+			return user_devolver;
+		}
+
+		return null;
+		
+	}
 
 }

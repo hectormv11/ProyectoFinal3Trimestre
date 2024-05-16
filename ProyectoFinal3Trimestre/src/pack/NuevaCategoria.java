@@ -20,7 +20,7 @@ public class NuevaCategoria extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private static JTextField textField;
-	private static String texto = textField.getText();
+	private static String texto;
 
 	/**
 	 * Launch the application.
@@ -60,6 +60,7 @@ public class NuevaCategoria extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
+					texto = textField.getText();
 					CategoriasBD.añadirCategoria(textField.getText(), user, img);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
