@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class NuevaCategoria extends JFrame {
@@ -17,7 +18,6 @@ public class NuevaCategoria extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private static JTextField textField;
-	private static String texto;
 
 	/**
 	 * Launch the application.
@@ -27,7 +27,7 @@ public class NuevaCategoria extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public NuevaCategoria(String img, Usuario user) {
+	public NuevaCategoria(String img, Usuario user, Cuenta c) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(700, 100, 450, 300);
 		contentPane = new JPanel();
@@ -56,8 +56,15 @@ public class NuevaCategoria extends JFrame {
 		JButton btnNewButton = new JButton("Guerdar y cerrar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				texto = textField.getText();
-				dispose();
+				try {
+					CategoriasBD.añadirCategoria(textField.getText(), user, img);
+					NuevaTransaccion nv = new NuevaTransaccion(user, c);
+					nv.show();
+					dispose();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}	
 			}
 		});
 		btnNewButton.setBounds(155, 186, 125, 23);
@@ -70,7 +77,5 @@ public class NuevaCategoria extends JFrame {
 
 	}
 
-	public static String getTexto() {
-		return texto;
-	}
+	
 }

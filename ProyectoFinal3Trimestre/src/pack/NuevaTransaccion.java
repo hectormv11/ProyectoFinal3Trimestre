@@ -60,6 +60,7 @@ public class NuevaTransaccion extends JFrame {
 	Categoria catSelect = null;
 	String nombreDelArchivo = "";
 	String tipo = "";
+	
 
 	/**
 	 * Launch the application.
@@ -243,51 +244,18 @@ public class NuevaTransaccion extends JFrame {
 					try {
 						copiarArchivo(origen, destino); 
 						
-						NuevaCategoria nv = new NuevaCategoria(nombreArchivo, usuario_logeado);
+						NuevaCategoria nv = new NuevaCategoria(nombreArchivo, usuario_logeado, c);
 						nv.show();
+						dispose();
 
-						int valor = consultaCategoria(usuario_logeado, rutaArchivo);
-
-						if(valor == 0) {
-							//return;
-						}
-						
 					} catch (IOException e1) {
 						
+						JOptionPane.showMessageDialog(null, "Cambie el nombre a su imagen y vuelva a intentarlo");
+						//e1.printStackTrace();
 					}
 
-					
-
-					lblNewLabel_3_1.setIcon(new ImageIcon(NuevaTransaccion.class.getResource("/resources/"+nombreArchivo)));
-					añadido.add(lblNewLabel_3_1);
-					añadido.setBackground(new Color(204, 255, 255));
-					panelprincipal.add(añadido);
-					panelprincipal.setVisible(false);
-					panelprincipal.setVisible(true);
-
-					nombreDelArchivo = nombreArchivo;
-
-					lblNewLabel_3_1.addMouseListener(new MouseAdapter() {
-
-						int toques = 0;
-						@Override
-						public void mouseClicked(MouseEvent e) {
-							toques++;
-							if(toques%2 == 0) {
-								numSeleccionados--;
-								lblNewLabel_3_1.setBackground(new Color(204, 255, 255));
-							}else {
-								numSeleccionados++;
-								lblNewLabel_3_1.setBackground(new Color(255, 255, 129));
-								catSelect = new Categoria(NuevaCategoria.getTexto(), usuario_logeado, nombreDelArchivo);
-							}
-						}
-					});
-
-
 				}else {
-					//si se cancela la subida
-					//...
+					System.out.println("-------");
 				}
 
 			}
@@ -429,15 +397,36 @@ public class NuevaTransaccion extends JFrame {
 			e.printStackTrace();
 		}
 	}
+	
+	/*lblNewLabel_3_1.setIcon(new ImageIcon(NuevaTransaccion.class.getResource("/resources/"+nombreArchivo)));
+	añadido.add(lblNewLabel_3_1);
+	añadido.setBackground(new Color(204, 255, 255));
+	panelprincipal.add(añadido);
+	panelprincipal.setVisible(false);
+	panelprincipal.setVisible(true);
 
-	public int consultaCategoria(Usuario usuario_logeado, String rutaArchivo) {
-		try {
-			CategoriasBD.añadirCategoria(NuevaCategoria.getTexto(), usuario_logeado, rutaArchivo);
-			return 1;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return 0;
+	nombreDelArchivo = nombreArchivo;
+
+	lblNewLabel_3_1.addMouseListener(new MouseAdapter() {
+
+		int toques = 0;
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			toques++;
+			if(toques%2 == 0) {
+				numSeleccionados--;
+				lblNewLabel_3_1.setBackground(new Color(204, 255, 255));
+			}else {
+				numSeleccionados++;
+				lblNewLabel_3_1.setBackground(new Color(255, 255, 129));
+				try {
+					catSelect = CategoriasBD.getCategoriaRuta(rutaArchivo, usuario_logeado);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
 		}
-	}
+	});*/
 
 }
