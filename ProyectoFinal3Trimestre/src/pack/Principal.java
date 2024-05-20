@@ -37,7 +37,7 @@ public class Principal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel panelTransacciones;
-	private JLabel lblNewLabel;
+	private JLabel lblPerfil;
 	Cuenta c;
 
 	/**
@@ -66,11 +66,11 @@ public class Principal extends JFrame {
 		mnNewMenu.setFont(new Font("Gill Sans MT", Font.PLAIN, 20));
 		menuBar.add(mnNewMenu);
 
-		lblNewLabel = new JLabel("Perfil ");
-		lblNewLabel.setHorizontalTextPosition(SwingConstants.LEADING);
-		lblNewLabel.setIcon(new ImageIcon(Principal.class.getResource("/resources/usuario.png")));
-		lblNewLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel.addMouseListener(new MouseAdapter() {
+		lblPerfil = new JLabel("Perfil ");
+		lblPerfil.setHorizontalTextPosition(SwingConstants.LEADING);
+		lblPerfil.setIcon(new ImageIcon(Principal.class.getResource("/resources/usuario.png")));
+		lblPerfil.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblPerfil.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
@@ -81,24 +81,49 @@ public class Principal extends JFrame {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblNewLabel.setForeground(Color.BLUE);
+				lblPerfil.setForeground(Color.BLUE);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblNewLabel.setForeground(Color.BLACK);
+				lblPerfil.setForeground(Color.BLACK);
 			}
 		});
-		lblNewLabel.setVerticalAlignment(SwingConstants.BOTTOM);
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Gill Sans MT", Font.PLAIN, 17));
-		mnNewMenu.add(lblNewLabel);
+		lblPerfil.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblPerfil.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPerfil.setFont(new Font("Gill Sans MT", Font.PLAIN, 17));
+		mnNewMenu.add(lblPerfil);
 
-		JLabel lblNewLabel_1 = new JLabel("Soporte ");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setIcon(new ImageIcon(Principal.class.getResource("/resources/centro-de-llamadas.png")));
-		lblNewLabel_1.setHorizontalTextPosition(SwingConstants.LEADING);
-		lblNewLabel_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel_1.addMouseListener(new MouseAdapter() {
+		JLabel lblSoporte = new JLabel("Soporte ");
+		lblSoporte.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSoporte.setIcon(new ImageIcon(Principal.class.getResource("/resources/centro-de-llamadas.png")));
+		lblSoporte.setHorizontalTextPosition(SwingConstants.LEADING);
+		lblSoporte.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblSoporte.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				
+
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+
+				lblSoporte.setForeground(Color.BLUE);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblSoporte.setForeground(Color.BLACK);
+			}
+		});
+		lblSoporte.setFont(new Font("Gill Sans MT", Font.PLAIN, 17));
+		mnNewMenu.add(lblSoporte);
+
+		JLabel lblAjustes = new JLabel("Ajustes ");
+		lblAjustes.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAjustes.setHorizontalTextPosition(SwingConstants.LEADING);
+		lblAjustes.setIcon(new ImageIcon(Principal.class.getResource("/resources/apoyo-tecnico.png")));
+		lblAjustes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblAjustes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
@@ -107,46 +132,21 @@ public class Principal extends JFrame {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-
-				lblNewLabel_1.setForeground(Color.BLUE);
+				lblAjustes.setForeground(Color.BLUE);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblNewLabel_1.setForeground(Color.BLACK);
+				lblAjustes.setForeground(Color.BLACK);
 			}
 		});
-		lblNewLabel_1.setFont(new Font("Gill Sans MT", Font.PLAIN, 17));
-		mnNewMenu.add(lblNewLabel_1);
+		lblAjustes.setFont(new Font("Gill Sans MT", Font.PLAIN, 17));
+		mnNewMenu.add(lblAjustes);
 
-		JLabel lblNewLabel_2 = new JLabel("Ajustes ");
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setHorizontalTextPosition(SwingConstants.LEADING);
-		lblNewLabel_2.setIcon(new ImageIcon(Principal.class.getResource("/resources/apoyo-tecnico.png")));
-		lblNewLabel_2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel_2.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-
-
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblNewLabel_2.setForeground(Color.BLUE);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblNewLabel_2.setForeground(Color.BLACK);
-			}
-		});
-		lblNewLabel_2.setFont(new Font("Gill Sans MT", Font.PLAIN, 17));
-		mnNewMenu.add(lblNewLabel_2);
-
-		JLabel lblNewLabel_3 = new JLabel("Cerrar Sesion ");
-		lblNewLabel_3.setHorizontalTextPosition(SwingConstants.LEADING);
-		lblNewLabel_3.setIcon(new ImageIcon(Principal.class.getResource("/resources/cerrar-sesion.png")));
-		lblNewLabel_3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel_3.addMouseListener(new MouseAdapter() {
+		JLabel lblCerrarSesion = new JLabel("Cerrar Sesion ");
+		lblCerrarSesion.setHorizontalTextPosition(SwingConstants.LEADING);
+		lblCerrarSesion.setIcon(new ImageIcon(Principal.class.getResource("/resources/cerrar-sesion.png")));
+		lblCerrarSesion.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblCerrarSesion.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Inicio i = new Inicio();
@@ -155,22 +155,22 @@ public class Principal extends JFrame {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblNewLabel_3.setForeground(Color.BLUE);
+				lblCerrarSesion.setForeground(Color.BLUE);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblNewLabel_3.setForeground(Color.BLACK);
+				lblCerrarSesion.setForeground(Color.BLACK);
 			}
 		});
-		lblNewLabel_3.setFont(new Font("Gill Sans MT", Font.PLAIN, 17));
-		mnNewMenu.add(lblNewLabel_3);
+		lblCerrarSesion.setFont(new Font("Gill Sans MT", Font.PLAIN, 17));
+		mnNewMenu.add(lblCerrarSesion);
 
 		JLabel lblNewLabel_4 = new JLabel("                    ");
 		menuBar.add(lblNewLabel_4);
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setFont(new Font("Dialog", Font.PLAIN, 13));
-		menuBar.add(comboBox);
+		JComboBox comboBoxCuentas = new JComboBox();
+		comboBoxCuentas.setFont(new Font("Dialog", Font.PLAIN, 13));
+		menuBar.add(comboBoxCuentas);
 		panelTransacciones = new JPanel();
 		panelTransacciones.setBorder(new EmptyBorder(5, 5, 5, 5));
 		Cuenta[] listado = CuentasBD.getCuentas(usuario_logeado);
@@ -180,59 +180,60 @@ public class Principal extends JFrame {
 			cuentasS[i] = listado[i].toString();
 		}
 
-		comboBox.setModel(new DefaultComboBoxModel(cuentasS));
+		comboBoxCuentas.setModel(new DefaultComboBoxModel(cuentasS));
 
 
 		JLabel lblNewLabel_4_1 = new JLabel("            ");
 		menuBar.add(lblNewLabel_4_1);
 
-		JButton btnNewButton = new JButton("");
-		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton.setToolTipText("Balance económico");
-		btnNewButton.setBorderPainted(false);
-		btnNewButton.setContentAreaFilled(false);
-		btnNewButton.setIcon(new ImageIcon(Principal.class.getResource("/resources/archivos.png")));
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton lblBalance = new JButton("");
+		lblBalance.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblBalance.setToolTipText("Balance económico");
+		lblBalance.setBorderPainted(false);
+		lblBalance.setContentAreaFilled(false);
+		lblBalance.setIcon(new ImageIcon(Principal.class.getResource("/resources/archivos.png")));
+		lblBalance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setFont(new Font("Dialog", Font.PLAIN, 15));
-		menuBar.add(btnNewButton);
+		lblBalance.setFont(new Font("Dialog", Font.PLAIN, 15));
+		menuBar.add(lblBalance);
 
 		setContentPane(panelTransacciones);
 		panelTransacciones.setLayout(null);
 		Border bordeBotonAñadir = BorderFactory.createLineBorder(Color.WHITE, 0);
 
-		JButton btnNewButton_1 = new JButton("");
-		btnNewButton_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton_1.setToolTipText("Filtros");
-		btnNewButton_1.addMouseListener(new MouseAdapter() {
+		JButton lblFiltros = new JButton("");
+		lblFiltros.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblFiltros.setToolTipText("Filtros");
+		lblFiltros.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
 		});
-		btnNewButton_1.setIcon(new ImageIcon(Principal.class.getResource("/resources/lupa.png")));
-		btnNewButton_1.setFont(new Font("Dialog", Font.PLAIN, 15));
-		btnNewButton_1.setContentAreaFilled(false);
-		btnNewButton_1.setBorderPainted(false);
-		btnNewButton_1.setBounds(427, 27, 32, 32);
-		panelTransacciones.add(btnNewButton_1);
+		lblFiltros.setIcon(new ImageIcon(Principal.class.getResource("/resources/lupa.png")));
+		lblFiltros.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblFiltros.setContentAreaFilled(false);
+		lblFiltros.setBorderPainted(false);
+		lblFiltros.setBounds(427, 27, 32, 32);
+		panelTransacciones.add(lblFiltros);
 
 		JLabel lblNewLabel_5 = new JLabel("New label");
 		lblNewLabel_5.setIcon(new ImageIcon(Principal.class.getResource("/resources/circulo (2).png")));
 		lblNewLabel_5.setBounds(410, 11, 64, 64);
 		panelTransacciones.add(lblNewLabel_5);
 
-		JLabel lblNewLabel_6_1 = new JLabel("Transacciones");
-		lblNewLabel_6_1.setForeground(new Color(255, 255, 255));
-		lblNewLabel_6_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_6_1.setFont(new Font("Dialog", Font.PLAIN, 24));
-		lblNewLabel_6_1.setBounds(111, 39, 263, 40);
-		panelTransacciones.add(lblNewLabel_6_1);
+		JLabel lblTransacciones = new JLabel("Transacciones");
+		lblTransacciones.setForeground(new Color(255, 255, 255));
+		lblTransacciones.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTransacciones.setFont(new Font("Dialog", Font.PLAIN, 24));
+		lblTransacciones.setBounds(111, 39, 263, 40);
+		panelTransacciones.add(lblTransacciones);
 
-		JLabel lblNewLabel_6 = new JLabel("");
-		lblNewLabel_6.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel_6.addMouseListener(new MouseAdapter() {
+		JLabel lblNuevaTransaccion = new JLabel("");
+		lblNuevaTransaccion.setToolTipText("Nueva Transaccion");
+		lblNuevaTransaccion.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblNuevaTransaccion.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
@@ -246,9 +247,9 @@ public class Principal extends JFrame {
 				}
 			}
 		});
-		lblNewLabel_6.setIcon(new ImageIcon(Principal.class.getResource("/resources/documento.png")));
-		lblNewLabel_6.setBounds(210, 440, 64, 64);
-		panelTransacciones.add(lblNewLabel_6);
+		lblNuevaTransaccion.setIcon(new ImageIcon(Principal.class.getResource("/resources/documento.png")));
+		lblNuevaTransaccion.setBounds(210, 440, 64, 64);
+		panelTransacciones.add(lblNuevaTransaccion);
 
 		JPanel panelContenedor = new JPanel();
 		panelContenedor.setBounds(8, 87, 467, 342);
@@ -258,25 +259,25 @@ public class Principal extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		panelContenedor.add(scrollPane);
 
-		Box container = Box.createVerticalBox();
-		scrollPane.setViewportView(container);
+		Box panelContainer = Box.createVerticalBox();
+		scrollPane.setViewportView(panelContainer);
 
 
 
 		for (int i = 0; i < listado.length; i++) {
-			if(listado[i].toString().equals(comboBox.getSelectedItem())) {
+			if(listado[i].toString().equals(comboBoxCuentas.getSelectedItem())) {
 				c = listado[i];
 
 			}
 		}
 
-		comboBox.addItemListener(new ItemListener() {
+		comboBoxCuentas.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 
-				container.removeAll();
-				container.setVisible(false);
+				panelContainer.removeAll();
+				panelContainer.setVisible(false);
 				for (int i = 0; i < listado.length; i++) {
-					if(listado[i].toString().equals(comboBox.getSelectedItem())) {
+					if(listado[i].toString().equals(comboBoxCuentas.getSelectedItem())) {
 						c = listado[i];
 
 					}
@@ -296,10 +297,10 @@ public class Principal extends JFrame {
 				}
 
 				for (int i = startIndex; i < trans.length; i++) {
-					container.add(getExamplePanel(trans[i]));
+					panelContainer.add(getExamplePanel(trans[i]));
 				}
 
-				container.setVisible(true);
+				panelContainer.setVisible(true);
 			}
 		});
 
@@ -312,7 +313,7 @@ public class Principal extends JFrame {
 		}
 
 		for (int i = startIndex; i < trans.length; i++) {
-			container.add(getExamplePanel(trans[i]));
+			panelContainer.add(getExamplePanel(trans[i]));
 		}
 
 		JLabel fondo = new JLabel("");

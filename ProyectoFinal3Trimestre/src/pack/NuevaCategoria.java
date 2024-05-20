@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -17,7 +18,7 @@ public class NuevaCategoria extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private static JTextField textField;
+	private static JTextField textFieldNombre;
 
 	/**
 	 * Launch the application.
@@ -42,33 +43,33 @@ public class NuevaCategoria extends JFrame {
 		lblNewLabel_2.setIcon(new ImageIcon(NuevaTransaccion.class.getResource("/resources/"+img)));
 		contentPane.add(lblNewLabel_2);
 
-		textField = new JTextField();
-		textField.setBounds(10, 51, 414, 25);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		textFieldNombre = new JTextField();
+		textFieldNombre.setBounds(10, 51, 414, 25);
+		contentPane.add(textFieldNombre);
+		textFieldNombre.setColumns(10);
 
-		JLabel lblNewLabel_1 = new JLabel("Indique el nombre de su nueva categoria");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("Consolas", Font.PLAIN, 15));
-		lblNewLabel_1.setBounds(10, 11, 414, 37);
-		contentPane.add(lblNewLabel_1);
+		JLabel textoIndicarNombre = new JLabel("Indique el nombre de su nueva categoria");
+		textoIndicarNombre.setHorizontalAlignment(SwingConstants.CENTER);
+		textoIndicarNombre.setFont(new Font("Consolas", Font.PLAIN, 15));
+		textoIndicarNombre.setBounds(10, 11, 414, 37);
+		contentPane.add(textoIndicarNombre);
 
-		JButton btnNewButton = new JButton("Guerdar y cerrar");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton botonGuardar = new JButton("Guerdar y cerrar");
+		botonGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					CategoriasBD.añadirCategoria(textField.getText(), user, img);
+					CategoriasBD.añadirCategoria(textFieldNombre.getText(), user, img);
 					NuevaTransaccion nv = new NuevaTransaccion(user, c);
 					nv.show();
 					dispose();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, "Nombre ya existente");
 					e1.printStackTrace();
 				}	
 			}
 		});
-		btnNewButton.setBounds(155, 186, 125, 23);
-		contentPane.add(btnNewButton);
+		botonGuardar.setBounds(142, 188, 150, 23);
+		contentPane.add(botonGuardar);
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(NuevaCategoria.class.getResource("/resources/maxresdefault (1).jpg")));

@@ -24,11 +24,11 @@ public class AñadirCuenta extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textFieldNombre;
+	private JTextField textFieldSaldo;
 	Cuenta c;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField textFieldSaldo2;
+	private JTextField textFieldNombre2;
 
 
 	/**
@@ -49,8 +49,8 @@ public class AñadirCuenta extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JButton btnNewButton = new JButton("");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnAtras = new JButton("");
+		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				PerfilDeUsuario p = new PerfilDeUsuario(usuario_logeado);
@@ -78,14 +78,14 @@ public class AñadirCuenta extends JFrame {
 		panel_1.setBounds(10, 270, 464, 137);
 		contentPane.add(panel_1);
 		
-		textField_2 = new JTextField();
-		textField_2.setText("");
-		textField_2.setColumns(10);
-		textField_2.setBounds(80, 65, 334, 17);
-		panel_1.add(textField_2);
+		textFieldSaldo2 = new JTextField();
+		textFieldSaldo2.setText("");
+		textFieldSaldo2.setColumns(10);
+		textFieldSaldo2.setBounds(80, 65, 334, 17);
+		panel_1.add(textFieldSaldo2);
 		
-		textField_3 = new JTextField();
-		textField_3.addMouseListener(new MouseAdapter() {
+		textFieldNombre2 = new JTextField();
+		textFieldNombre2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
@@ -93,37 +93,37 @@ public class AñadirCuenta extends JFrame {
 				
 			}
 		});
-		textField_3.setText((String) null);
-		textField_3.setColumns(10);
-		textField_3.setBounds(80, 41, 334, 17);
-		panel_1.add(textField_3);
+		textFieldNombre2.setText((String) null);
+		textFieldNombre2.setColumns(10);
+		textFieldNombre2.setBounds(80, 41, 334, 17);
+		panel_1.add(textFieldNombre2);
 		
-		JLabel lblNewLabel_2 = new JLabel("Nombre:");
-		lblNewLabel_2.setFont(new Font("Consolas", Font.PLAIN, 15));
-		lblNewLabel_2.setBounds(10, 39, 60, 23);
-		panel_1.add(lblNewLabel_2);
+		JLabel lblNombre2 = new JLabel("Nombre:");
+		lblNombre2.setFont(new Font("Consolas", Font.PLAIN, 15));
+		lblNombre2.setBounds(10, 39, 60, 23);
+		panel_1.add(lblNombre2);
 		
-		JLabel lblSaldo_1 = new JLabel("Saldo:");
-		lblSaldo_1.setFont(new Font("Consolas", Font.PLAIN, 15));
-		lblSaldo_1.setBounds(10, 64, 60, 23);
-		panel_1.add(lblSaldo_1);
+		JLabel lblSaldo2 = new JLabel("Saldo:");
+		lblSaldo2.setFont(new Font("Consolas", Font.PLAIN, 15));
+		lblSaldo2.setBounds(10, 64, 60, 23);
+		panel_1.add(lblSaldo2);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Añadir cuentas");
-		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_1.setFont(new Font("Consolas", Font.PLAIN, 15));
-		lblNewLabel_1_1.setBounds(10, 11, 444, 25);
-		panel_1.add(lblNewLabel_1_1);
+		JLabel lblAñadirCuentas = new JLabel("Añadir cuentas");
+		lblAñadirCuentas.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAñadirCuentas.setFont(new Font("Consolas", Font.PLAIN, 15));
+		lblAñadirCuentas.setBounds(10, 11, 444, 25);
+		panel_1.add(lblAñadirCuentas);
 		
-		JButton btnGuardar_1 = new JButton("Guardar");
-		btnGuardar_1.addActionListener(new ActionListener() {
+		JButton btnGuardar2 = new JButton("Guardar");
+		btnGuardar2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(!textField_3.getText().equals("") && !textField_2.getText().equals("")) {
-					double saldo = Double.parseDouble(textField_2.getText());
+				if(!textFieldNombre2.getText().equals("") && !textFieldSaldo2.getText().equals("")) {
+					double saldo = Double.parseDouble(textFieldSaldo2.getText());
 					try {
-						CuentasBD.registrarCuenta(textField_3.getText(), usuario_logeado, saldo);
-						textField_3.setText("");
-						textField_2.setText("");
+						CuentasBD.registrarCuenta(textFieldNombre2.getText(), usuario_logeado, saldo);
+						textFieldNombre2.setText("");
+						textFieldSaldo2.setText("");
 						labelFotoCheck.setVisible(true);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
@@ -132,18 +132,18 @@ public class AñadirCuenta extends JFrame {
 				}
 			}
 		});
-		btnGuardar_1.setBounds(185, 98, 89, 23);
-		panel_1.add(btnGuardar_1);
+		btnGuardar2.setBounds(185, 98, 89, 23);
+		panel_1.add(btnGuardar2);
 		
 		JLabel fondo1_1 = new JLabel("");
 		fondo1_1.setIcon(new ImageIcon(AñadirCuenta.class.getResource("/resources/maxresdefault (1).jpg")));
 		fondo1_1.setBounds(0, 0, 464, 137);
 		panel_1.add(fondo1_1);
-		btnNewButton.setIcon(new ImageIcon(AñadirCuenta.class.getResource("/resources/izquierda.png")));
-		btnNewButton.setContentAreaFilled(false);
-		btnNewButton.setBorderPainted(false);
-		btnNewButton.setBounds(10, 11, 64, 64);
-		contentPane.add(btnNewButton);
+		btnAtras.setIcon(new ImageIcon(AñadirCuenta.class.getResource("/resources/izquierda.png")));
+		btnAtras.setContentAreaFilled(false);
+		btnAtras.setBorderPainted(false);
+		btnAtras.setBounds(10, 11, 64, 64);
+		contentPane.add(btnAtras);
 
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 83, 464, 176);
@@ -152,22 +152,22 @@ public class AñadirCuenta extends JFrame {
 
 
 
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(80, 113, 334, 17);
-		panel.add(textField_1);
+		textFieldSaldo = new JTextField();
+		textFieldSaldo.setColumns(10);
+		textFieldSaldo.setBounds(80, 113, 334, 17);
+		panel.add(textFieldSaldo);
 
-		textField = new JTextField();
-		textField.setBounds(80, 89, 334, 17);
-		panel.add(textField);
-		textField.setColumns(10);
+		textFieldNombre = new JTextField();
+		textFieldNombre.setBounds(80, 89, 334, 17);
+		panel.add(textFieldNombre);
+		textFieldNombre.setColumns(10);
 
 
 
-		JLabel lblNewLabel = new JLabel("Nombre:");
-		lblNewLabel.setFont(new Font("Consolas", Font.PLAIN, 15));
-		lblNewLabel.setBounds(10, 87, 60, 23);
-		panel.add(lblNewLabel);
+		JLabel lblNombre = new JLabel("Nombre:");
+		lblNombre.setFont(new Font("Consolas", Font.PLAIN, 15));
+		lblNombre.setBounds(10, 87, 60, 23);
+		panel.add(lblNombre);
 
 		JLabel lblSaldo = new JLabel("Saldo:");
 		lblSaldo.setFont(new Font("Consolas", Font.PLAIN, 15));
@@ -188,11 +188,11 @@ public class AñadirCuenta extends JFrame {
 
 		comboBox.setModel(new DefaultComboBoxModel(cuentasS));
 
-		JLabel lblNewLabel_1 = new JLabel("Editar cuentas");
-		lblNewLabel_1.setFont(new Font("Consolas", Font.PLAIN, 15));
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(10, 11, 444, 25);
-		panel.add(lblNewLabel_1);
+		JLabel lblEdiarCuentas = new JLabel("Editar cuentas");
+		lblEdiarCuentas.setFont(new Font("Consolas", Font.PLAIN, 15));
+		lblEdiarCuentas.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEdiarCuentas.setBounds(10, 11, 444, 25);
+		panel.add(lblEdiarCuentas);
 
 		for (int i = 0; i < listado.length; i++) {
 			if(listado[i].toString().equals(comboBox.getSelectedItem())) {
@@ -224,25 +224,25 @@ public class AñadirCuenta extends JFrame {
 					}
 				}
 				
-				textField.setText(c.getNombre());
+				textFieldNombre.setText(c.getNombre());
 				String saldo = String.valueOf(c.getSaldo());
-				textField_1.setText(saldo);
+				textFieldSaldo.setText(saldo);
 
 			}
 		});
 		
-		textField.setText(c.getNombre());
+		textFieldNombre.setText(c.getNombre());
 		String saldo = String.valueOf(c.getSaldo());
-		textField_1.setText(saldo);
+		textFieldSaldo.setText(saldo);
 		
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 
-				if(!textField.getText().isEmpty() && !textField_1.getText().isEmpty()) {
+				if(!textFieldNombre.getText().isEmpty() && !textFieldSaldo.getText().isEmpty()) {
 					try {
-						double numeroComoDouble = Double.parseDouble(textField_1.getText());
-						CuentasBD.actualizarCuenta(textField.getText(), c, numeroComoDouble);
+						double numeroComoDouble = Double.parseDouble(textFieldSaldo.getText());
+						CuentasBD.actualizarCuenta(textFieldNombre.getText(), c, numeroComoDouble);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -262,7 +262,7 @@ public class AñadirCuenta extends JFrame {
 					}
 					
 					comboBox.setModel(new DefaultComboBoxModel(cuentasS));
-					String elegido = textField.getText()+ " - "+Double.parseDouble(textField_1.getText());
+					String elegido = textFieldNombre.getText()+ " - "+Double.parseDouble(textFieldSaldo.getText());
 					comboBox.setSelectedItem(elegido);
 					comboBox.setVisible(true);
 

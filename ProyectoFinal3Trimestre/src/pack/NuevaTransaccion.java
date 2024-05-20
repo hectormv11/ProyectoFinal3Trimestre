@@ -34,6 +34,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.ButtonGroup;
 
@@ -60,7 +61,7 @@ public class NuevaTransaccion extends JFrame {
 	Categoria catSelect = null;
 	String nombreDelArchivo = "";
 	String tipo = "";
-	
+
 
 	/**
 	 * Launch the application.
@@ -81,14 +82,14 @@ public class NuevaTransaccion extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel linkLabel = new JLabel("<html><a href=''>Sugerencia de iconos para tus nuevas categorias\r\n</a></html>");
-		linkLabel.setFont(new Font("Dialog", Font.PLAIN, 15));
-		linkLabel.setForeground(new Color(255, 255, 255));
-		linkLabel.setBackground(new Color(255, 255, 255));
-		linkLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		linkLabel.setBounds(10, 187, 464, 20);
-		linkLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		linkLabel.addMouseListener(new MouseAdapter() {
+		JLabel linkLabelIconos = new JLabel("<html><a href=''>Sugerencia de iconos para tus nuevas categorias\r\n</a></html>");
+		linkLabelIconos.setFont(new Font("Dialog", Font.PLAIN, 15));
+		linkLabelIconos.setForeground(new Color(255, 255, 255));
+		linkLabelIconos.setBackground(new Color(255, 255, 255));
+		linkLabelIconos.setHorizontalAlignment(SwingConstants.CENTER);
+		linkLabelIconos.setBounds(10, 187, 464, 20);
+		linkLabelIconos.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		linkLabelIconos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				abrirEnlace("https://www.flaticon.es/");
@@ -96,21 +97,21 @@ public class NuevaTransaccion extends JFrame {
 		});
 
 		// Añadir el JLabel al JFrame
-		getContentPane().add(linkLabel);
+		getContentPane().add(linkLabelIconos);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 143, 464, 34);
 		contentPane.add(scrollPane);
 
-		JTextArea textArea = new JTextArea();
-		scrollPane.setViewportView(textArea);
+		JTextArea textAreaComentario = new JTextArea();
+		scrollPane.setViewportView(textAreaComentario);
 
-		JLabel lblNewLabel_1_1_1 = new JLabel("Comentario:");
-		lblNewLabel_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_1_1.setForeground(Color.WHITE);
-		lblNewLabel_1_1_1.setFont(new Font("Consolas", Font.PLAIN, 15));
-		lblNewLabel_1_1_1.setBounds(10, 123, 464, 20);
-		contentPane.add(lblNewLabel_1_1_1);
+		JLabel textoComentario = new JLabel("Comentario:");
+		textoComentario.setHorizontalAlignment(SwingConstants.CENTER);
+		textoComentario.setForeground(Color.WHITE);
+		textoComentario.setFont(new Font("Consolas", Font.PLAIN, 15));
+		textoComentario.setBounds(10, 123, 464, 20);
+		contentPane.add(textoComentario);
 
 		txtYyyymmdd = new JTextField();
 		txtYyyymmdd.addFocusListener(new FocusAdapter() {
@@ -136,19 +137,19 @@ public class NuevaTransaccion extends JFrame {
 		txtYyyymmdd.setBounds(176, 91, 133, 20);
 		contentPane.add(txtYyyymmdd);
 
-		JLabel lblNewLabel_2 = new JLabel("Categorias:");
-		lblNewLabel_2.setFont(new Font("Consolas", Font.PLAIN, 15));
-		lblNewLabel_2.setForeground(new Color(255, 255, 255));
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setBounds(10, 213, 464, 20);
-		contentPane.add(lblNewLabel_2);
+		JLabel textoCategorias = new JLabel("Categorias:");
+		textoCategorias.setFont(new Font("Consolas", Font.PLAIN, 15));
+		textoCategorias.setForeground(new Color(255, 255, 255));
+		textoCategorias.setHorizontalAlignment(SwingConstants.CENTER);
+		textoCategorias.setBounds(10, 213, 464, 20);
+		contentPane.add(textoCategorias);
 
-		JLabel lblNewLabel = new JLabel("EUR");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Consolas", Font.PLAIN, 20));
-		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setBounds(263, 56, 57, 24);
-		contentPane.add(lblNewLabel);
+		JLabel textoDivisa = new JLabel("EUR");
+		textoDivisa.setHorizontalAlignment(SwingConstants.CENTER);
+		textoDivisa.setFont(new Font("Consolas", Font.PLAIN, 20));
+		textoDivisa.setForeground(new Color(255, 255, 255));
+		textoDivisa.setBounds(263, 56, 57, 24);
+		contentPane.add(textoDivisa);
 
 		textField = new JTextField();
 		textField.setBounds(176, 55, 85, 20);
@@ -159,22 +160,22 @@ public class NuevaTransaccion extends JFrame {
 		scrollPane_1.setBounds(0, 238, 484, 287);
 		contentPane.add(scrollPane_1);
 
-		JPanel panelprincipal = new JPanel();
-		scrollPane_1.setViewportView(panelprincipal);
-		panelprincipal.setBackground(new Color(204, 255, 255));
-		panelprincipal.setLayout(new GridLayout(0, 5, 0, 0));
+		JPanel panelCategorias = new JPanel();
+		scrollPane_1.setViewportView(panelCategorias);
+		panelCategorias.setBackground(new Color(204, 255, 255));
+		panelCategorias.setLayout(new GridLayout(0, 5, 0, 0));
 
 
 		JPanel panelAñadir = new JPanel();
 		panelAñadir.setPreferredSize(new Dimension(tamañoMinimo,tamañoMinimo)); // Establecer tamaño mínimo
 		panelAñadir.setLayout(new BorderLayout()); // Layout para centrar componentes si es necesario
-		JLabel lblNewLabel_3_1 = new JLabel("");
-		lblNewLabel_3_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_3_1.setIcon(new ImageIcon(NuevaTransaccion.class.getResource("/resources/agregar.png")));
-		panelAñadir.add(lblNewLabel_3_1);
+		JLabel lblPorDefecto = new JLabel("");
+		lblPorDefecto.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblPorDefecto.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPorDefecto.setIcon(new ImageIcon(NuevaTransaccion.class.getResource("/resources/agregar.png")));
+		panelAñadir.add(lblPorDefecto);
 		panelAñadir.setBackground(new Color(204, 255, 255));
-		panelprincipal.add(panelAñadir);
+		panelCategorias.add(panelAñadir);
 
 		ArrayList<Categoria> categoriaArray = CategoriasBD.getCategorias(usuario_logeado);
 
@@ -191,7 +192,7 @@ public class NuevaTransaccion extends JFrame {
 			labelFoto.setIcon(new ImageIcon(NuevaTransaccion.class.getResource("/resources/"+categoriaArray.get(i).getRuta())));
 			nuevo.add(labelFoto);
 			nuevo.setBackground(new Color(204, 255, 255));
-			panelprincipal.add(nuevo);
+			panelCategorias.add(nuevo);
 
 			Categoria actual = categoriaArray.get(i);
 			nuevo.addMouseListener(new MouseAdapter() {
@@ -236,22 +237,28 @@ public class NuevaTransaccion extends JFrame {
 
 					nombreArchivo = chooser.getSelectedFile().getName(); //ejemplo: foto.png
 					String rutaArchivo = chooser.getSelectedFile().getAbsolutePath(); //ejemplo: C:/User/Pablo/Escritorio/foto.png
-					//textArea.append("Copiando a la carpeta \"resources\"...");
-					File origen = new File(rutaArchivo);
-					File destino = new File(NuevaTransaccion.class.getResource("/resources/").getPath()+nombreArchivo);
-					//textArea.append("\n");
+					
+					File origen = new File(rutaArchivo);//archivo de origen
+					File destino = new File(NuevaTransaccion.class.getResource("/resources/").getPath()+nombreArchivo);//archivo de destino
+					
+					//genero un numero aleatorio y le cambio el nombre para que las imagenes no tengan el mismo nombre de ruta
+					Random random = new Random();
+					int numeroAleatorio = 10000 + random.nextInt(99999);
 
-					try {
-						copiarArchivo(origen, destino); 
+					String rutaArchivoNuevo = NuevaTransaccion.class.getResource("/resources/").getPath()+numeroAleatorio;
+					File archivoNuevo = new File(rutaArchivoNuevo);
+					
+					destino.renameTo(archivoNuevo);
+
+					//copio el archivo a la carpeta del proyecto
+					if(copiarArchivo(origen, destino) == 0) {
 						
-						NuevaCategoria nv = new NuevaCategoria(nombreArchivo, usuario_logeado, c);
+						JOptionPane.showMessageDialog(null, "Problema desconocido, intentelo de nuevo");
+
+					}else {
+						NuevaCategoria nv = new NuevaCategoria(archivoNuevo.getName(), usuario_logeado, c);
 						nv.show();
 						dispose();
-
-					} catch (IOException e1) {
-						
-						JOptionPane.showMessageDialog(null, "Cambie el nombre a su imagen y vuelva a intentarlo");
-						//e1.printStackTrace();
 					}
 
 				}else {
@@ -261,10 +268,10 @@ public class NuevaTransaccion extends JFrame {
 			}
 		});
 
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Ingreso");
-		rdbtnNewRadioButton.addItemListener(new ItemListener() {
+		JRadioButton redioButtonIngreso = new JRadioButton("Ingreso");
+		redioButtonIngreso.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				if(rdbtnNewRadioButton.isSelected()) {
+				if(redioButtonIngreso.isSelected()) {
 					tipo = "I";
 				}else {
 					tipo = "G";
@@ -272,29 +279,29 @@ public class NuevaTransaccion extends JFrame {
 
 			}
 		});
-		rdbtnNewRadioButton.setFont(new Font("Consolas", Font.PLAIN, 15));
-		rdbtnNewRadioButton.setForeground(new Color(255, 255, 255));
-		rdbtnNewRadioButton.setContentAreaFilled(false);
-		rdbtnNewRadioButton.setBounds(326, 54, 85, 23);
-		contentPane.add(rdbtnNewRadioButton);
+		redioButtonIngreso.setFont(new Font("Consolas", Font.PLAIN, 15));
+		redioButtonIngreso.setForeground(new Color(255, 255, 255));
+		redioButtonIngreso.setContentAreaFilled(false);
+		redioButtonIngreso.setBounds(326, 54, 85, 23);
+		contentPane.add(redioButtonIngreso);
 
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Gasto");
-		rdbtnNewRadioButton_1.setFont(new Font("Consolas", Font.PLAIN, 15));
-		rdbtnNewRadioButton_1.setForeground(new Color(255, 255, 255));
-		rdbtnNewRadioButton_1.setContentAreaFilled(false);
-		rdbtnNewRadioButton_1.setBounds(326, 93, 85, 23);
-		contentPane.add(rdbtnNewRadioButton_1);
+		JRadioButton redioButtonGasto = new JRadioButton("Gasto");
+		redioButtonGasto.setFont(new Font("Consolas", Font.PLAIN, 15));
+		redioButtonGasto.setForeground(new Color(255, 255, 255));
+		redioButtonGasto.setContentAreaFilled(false);
+		redioButtonGasto.setBounds(326, 93, 85, 23);
+		contentPane.add(redioButtonGasto);
 
 		ButtonGroup ingresosGastos = new ButtonGroup();
-		ingresosGastos.add(rdbtnNewRadioButton_1);
-		ingresosGastos.add(rdbtnNewRadioButton);
+		ingresosGastos.add(redioButtonGasto);
+		ingresosGastos.add(redioButtonIngreso);
 
-		JButton btnNewButton = new JButton("Añadir");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton botonAñadir = new JButton("Añadir");
+		botonAñadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double numero = 0;
 
-				if(numSeleccionados == 1 && !txtYyyymmdd.getText().equals("") && (rdbtnNewRadioButton.isSelected() || rdbtnNewRadioButton_1.isSelected())) {
+				if(numSeleccionados == 1 && !txtYyyymmdd.getText().equals("") && (redioButtonIngreso.isSelected() || redioButtonGasto.isSelected())) {
 
 					if(!textField.getText().equals("")) {
 						numero = Double.parseDouble(textField.getText());
@@ -309,7 +316,7 @@ public class NuevaTransaccion extends JFrame {
 					} catch (DateTimeParseException e1) {
 						e1.printStackTrace();  // Maneja la excepción si la cadena no tiene el formato correcto
 					}
-					Transaccion trans = new Transaccion(0,numero, c, catSelect, sqlDate, textArea.getText(), tipo);
+					Transaccion trans = new Transaccion(0,numero, c, catSelect, sqlDate, textAreaComentario.getText(), tipo);
 					try {
 						if(numero != 0) {
 							TransaccionesBD.añadirTransaccion(trans);
@@ -345,29 +352,29 @@ public class NuevaTransaccion extends JFrame {
 
 			}
 		});
-		btnNewButton.setBounds(192, 531, 89, 23);
-		contentPane.add(btnNewButton);
+		botonAñadir.setBounds(192, 531, 89, 23);
+		contentPane.add(botonAñadir);
 
-		JLabel lblNewLabel_1_1 = new JLabel("Fecha:");
-		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1_1.setForeground(Color.WHITE);
-		lblNewLabel_1_1.setFont(new Font("Consolas", Font.PLAIN, 15));
-		lblNewLabel_1_1.setBounds(77, 92, 89, 20);
-		contentPane.add(lblNewLabel_1_1);
+		JLabel textoFecha = new JLabel("Fecha:");
+		textoFecha.setHorizontalAlignment(SwingConstants.RIGHT);
+		textoFecha.setForeground(Color.WHITE);
+		textoFecha.setFont(new Font("Consolas", Font.PLAIN, 15));
+		textoFecha.setBounds(77, 92, 89, 20);
+		contentPane.add(textoFecha);
 
-		JLabel lblNewLabel_1_1_2 = new JLabel("Canidad:");
-		lblNewLabel_1_1_2.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1_1_2.setForeground(Color.WHITE);
-		lblNewLabel_1_1_2.setFont(new Font("Consolas", Font.PLAIN, 15));
-		lblNewLabel_1_1_2.setBounds(77, 56, 89, 20);
-		contentPane.add(lblNewLabel_1_1_2);
+		JLabel textoCantidad = new JLabel("Canidad:");
+		textoCantidad.setHorizontalAlignment(SwingConstants.RIGHT);
+		textoCantidad.setForeground(Color.WHITE);
+		textoCantidad.setFont(new Font("Consolas", Font.PLAIN, 15));
+		textoCantidad.setBounds(77, 56, 89, 20);
+		contentPane.add(textoCantidad);
 
-		JLabel lblNewLabel_1_1_2_1 = new JLabel("Nueva transacción");
-		lblNewLabel_1_1_2_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_1_2_1.setForeground(Color.WHITE);
-		lblNewLabel_1_1_2_1.setFont(new Font("Consolas", Font.PLAIN, 20));
-		lblNewLabel_1_1_2_1.setBounds(10, 11, 464, 34);
-		contentPane.add(lblNewLabel_1_1_2_1);
+		JLabel textoNuevaTransaccion = new JLabel("Nueva transacción");
+		textoNuevaTransaccion.setHorizontalAlignment(SwingConstants.CENTER);
+		textoNuevaTransaccion.setForeground(Color.WHITE);
+		textoNuevaTransaccion.setFont(new Font("Consolas", Font.PLAIN, 20));
+		textoNuevaTransaccion.setBounds(10, 11, 464, 34);
+		contentPane.add(textoNuevaTransaccion);
 
 		JLabel linkLabel_1 = new JLabel("");
 		linkLabel_1.setIcon(new ImageIcon(NuevaTransaccion.class.getResource("/resources/maxresdefault (1).jpg")));
@@ -385,8 +392,15 @@ public class NuevaTransaccion extends JFrame {
 		contentPane.add(fondo);
 	}
 
-	private static void copiarArchivo(File source, File dest) throws IOException {
-		Files.copy(source.toPath(), dest.toPath());
+	private static int copiarArchivo(File source, File dest) {
+		try {
+			Files.copy(source.toPath(), dest.toPath());
+			return 1;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
 	}
 
 	private void abrirEnlace(String url) {
@@ -397,7 +411,7 @@ public class NuevaTransaccion extends JFrame {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/*lblNewLabel_3_1.setIcon(new ImageIcon(NuevaTransaccion.class.getResource("/resources/"+nombreArchivo)));
 	añadido.add(lblNewLabel_3_1);
 	añadido.setBackground(new Color(204, 255, 255));

@@ -60,13 +60,13 @@ public class Inicio extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton Registro = new JButton("Registrarse");
-		Registro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		Registro.setBorderPainted(false);
-		Registro.setForeground(new Color(255, 255, 255));
-		Registro.setFont(new Font("Consolas", Font.PLAIN, 15));
-		Registro.setBackground(new Color(0, 16, 53));
-		Registro.addActionListener(new ActionListener() {
+		JButton botonRegistro = new JButton("Registrarse");
+		botonRegistro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		botonRegistro.setBorderPainted(false);
+		botonRegistro.setForeground(new Color(255, 255, 255));
+		botonRegistro.setFont(new Font("Consolas", Font.PLAIN, 15));
+		botonRegistro.setBackground(new Color(0, 16, 53));
+		botonRegistro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				Registro registro = new Registro();
@@ -75,16 +75,16 @@ public class Inicio extends JFrame {
 				
 			}
 		});
-		Registro.setBounds(159, 361, 170, 50);
-		contentPane.add(Registro);
+		botonRegistro.setBounds(159, 361, 170, 50);
+		contentPane.add(botonRegistro);
 		
-		JButton iniciarSesion = new JButton("Inicio de sesión");
-		iniciarSesion.setBorderPainted(false);
-		iniciarSesion.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		iniciarSesion.setForeground(new Color(255, 255, 255));
-		iniciarSesion.setFont(new Font("Consolas", Font.PLAIN, 15));
-		iniciarSesion.setBackground(new Color(0, 16, 53));
-		iniciarSesion.addActionListener(new ActionListener() {
+		JButton botonIniciarSesion = new JButton("Inicio de sesión");
+		botonIniciarSesion.setBorderPainted(false);
+		botonIniciarSesion.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		botonIniciarSesion.setForeground(new Color(255, 255, 255));
+		botonIniciarSesion.setFont(new Font("Consolas", Font.PLAIN, 15));
+		botonIniciarSesion.setBackground(new Color(0, 16, 53));
+		botonIniciarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				InicioSesion inicioSesion = new InicioSesion();
@@ -93,15 +93,15 @@ public class Inicio extends JFrame {
 				
 			}
 		});
-		iniciarSesion.setBounds(159, 300, 170, 50);
-		contentPane.add(iniciarSesion);
+		botonIniciarSesion.setBounds(159, 300, 170, 50);
+		contentPane.add(botonIniciarSesion);
 		
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setIcon(new ImageIcon(Inicio.class.getResource("/resources/_de3cce87-5082-4ac5-9301-938179dc1a2b (2).jpg")));
-		lblNewLabel.setBounds(178, 131, 128, 128);
-		contentPane.add(lblNewLabel);
+		JLabel lblIconoLogo = new JLabel("");
+		lblIconoLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIconoLogo.setIcon(new ImageIcon(Inicio.class.getResource("/resources/_de3cce87-5082-4ac5-9301-938179dc1a2b (2).jpg")));
+		lblIconoLogo.setBounds(178, 131, 128, 128);
+		contentPane.add(lblIconoLogo);
 		
 		JLabel nombreAplicacion = new JLabel(".");
 		nombreAplicacion.setFont(new Font("Consolas", Font.PLAIN, 15));

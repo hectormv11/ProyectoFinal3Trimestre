@@ -47,9 +47,9 @@ public class PerfilDeUsuario extends JFrame {
 		JLabel confirmar = new JLabel("Pulsa de nuevo el boton para confirmar");
 		confirmar.setVisible(false);
 
-		JButton btnNewButton = new JButton("");
-		btnNewButton.setBorderPainted(false);
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnAtras = new JButton("");
+		btnAtras.setBorderPainted(false);
+		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				try {
@@ -86,10 +86,10 @@ public class PerfilDeUsuario extends JFrame {
 		añadirCuenta.setBorderPainted(false);
 		añadirCuenta.setBounds(209, 440, 64, 64);
 		contentPane.add(añadirCuenta);
-		btnNewButton.setIcon(new ImageIcon(PerfilDeUsuario.class.getResource("/resources/izquierda.png")));
-		btnNewButton.setContentAreaFilled(false);
-		btnNewButton.setBounds(10, 11, 64, 64);
-		contentPane.add(btnNewButton);
+		btnAtras.setIcon(new ImageIcon(PerfilDeUsuario.class.getResource("/resources/izquierda.png")));
+		btnAtras.setContentAreaFilled(false);
+		btnAtras.setBounds(10, 11, 64, 64);
+		contentPane.add(btnAtras);
 		confirmar.setHorizontalAlignment(SwingConstants.CENTER);
 		confirmar.setBounds(175, 381, 250, 14);
 		contentPane.add(confirmar);

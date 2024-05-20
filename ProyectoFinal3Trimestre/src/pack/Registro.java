@@ -22,7 +22,7 @@ public class Registro extends JFrame {
 	private JPanel contentPane;
 	private JTextField textUsuario;
 	private JPasswordField passwordField;
-	private JPasswordField passwordField_2;
+	private JPasswordField passwordField2;
 	private JTextField textCorreo;
 	int numPulsaciones = 0;
 
@@ -55,18 +55,18 @@ public class Registro extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		passwordField_2 = new JPasswordField();
-		passwordField_2.setEchoChar('*');
-		passwordField_2.setBounds(240, 250, 200, 20);
-		contentPane.add(passwordField_2);
+		passwordField2 = new JPasswordField();
+		passwordField2.setEchoChar('*');
+		passwordField2.setBounds(240, 290, 200, 20);
+		contentPane.add(passwordField2);
 
 		textUsuario = new JTextField();
 		textUsuario.setColumns(10);
-		textUsuario.setBounds(240, 168, 200, 20);
+		textUsuario.setBounds(240, 208, 200, 20);
 		contentPane.add(textUsuario);
 
-		JButton btnNewButton = new JButton("");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnAtras = new JButton("");
+		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				Inicio i = new Inicio();
@@ -75,38 +75,32 @@ public class Registro extends JFrame {
 
 			}
 		});
-		btnNewButton.setIcon(new ImageIcon(Registro.class.getResource("/resources/izquierda.png")));
-		btnNewButton.setContentAreaFilled(false);
-		btnNewButton.setBorderPainted(false);
-		btnNewButton.setBounds(10, 11, 64, 64);
-		contentPane.add(btnNewButton);
-
-		JLabel iconoVerificar = new JLabel("");
-		iconoVerificar.setVisible(false);
-		iconoVerificar.setIcon(new ImageIcon(Registro.class.getResource("/resources/registrarse.png")));
-		iconoVerificar.setBounds(209, 409, 64, 64);
-		contentPane.add(iconoVerificar);
+		btnAtras.setIcon(new ImageIcon(Registro.class.getResource("/resources/izquierda.png")));
+		btnAtras.setContentAreaFilled(false);
+		btnAtras.setBorderPainted(false);
+		btnAtras.setBounds(10, 11, 64, 64);
+		contentPane.add(btnAtras);
 
 		passwordField = new JPasswordField();
 		passwordField.setEchoChar('*');
-		passwordField.setBounds(240, 209, 200, 20);
+		passwordField.setBounds(240, 249, 200, 20);
 		contentPane.add(passwordField);
 
 		textCorreo = new JTextField();
 		textCorreo.setColumns(10);
-		textCorreo.setBounds(240, 291, 200, 20);
+		textCorreo.setBounds(240, 331, 200, 20);
 		contentPane.add(textCorreo);
 
 		JLabel lblCorreoElectronico = new JLabel("Correo electronico:");
 		lblCorreoElectronico.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCorreoElectronico.setFont(new Font("Consolas", Font.PLAIN, 18));
-		lblCorreoElectronico.setBounds(10, 287, 222, 30);
+		lblCorreoElectronico.setBounds(10, 327, 222, 30);
 		contentPane.add(lblCorreoElectronico);
 
 		JLabel lblConfirmarContrasea = new JLabel("Confirmar contraseña:");
 		lblConfirmarContrasea.setHorizontalAlignment(SwingConstants.CENTER);
 		lblConfirmarContrasea.setFont(new Font("Consolas", Font.PLAIN, 18));
-		lblConfirmarContrasea.setBounds(10, 246, 222, 30);
+		lblConfirmarContrasea.setBounds(10, 286, 222, 30);
 		contentPane.add(lblConfirmarContrasea);
 
 		JLabel iconoPerfil = new JLabel("");
@@ -117,13 +111,13 @@ public class Registro extends JFrame {
 		JLabel lblUsuario = new JLabel("Usuario:");
 		lblUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUsuario.setFont(new Font("Consolas", Font.PLAIN, 18));
-		lblUsuario.setBounds(10, 164, 222, 30);
+		lblUsuario.setBounds(10, 204, 222, 30);
 		contentPane.add(lblUsuario);
 
 		JLabel lblContrasea = new JLabel("Contraseña:");
 		lblContrasea.setHorizontalAlignment(SwingConstants.CENTER);
 		lblContrasea.setFont(new Font("Consolas", Font.PLAIN, 18));
-		lblContrasea.setBounds(10, 205, 222, 30);
+		lblContrasea.setBounds(10, 245, 222, 30);
 		contentPane.add(lblContrasea);
 
 		JButton btnRegistrarse = new JButton("Registrarse");
@@ -131,7 +125,7 @@ public class Registro extends JFrame {
 		btnRegistrarse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if(passwordField.getText().equals(passwordField_2.getText()) && passwordField.getText().length() != 0) {
+				if(passwordField.getText().equals(passwordField2.getText()) && passwordField.getText().length() != 0) {
 					try {
 						UsuariosBD.registrarse(textUsuario.getText(), passwordField.getText(), textCorreo.getText());
 						Usuario user = UsuariosBD.obtenerUsuario(textUsuario.getText());
@@ -140,7 +134,7 @@ public class Registro extends JFrame {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					iconoVerificar.setVisible(true);
+					
 					Inicio i = new Inicio();
 					i.show();
 					dispose();
@@ -150,7 +144,7 @@ public class Registro extends JFrame {
 			}
 		});
 		btnRegistrarse.setFont(new Font("Dialog", Font.PLAIN, 20));
-		btnRegistrarse.setBounds(166, 352, 149, 35);
+		btnRegistrarse.setBounds(166, 392, 149, 35);
 		contentPane.add(btnRegistrarse);
 		
 		JButton btnNewButton_1 = new JButton("");
@@ -160,12 +154,12 @@ public class Registro extends JFrame {
 				numPulsaciones++;
 				if(numPulsaciones%2 == 0) {
 					passwordField.setEchoChar('*');
-					passwordField_2.setEchoChar('*');
+					passwordField2.setEchoChar('*');
 					ImageIcon icono = new ImageIcon(Registro.class.getResource("/resources/ojo.png"));
 					btnNewButton_1.setIcon(icono);
 				}else {
 					passwordField.setEchoChar((char)0);
-					passwordField_2.setEchoChar((char)0);
+					passwordField2.setEchoChar((char)0);
 					ImageIcon icono = new ImageIcon(Registro.class.getResource("/resources/ojo (1).png"));
 					btnNewButton_1.setIcon(icono);
 				}
@@ -177,7 +171,7 @@ public class Registro extends JFrame {
 		btnNewButton_1.setIcon(new ImageIcon(Registro.class.getResource("/resources/ojo.png")));
 		btnNewButton_1.setContentAreaFilled(false);
 		btnNewButton_1.setBorderPainted(false);
-		btnNewButton_1.setBounds(450, 228, 24, 24);
+		btnNewButton_1.setBounds(450, 268, 24, 24);
 		contentPane.add(btnNewButton_1);
 
 		JLabel fondo = new JLabel("");
