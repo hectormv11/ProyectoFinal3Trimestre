@@ -127,7 +127,9 @@ public class Principal extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-
+				Ajustes a = new Ajustes(usuario_logeado);
+				a.show();
+				dispose();
 
 			}
 			@Override
