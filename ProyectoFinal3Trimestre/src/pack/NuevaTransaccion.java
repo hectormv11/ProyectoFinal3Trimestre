@@ -50,6 +50,10 @@ import java.awt.event.ItemEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.BadLocationException;
+
 public class NuevaTransaccion extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -119,7 +123,7 @@ public class NuevaTransaccion extends JFrame {
 			public void focusLost(FocusEvent e) {
 
 				if(txtYyyymmdd.getText().equals("")) {
-					txtYyyymmdd.setText("yyyy-mm-dd");
+					txtYyyymmdd.setText("2000-12-31");
 				}
 
 			}
@@ -127,15 +131,26 @@ public class NuevaTransaccion extends JFrame {
 		txtYyyymmdd.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(txtYyyymmdd.getText().equals("yyyy-mm-dd")) {
+				if(txtYyyymmdd.getText().equals("2000-12-31")) {
 					txtYyyymmdd.setText("");
 				}
 			}
 		});
-		txtYyyymmdd.setText("yyyy-mm-dd");
+		txtYyyymmdd.setText("2000-12-31");
 		txtYyyymmdd.setColumns(10);
 		txtYyyymmdd.setBounds(176, 91, 133, 20);
 		contentPane.add(txtYyyymmdd);
+		((AbstractDocument) txtYyyymmdd.getDocument()).setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, javax.swing.text.AttributeSet attrs) throws BadLocationException {
+                if (text.matches("[0-9-]*")) {
+                    super.replace(fb, offset, length, text, attrs);
+                } else {
+                    JOptionPane.showMessageDialog(null, "El campo fecha solo puede contener números y guiones con el formato yyyy-mm-dd.");
+                }
+            }
+        });
+		txtYyyymmdd.setToolTipText("El campo fecha solo puede contener números y guiones con el formato yyyy-mm-dd.");
 
 		JLabel textoCategorias = new JLabel("Categorias:");
 		textoCategorias.setFont(new Font("Consolas", Font.PLAIN, 15));
@@ -155,6 +170,17 @@ public class NuevaTransaccion extends JFrame {
 		textField.setBounds(176, 55, 85, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
+		((AbstractDocument) textField.getDocument()).setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, javax.swing.text.AttributeSet attrs) throws BadLocationException {
+                if (text.matches("[0-9.]*")) {
+                    super.replace(fb, offset, length, text, attrs);
+                } else {
+                   JOptionPane.showMessageDialog(null, "El campo cantidad solo puede contener números.");
+                }
+            }
+        });
+		textField.setToolTipText("El campo cantidad solo puede contener números.");
 
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(0, 238, 484, 287);
@@ -314,7 +340,9 @@ public class NuevaTransaccion extends JFrame {
 						sqlDate = Date.valueOf(localDate);  // Convierte LocalDate a java.sql.Date
 
 					} catch (DateTimeParseException e1) {
-						e1.printStackTrace();  // Maneja la excepción si la cadena no tiene el formato correcto
+						JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto");
+						return;
+						// Maneja la excepción si la cadena no tiene el formato correcto
 					}
 					Transaccion trans = new Transaccion(0,numero, c, catSelect, sqlDate, textAreaComentario.getText(), tipo);
 					try {
@@ -336,7 +364,7 @@ public class NuevaTransaccion extends JFrame {
 						}
 
 					} catch (SQLException e1) {
-
+					
 						e1.printStackTrace();
 					}
 

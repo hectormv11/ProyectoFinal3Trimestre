@@ -48,6 +48,7 @@ public class PerfilDeUsuario extends JFrame {
 		confirmar.setVisible(false);
 
 		JButton btnAtras = new JButton("");
+		btnAtras.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAtras.setBorderPainted(false);
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
