@@ -99,6 +99,29 @@ public class NuevaTransaccion extends JFrame {
 				abrirEnlace("https://www.flaticon.es/");
 			}
 		});
+		
+		JButton btnAtras = new JButton("");
+		btnAtras.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					Principal p = new Principal(usuario_logeado);
+					p.show();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				dispose();
+				
+			}
+		});
+		btnAtras.setIcon(new ImageIcon(NuevaTransaccion.class.getResource("/resources/izquierda (1).png")));
+		btnAtras.setContentAreaFilled(false);
+		btnAtras.setBorderPainted(false);
+		btnAtras.setBounds(10, 16, 64, 64);
+		contentPane.add(btnAtras);
 
 		// Añadir el JLabel al JFrame
 		getContentPane().add(linkLabelIconos);
@@ -141,15 +164,15 @@ public class NuevaTransaccion extends JFrame {
 		txtYyyymmdd.setBounds(176, 91, 133, 20);
 		contentPane.add(txtYyyymmdd);
 		((AbstractDocument) txtYyyymmdd.getDocument()).setDocumentFilter(new DocumentFilter() {
-            @Override
-            public void replace(FilterBypass fb, int offset, int length, String text, javax.swing.text.AttributeSet attrs) throws BadLocationException {
-                if (text.matches("[0-9-]*")) {
-                    super.replace(fb, offset, length, text, attrs);
-                } else {
-                    JOptionPane.showMessageDialog(null, "El campo fecha solo puede contener números y guiones con el formato yyyy-mm-dd.");
-                }
-            }
-        });
+			@Override
+			public void replace(FilterBypass fb, int offset, int length, String text, javax.swing.text.AttributeSet attrs) throws BadLocationException {
+				if (text.matches("[0-9-]*")) {
+					super.replace(fb, offset, length, text, attrs);
+				} else {
+					JOptionPane.showMessageDialog(null, "El campo fecha solo puede contener números y guiones con el formato yyyy-mm-dd.");
+				}
+			}
+		});
 		txtYyyymmdd.setToolTipText("El campo fecha solo puede contener números y guiones con el formato yyyy-mm-dd.");
 
 		JLabel textoCategorias = new JLabel("Categorias:");
@@ -171,15 +194,15 @@ public class NuevaTransaccion extends JFrame {
 		contentPane.add(textField);
 		textField.setColumns(10);
 		((AbstractDocument) textField.getDocument()).setDocumentFilter(new DocumentFilter() {
-            @Override
-            public void replace(FilterBypass fb, int offset, int length, String text, javax.swing.text.AttributeSet attrs) throws BadLocationException {
-                if (text.matches("[0-9.]*")) {
-                    super.replace(fb, offset, length, text, attrs);
-                } else {
-                   JOptionPane.showMessageDialog(null, "El campo cantidad solo puede contener números.");
-                }
-            }
-        });
+			@Override
+			public void replace(FilterBypass fb, int offset, int length, String text, javax.swing.text.AttributeSet attrs) throws BadLocationException {
+				if (text.matches("[0-9.]*")) {
+					super.replace(fb, offset, length, text, attrs);
+				} else {
+					JOptionPane.showMessageDialog(null, "El campo cantidad solo puede contener números.");
+				}
+			}
+		});
 		textField.setToolTipText("El campo cantidad solo puede contener números.");
 
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -263,22 +286,22 @@ public class NuevaTransaccion extends JFrame {
 
 					nombreArchivo = chooser.getSelectedFile().getName(); //ejemplo: foto.png
 					String rutaArchivo = chooser.getSelectedFile().getAbsolutePath(); //ejemplo: C:/User/Pablo/Escritorio/foto.png
-					
+
 					File origen = new File(rutaArchivo);//archivo de origen
 					File destino = new File(NuevaTransaccion.class.getResource("/resources/").getPath()+nombreArchivo);//archivo de destino
-					
+
 					//genero un numero aleatorio y le cambio el nombre para que las imagenes no tengan el mismo nombre de ruta
 					Random random = new Random();
 					int numeroAleatorio = 10000 + random.nextInt(99999);
 
 					String rutaArchivoNuevo = NuevaTransaccion.class.getResource("/resources/").getPath()+numeroAleatorio;
 					File archivoNuevo = new File(rutaArchivoNuevo);
-					
+
 					destino.renameTo(archivoNuevo);
 
 					//copio el archivo a la carpeta del proyecto
 					if(copiarArchivo(origen, destino) == 0) {
-						
+
 						JOptionPane.showMessageDialog(null, "Problema desconocido, intentelo de nuevo");
 
 					}else {
@@ -327,7 +350,7 @@ public class NuevaTransaccion extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				double numero = 0;
 
-				if(numSeleccionados == 1 && !txtYyyymmdd.getText().equals("") && (redioButtonIngreso.isSelected() || redioButtonGasto.isSelected())) {
+				if(numSeleccionados == 1 && !txtYyyymmdd.getText().equals("") && !txtYyyymmdd.getText().equals("2000-12-31") && (redioButtonIngreso.isSelected() || redioButtonGasto.isSelected())) {
 
 					if(!textField.getText().equals("")) {
 						numero = Double.parseDouble(textField.getText());
@@ -364,14 +387,14 @@ public class NuevaTransaccion extends JFrame {
 						}
 
 					} catch (SQLException e1) {
-					
+
 						e1.printStackTrace();
 					}
 
 				}else if(numSeleccionados > 1){
 					JOptionPane.showMessageDialog(null, "Más de una categoria seleccionada");
 				}else {
-					JOptionPane.showMessageDialog(null, "Algun campo vacio");
+					JOptionPane.showMessageDialog(null, "Algun campo vacio o fecha de ejemplo usada");
 				}
 
 
@@ -439,36 +462,5 @@ public class NuevaTransaccion extends JFrame {
 			e.printStackTrace();
 		}
 	}
-
-	/*lblNewLabel_3_1.setIcon(new ImageIcon(NuevaTransaccion.class.getResource("/resources/"+nombreArchivo)));
-	añadido.add(lblNewLabel_3_1);
-	añadido.setBackground(new Color(204, 255, 255));
-	panelprincipal.add(añadido);
-	panelprincipal.setVisible(false);
-	panelprincipal.setVisible(true);
-
-	nombreDelArchivo = nombreArchivo;
-
-	lblNewLabel_3_1.addMouseListener(new MouseAdapter() {
-
-		int toques = 0;
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			toques++;
-			if(toques%2 == 0) {
-				numSeleccionados--;
-				lblNewLabel_3_1.setBackground(new Color(204, 255, 255));
-			}else {
-				numSeleccionados++;
-				lblNewLabel_3_1.setBackground(new Color(255, 255, 129));
-				try {
-					catSelect = CategoriasBD.getCategoriaRuta(rutaArchivo, usuario_logeado);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		}
-	});*/
 
 }

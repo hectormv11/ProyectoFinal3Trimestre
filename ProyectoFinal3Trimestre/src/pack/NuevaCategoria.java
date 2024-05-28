@@ -3,6 +3,10 @@ package pack;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.DocumentFilter.FilterBypass;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
@@ -44,6 +48,18 @@ public class NuevaCategoria extends JFrame {
 		contentPane.add(lblNewLabel_2);
 
 		textFieldNombre = new JTextField();
+		((AbstractDocument) textFieldNombre.getDocument()).setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, javax.swing.text.AttributeSet attrs) throws BadLocationException {
+                if (text.matches("[a-zA-Z0-9]*")) {
+                    super.replace(fb, offset, length, text, attrs);
+                } else {
+                    JOptionPane.showMessageDialog(null, "El campo nombre solo puede contener letras y números.");
+                }
+            }
+        });
+		textFieldNombre.setToolTipText("El campo nombre solo puede contener letras y números.");
+
 		textFieldNombre.setBounds(10, 51, 414, 25);
 		contentPane.add(textFieldNombre);
 		textFieldNombre.setColumns(10);

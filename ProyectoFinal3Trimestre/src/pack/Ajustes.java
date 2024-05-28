@@ -48,7 +48,7 @@ public class Ajustes extends JFrame {
 			}
 		});
 		getContentPane().setLayout(null);
-		btnAtras.setIcon(new ImageIcon(Ajustes.class.getResource("/resources/izquierda.png")));
+		btnAtras.setIcon(new ImageIcon(Ajustes.class.getResource("/resources/izquierda (1).png")));
 		btnAtras.setContentAreaFilled(false);
 		btnAtras.setBorderPainted(false);
 		getContentPane().add(btnAtras);

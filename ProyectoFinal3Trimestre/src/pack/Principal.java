@@ -50,7 +50,7 @@ public class Principal extends JFrame {
 	 * @throws SQLException 
 	 */
 	@SuppressWarnings("rawtypes")
-	public Principal(Usuario usuario_logeado) throws SQLException {
+	public Principal(Usuario usuario_logeado, boolean arrayTrans) throws SQLException {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(700, 100, 500, 600);
@@ -206,6 +206,21 @@ public class Principal extends JFrame {
 		Border bordeBotonAñadir = BorderFactory.createLineBorder(Color.WHITE, 0);
 
 		JButton lblFiltros = new JButton("");
+		lblFiltros.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Filtros f;
+				try {
+					f = new Filtros(c, usuario_logeado);
+					f.show();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				dispose();
+				
+			}
+		});
 		lblFiltros.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblFiltros.setToolTipText("Filtros");
 		lblFiltros.addMouseListener(new MouseAdapter() {
@@ -305,8 +320,14 @@ public class Principal extends JFrame {
 				panelContainer.setVisible(true);
 			}
 		});
-
-		Transaccion[] trans = TransaccionesBD.getTransacciones(c, usuario_logeado);
+		Transaccion[] trans = null;
+		if(!arrayTrans) {
+			trans = TransaccionesBD.getTransacciones(c, usuario_logeado);
+		}else {
+			
+			trans = 
+		}
+		
 
 		int startIndex = 0;
 

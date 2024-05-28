@@ -64,7 +64,7 @@ public class InicioSesion extends JFrame {
 				
 			}
 		});
-		btnNewButton_1.setIcon(new ImageIcon(InicioSesion.class.getResource("/resources/izquierda.png")));
+		btnNewButton_1.setIcon(new ImageIcon(InicioSesion.class.getResource("/resources/izquierda (1).png")));
 		btnNewButton_1.setContentAreaFilled(false);
 		btnNewButton_1.setBorderPainted(false);
 		btnNewButton_1.setBounds(10, 11, 64, 64);

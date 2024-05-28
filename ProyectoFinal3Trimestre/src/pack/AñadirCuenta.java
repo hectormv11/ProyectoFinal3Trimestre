@@ -3,7 +3,12 @@ package pack;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.DocumentFilter.FilterBypass;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -68,6 +73,7 @@ public class AñadirCuenta extends JFrame {
 		contentPane.add(labelFotoCheck);
 		
 		JLabel lblNewLabel_3_1 = new JLabel("");
+		lblNewLabel_3_1.setVisible(false);
 		lblNewLabel_3_1.setIcon(new ImageIcon(AñadirCuenta.class.getResource("/resources/maxresdefault (1).jpg")));
 		lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3_1.setBounds(180, 430, 121, 64);
@@ -79,17 +85,49 @@ public class AñadirCuenta extends JFrame {
 		contentPane.add(panel_1);
 		
 		textFieldSaldo2 = new JTextField();
+		textFieldSaldo2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				labelFotoCheck.setVisible(false);
+				lblNewLabel_3_1.setVisible(false);
+				
+			}
+		});
 		textFieldSaldo2.setText("");
 		textFieldSaldo2.setColumns(10);
 		textFieldSaldo2.setBounds(80, 65, 334, 17);
 		panel_1.add(textFieldSaldo2);
+		((AbstractDocument) textFieldSaldo2.getDocument()).setDocumentFilter(new DocumentFilter() {
+			@Override
+			public void replace(FilterBypass fb, int offset, int length, String text, javax.swing.text.AttributeSet attrs) throws BadLocationException {
+				if (text.matches("[0-9.]*")) {
+					super.replace(fb, offset, length, text, attrs);
+				} else {
+					JOptionPane.showMessageDialog(null, "El campo saldo solo puede contener números.");
+				}
+			}
+		});
+		textFieldSaldo2.setToolTipText("El campo saldo solo puede contener números.");
 		
 		textFieldNombre2 = new JTextField();
+		((AbstractDocument) textFieldNombre2.getDocument()).setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, javax.swing.text.AttributeSet attrs) throws BadLocationException {
+                if (text.matches("[a-zA-Z0-9]*")) {
+                    super.replace(fb, offset, length, text, attrs);
+                } else {
+                    JOptionPane.showMessageDialog(null, "El campo nombre solo puede contener letras y números.");
+                }
+            }
+        });
+		textFieldNombre2.setToolTipText("El campo nombre solo puede contener letras y números.");
 		textFieldNombre2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
 				labelFotoCheck.setVisible(false);
+				lblNewLabel_3_1.setVisible(false);
 				
 			}
 		});
@@ -125,6 +163,7 @@ public class AñadirCuenta extends JFrame {
 						textFieldNombre2.setText("");
 						textFieldSaldo2.setText("");
 						labelFotoCheck.setVisible(true);
+						lblNewLabel_3_1.setVisible(true);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -139,7 +178,7 @@ public class AñadirCuenta extends JFrame {
 		fondo1_1.setIcon(new ImageIcon(AñadirCuenta.class.getResource("/resources/maxresdefault (1).jpg")));
 		fondo1_1.setBounds(0, 0, 464, 137);
 		panel_1.add(fondo1_1);
-		btnAtras.setIcon(new ImageIcon(AñadirCuenta.class.getResource("/resources/izquierda.png")));
+		btnAtras.setIcon(new ImageIcon(AñadirCuenta.class.getResource("/resources/izquierda (1).png")));
 		btnAtras.setContentAreaFilled(false);
 		btnAtras.setBorderPainted(false);
 		btnAtras.setBounds(10, 11, 64, 64);

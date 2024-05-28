@@ -5,7 +5,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.DocumentFilter.FilterBypass;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -87,7 +92,7 @@ public class PerfilDeUsuario extends JFrame {
 		añadirCuenta.setBorderPainted(false);
 		añadirCuenta.setBounds(209, 440, 64, 64);
 		contentPane.add(añadirCuenta);
-		btnAtras.setIcon(new ImageIcon(PerfilDeUsuario.class.getResource("/resources/izquierda.png")));
+		btnAtras.setIcon(new ImageIcon(PerfilDeUsuario.class.getResource("/resources/izquierda (1).png")));
 		btnAtras.setContentAreaFilled(false);
 		btnAtras.setBounds(10, 11, 64, 64);
 		contentPane.add(btnAtras);
@@ -96,6 +101,17 @@ public class PerfilDeUsuario extends JFrame {
 		contentPane.add(confirmar);
 
 		passwordTexto = new JPasswordField();
+		DocumentFilter passwordFilter = new DocumentFilter() {
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, javax.swing.text.AttributeSet attrs) throws BadLocationException {
+                if (text.matches("[a-zA-Z0-9!@#$%^&*()_+=-]*")) {
+                    super.replace(fb, offset, length, text, attrs);
+                } else {
+                    JOptionPane.showMessageDialog(null, "La contraseña solo puede contener letras, números y los siguientes caracteres especiales: !@#$%^&*()_+=-");
+                }
+            }
+        };
+        ((AbstractDocument) passwordTexto.getDocument()).setDocumentFilter(passwordFilter);
 		passwordTexto.setEchoChar('*');
 		passwordTexto.setEditable(false);
 		passwordTexto.setBounds(175, 350, 250, 20);

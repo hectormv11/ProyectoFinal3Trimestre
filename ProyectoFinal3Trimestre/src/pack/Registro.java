@@ -90,7 +90,7 @@ public class Registro extends JFrame {
                 dispose();
             }
         });
-        btnAtras.setIcon(new ImageIcon(Registro.class.getResource("/resources/izquierda.png")));
+        btnAtras.setIcon(new ImageIcon(Registro.class.getResource("/resources/izquierda (1).png")));
         btnAtras.setContentAreaFilled(false);
         btnAtras.setBorderPainted(false);
         btnAtras.setBounds(10, 11, 64, 64);
