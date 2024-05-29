@@ -106,7 +106,7 @@ public class NuevaTransaccion extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
-					Principal p = new Principal(usuario_logeado);
+					Principal p = new Principal(usuario_logeado, false, null,"Ningun filtro aplicado");
 					p.show();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
@@ -322,10 +322,7 @@ public class NuevaTransaccion extends JFrame {
 			public void itemStateChanged(ItemEvent e) {
 				if(redioButtonIngreso.isSelected()) {
 					tipo = "I";
-				}else {
-					tipo = "G";
 				}
-
 			}
 		});
 		redioButtonIngreso.setFont(new Font("Consolas", Font.PLAIN, 15));
@@ -340,6 +337,14 @@ public class NuevaTransaccion extends JFrame {
 		redioButtonGasto.setContentAreaFilled(false);
 		redioButtonGasto.setBounds(326, 93, 85, 23);
 		contentPane.add(redioButtonGasto);
+		
+		redioButtonGasto.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(redioButtonGasto.isSelected()) {
+					tipo = "G";
+				}
+			}
+		});
 
 		ButtonGroup ingresosGastos = new ButtonGroup();
 		ingresosGastos.add(redioButtonGasto);
@@ -379,7 +384,7 @@ public class NuevaTransaccion extends JFrame {
 
 					try {
 						if(numero != 0) {
-							Principal p = new Principal(usuario_logeado);
+							Principal p = new Principal(usuario_logeado,false, null,"Ningun filtro aplicado");
 							p.show();
 							dispose();
 						}else {

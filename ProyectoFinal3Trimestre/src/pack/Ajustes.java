@@ -36,7 +36,7 @@ public class Ajustes extends JFrame {
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Principal p = new Principal(user);
+					Principal p = new Principal(user,false,null,"Ningun filtro aplicado");
 					p.show();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block

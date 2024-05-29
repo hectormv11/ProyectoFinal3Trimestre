@@ -106,7 +106,7 @@ public class InicioSesion extends JFrame {
 
 				try {
 					Usuario logeado = UsuariosBD.doLogin(usuario, passw);
-					Principal principal = new Principal(logeado);
+					Principal principal = new Principal(logeado,false, null,"Ningun filtro aplicado");
 					principal.show();
 					dispose();
 				} catch (SQLException e1) {

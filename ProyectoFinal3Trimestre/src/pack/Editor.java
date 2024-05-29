@@ -44,7 +44,7 @@ public class Editor extends JFrame {
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Principal p = new Principal(trans.getCuenta().getUser());
+					Principal p = new Principal(trans.getCuenta().getUser(),false, null,"Ningun filtro aplicado");
 					p.show();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block

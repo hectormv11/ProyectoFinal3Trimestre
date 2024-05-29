@@ -59,7 +59,7 @@ public class PerfilDeUsuario extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				try {
-					Principal p = new Principal(user);
+					Principal p = new Principal(user,false, null,"Ningun filtro aplicado");
 					p.show();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block

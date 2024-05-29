@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TransaccionesBD {
@@ -83,17 +84,19 @@ public class TransaccionesBD {
 		String consulta = "SELECT * FROM transaccion WHERE cuenta = " + c.getId();
 		
 		if(cantidad != 0.0) {
-			consulta += "cantidad = " + cantidad;
+			consulta += " and cantidad = " + cantidad;
 		}
 		if(fecha != null) {
-			consulta += "fecha = " + fecha;
+			consulta += " and fecha = '" + fecha + "'";
 		}
 		if(categoria != null) {
-			consulta += "categoria = " + categoria.getNombre();
+			consulta += " and categoria = '" + categoria.getNombre() + "'";
 		}
-		if(tipoS != null) {
-			consulta += "tipo = " + tipoS;
+		if(!tipoS.equals("")) {
+			consulta += " and tipo = '" + tipoS + "'";
 		}
+		
+		System.out.println(consulta);
 		
 		ResultSet rs = stm.executeQuery(consulta);
 
@@ -125,6 +128,59 @@ public class TransaccionesBD {
 
 		return array;
 
+	}
+	
+	public static String getBalance(Cuenta c, int n, String tip) throws SQLException {
+		
+		Conexion con = new Conexion();
+		Statement stm = con.abrirConexion();
+		
+		String consulta = "SELECT * FROM transaccion WHERE cuenta = " + c.getId() + " and tipo = '" + tip + "'";
+		
+		LocalDate currentDate = LocalDate.now();
+		
+		if(n == 1) {
+			consulta += " and year(fecha) <= '" + currentDate.getYear() + "'" ;
+		}else if(n == 2) {
+			consulta += " and month(fecha) <= '" + currentDate.getMonth() + "'" ;
+		}else if(n ==3) {
+			consulta += " and day(fecha) <= '" + currentDate.getDayOfMonth() + "'" ;
+		}
+		
+		ResultSet rs = stm.executeQuery(consulta);
+		
+		ArrayList<Transaccion> lista = new ArrayList<Transaccion>();
+		
+		if(rs != null) {
+			while(rs.next()) {
+				
+				int id = rs.getInt(1);
+				Double cant = rs.getDouble(2);
+				String nombreCategoria = rs.getString(4);
+				Date fechaN = rs.getDate(5);
+				String comentario = rs.getString(6);
+				String tipo = rs.getString(7);
+
+				Categoria cat = CategoriasBD.getCategoria(nombreCategoria, c.getUser());
+				Categoria ca = new Categoria(nombreCategoria, c.getUser(), cat.getRuta());
+
+				Transaccion actual = new Transaccion(id, cant, c, ca, fechaN, comentario, tipo);
+
+				lista.add(actual);
+				
+			}
+		}
+		
+		double dinero = 0.0;
+		
+		for (int i = 0; i < lista.size(); i++) {
+			dinero += lista.get(i).getCantidad();
+		}
+		
+		String dineroS = dinero + "";
+		
+		return dineroS;
+		
 	}
 
 }
