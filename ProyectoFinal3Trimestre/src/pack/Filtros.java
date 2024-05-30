@@ -128,7 +128,7 @@ public class Filtros extends JFrame {
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
 		lblNewLabel_2.setFont(new Font("Consolas", Font.PLAIN, 25));
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setBounds(10, 11, 464, 78);
+		lblNewLabel_2.setBounds(84, 11, 316, 78);
 		contentPane.add(lblNewLabel_2);
 
 		filtroFecha = new JTextField();
@@ -225,7 +225,16 @@ public class Filtros extends JFrame {
 					utilDate = Date.valueOf(localDate);
 				}
 				
-				String frase = "- Filtros apicados: ";
+				String frase = "Ningun filtro aplicado";
+				int aplicados = 0;
+				
+				if(cantidad != 0.0 || utilDate != null || catSelect != null || !tipo.equals("")) {
+					aplicados = 1;
+				}
+				
+				if(aplicados != 0) {
+					frase = "- Filtros apicados: ";
+				}
 				
 				if(cantidad != 0.0) {
 					frase += "Cantidad -";

@@ -94,54 +94,6 @@ public class Principal extends JFrame {
 		lblPerfil.setFont(new Font("Gill Sans MT", Font.PLAIN, 17));
 		mnNewMenu.add(lblPerfil);
 
-		JLabel lblSoporte = new JLabel("Soporte ");
-		lblSoporte.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSoporte.setIcon(new ImageIcon(Principal.class.getResource("/resources/centro-de-llamadas.png")));
-		lblSoporte.setHorizontalTextPosition(SwingConstants.LEADING);
-		lblSoporte.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblSoporte.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				
-
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-
-				lblSoporte.setForeground(Color.BLUE);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblSoporte.setForeground(Color.BLACK);
-			}
-		});
-		lblSoporte.setFont(new Font("Gill Sans MT", Font.PLAIN, 17));
-		mnNewMenu.add(lblSoporte);
-
-		JLabel lblCerrarSesion = new JLabel("Cerrar Sesion ");
-		lblCerrarSesion.setHorizontalTextPosition(SwingConstants.LEADING);
-		lblCerrarSesion.setIcon(new ImageIcon(Principal.class.getResource("/resources/cerrar-sesion.png")));
-		lblCerrarSesion.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblCerrarSesion.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				Inicio i = new Inicio();
-				i.show();
-				dispose();
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblCerrarSesion.setForeground(Color.BLUE);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblCerrarSesion.setForeground(Color.BLACK);
-			}
-		});
-		lblCerrarSesion.setFont(new Font("Gill Sans MT", Font.PLAIN, 17));
-		mnNewMenu.add(lblCerrarSesion);
-
 		JLabel lblNewLabel_4 = new JLabel("                    ");
 		menuBar.add(lblNewLabel_4);
 
@@ -171,18 +123,18 @@ public class Principal extends JFrame {
 		lblBalance.setIcon(new ImageIcon(Principal.class.getResource("/resources/archivos.png")));
 		lblBalance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				BalanceEconomico b;
 				try {
-					b = new BalanceEconomico(c);
+					b = new BalanceEconomico(c, TransaccionesBD.getTransacciones(c, usuario_logeado));
 					b.show();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 				dispose();
-				
+
 			}
 		});
 		lblBalance.setFont(new Font("Dialog", Font.PLAIN, 15));
@@ -190,12 +142,10 @@ public class Principal extends JFrame {
 
 		setContentPane(panelTransacciones);
 		panelTransacciones.setLayout(null);
-		Border bordeBotonAñadir = BorderFactory.createLineBorder(Color.WHITE, 0);
-
 		JButton lblFiltros = new JButton("");
 		lblFiltros.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				Filtros f;
 				try {
 					f = new Filtros(c, usuario_logeado);
@@ -205,17 +155,12 @@ public class Principal extends JFrame {
 					e1.printStackTrace();
 				}
 				dispose();
-				
+
 			}
 		});
 		lblFiltros.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblFiltros.setToolTipText("Filtros");
-		lblFiltros.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		
+
 		JLabel filtrosAplicados = new JLabel("");
 		filtrosAplicados.setHorizontalAlignment(SwingConstants.CENTER);
 		filtrosAplicados.setForeground(new Color(0, 0, 0));
@@ -223,7 +168,7 @@ public class Principal extends JFrame {
 		filtrosAplicados.setBounds(10, 67, 464, 20);
 		filtrosAplicados.setText(filtros);
 		panelTransacciones.add(filtrosAplicados);
-		
+
 		JLabel filtrosAplicadosFondo = new JLabel("");
 		filtrosAplicadosFondo.setIcon(new ImageIcon(Principal.class.getResource("/resources/maxresdefault (1).jpg")));
 		filtrosAplicadosFondo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -231,7 +176,7 @@ public class Principal extends JFrame {
 		filtrosAplicadosFondo.setFont(new Font("Arial", Font.PLAIN, 15));
 		filtrosAplicadosFondo.setBounds(9, 67, 464, 20);
 		panelTransacciones.add(filtrosAplicadosFondo);
-		
+
 		lblFiltros.setIcon(new ImageIcon(Principal.class.getResource("/resources/lupa.png")));
 		lblFiltros.setFont(new Font("Dialog", Font.PLAIN, 15));
 		lblFiltros.setContentAreaFilled(false);
@@ -263,7 +208,7 @@ public class Principal extends JFrame {
 					nt.show();
 					dispose();
 				} catch (SQLException e1) {
-					
+
 					e1.printStackTrace();
 				}
 			}
@@ -294,7 +239,7 @@ public class Principal extends JFrame {
 
 		comboBoxCuentas.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				
+
 				flag = false;
 
 				panelContainer.removeAll();
@@ -330,10 +275,10 @@ public class Principal extends JFrame {
 		if(flag == false) {
 			trans = TransaccionesBD.getTransacciones(c, usuario_logeado);
 		}else {
-			
-			 trans = arrT;
+
+			trans = arrT;
 		}
-		
+
 
 		int startIndex = 0;
 
@@ -344,6 +289,64 @@ public class Principal extends JFrame {
 		for (int i = startIndex; i < trans.length; i++) {
 			panelContainer.add(getExamplePanel(trans[i]));
 		}
+		
+		JLabel lblSoporte = new JLabel("Soporte ");
+		lblSoporte.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSoporte.setIcon(new ImageIcon(Principal.class.getResource("/resources/centro-de-llamadas.png")));
+		lblSoporte.setHorizontalTextPosition(SwingConstants.LEADING);
+		lblSoporte.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblSoporte.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				Soporte s;
+				try {
+					s = new Soporte(c, TransaccionesBD.getTransacciones(c, usuario_logeado));
+					s.show();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				dispose();
+
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+
+				lblSoporte.setForeground(Color.BLUE);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblSoporte.setForeground(Color.BLACK);
+			}
+		});
+		lblSoporte.setFont(new Font("Gill Sans MT", Font.PLAIN, 17));
+		mnNewMenu.add(lblSoporte);
+		
+		JLabel lblCerrarSesion = new JLabel("Cerrar Sesion ");
+		lblCerrarSesion.setHorizontalTextPosition(SwingConstants.LEADING);
+		lblCerrarSesion.setIcon(new ImageIcon(Principal.class.getResource("/resources/cerrar-sesion.png")));
+		lblCerrarSesion.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblCerrarSesion.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Inicio i = new Inicio();
+				i.show();
+				dispose();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblCerrarSesion.setForeground(Color.BLUE);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblCerrarSesion.setForeground(Color.BLACK);
+			}
+		});
+		lblCerrarSesion.setFont(new Font("Gill Sans MT", Font.PLAIN, 17));
+		mnNewMenu.add(lblCerrarSesion);
+		
 
 		JLabel fondo = new JLabel("");
 		fondo.setIcon(new ImageIcon(Principal.class.getResource("/resources/fondoPizarra.jpg")));

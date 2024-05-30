@@ -12,6 +12,9 @@ import java.awt.Font;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.awt.event.ActionEvent;
 
 public class Soporte extends JFrame {
 
@@ -21,23 +24,11 @@ public class Soporte extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Soporte frame = new Soporte();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
-	public Soporte() {
+	public Soporte(Cuenta c, Transaccion[] trans) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(700, 100, 450, 300);
 		contentPane = new JPanel();
@@ -47,7 +38,23 @@ public class Soporte extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnAtras = new JButton("");
-		btnAtras.setIcon(new ImageIcon(Soporte.class.getResource("/resources/izquierda.png")));
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Principal p;
+				try {
+					p = new Principal(c.getUser(), false, trans, "Ningun filtro aplicado");
+					p.show();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				dispose();
+				
+			}
+		});
+		btnAtras.setIcon(new ImageIcon(Soporte.class.getResource("/resources/izquierda (1).png")));
 		btnAtras.setContentAreaFilled(false);
 		btnAtras.setBorderPainted(false);
 		btnAtras.setBounds(10, 11, 64, 64);

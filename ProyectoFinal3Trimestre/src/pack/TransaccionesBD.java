@@ -53,9 +53,9 @@ public class TransaccionesBD {
 		return array;
 
 	}	
-	
+
 	public static void añadirTransaccion(Transaccion trans) throws SQLException {
-		
+
 		Conexion con = new Conexion();
 		Connection link = con.abrirConsulta();
 
@@ -71,18 +71,18 @@ public class TransaccionesBD {
 		ps.setString(6, trans.getTipo());
 
 		ps.execute();
-		
+
 	}
-	
+
 	public static Transaccion[] getTansFiltros(Usuario user, Cuenta c, double cantidad, Date fecha, Categoria categoria, String tipoS) throws SQLException {
-		
+
 		Conexion con = new Conexion();
 		Statement stm = con.abrirConexion();
 
 		ArrayList<Transaccion> lista = new ArrayList<Transaccion>();
 
 		String consulta = "SELECT * FROM transaccion WHERE cuenta = " + c.getId();
-		
+
 		if(cantidad != 0.0) {
 			consulta += " and cantidad = " + cantidad;
 		}
@@ -95,14 +95,12 @@ public class TransaccionesBD {
 		if(!tipoS.equals("")) {
 			consulta += " and tipo = '" + tipoS + "'";
 		}
-		
-		System.out.println(consulta);
-		
+
 		ResultSet rs = stm.executeQuery(consulta);
 
 		if(rs != null) {
 			while(rs.next()) {
-				
+
 				int id = rs.getInt(1);
 				Double cant = rs.getDouble(2);
 				String nombreCategoria = rs.getString(4);
@@ -116,7 +114,7 @@ public class TransaccionesBD {
 				Transaccion actual = new Transaccion(id, cant, c, ca, fechaN, comentario, tipo);
 
 				lista.add(actual);
-				
+
 			}
 		}
 
@@ -129,31 +127,31 @@ public class TransaccionesBD {
 		return array;
 
 	}
-	
+
 	public static String getBalance(Cuenta c, int n, String tip) throws SQLException {
-		
+
 		Conexion con = new Conexion();
 		Statement stm = con.abrirConexion();
-		
+
 		String consulta = "SELECT * FROM transaccion WHERE cuenta = " + c.getId() + " and tipo = '" + tip + "'";
-		
+
 		LocalDate currentDate = LocalDate.now();
-		
+
 		if(n == 1) {
-			consulta += " and year(fecha) <= '" + currentDate.getYear() + "'" ;
+			consulta += " and fecha BETWEEN DATE_SUB('" + currentDate + "', INTERVAL 1 YEAR) AND '" + currentDate + "'";
 		}else if(n == 2) {
-			consulta += " and month(fecha) <= '" + currentDate.getMonth() + "'" ;
+			consulta += " and fecha BETWEEN DATE_SUB('" + currentDate + "', INTERVAL 1 MONTH) AND '" + currentDate + "'";
 		}else if(n ==3) {
-			consulta += " and day(fecha) <= '" + currentDate.getDayOfMonth() + "'" ;
+			consulta += " and fecha BETWEEN DATE_SUB('" + currentDate + "', INTERVAL 1 WEEK) AND '" + currentDate + "'";
 		}
-		
+
 		ResultSet rs = stm.executeQuery(consulta);
-		
+
 		ArrayList<Transaccion> lista = new ArrayList<Transaccion>();
-		
+
 		if(rs != null) {
 			while(rs.next()) {
-				
+
 				int id = rs.getInt(1);
 				Double cant = rs.getDouble(2);
 				String nombreCategoria = rs.getString(4);
@@ -167,20 +165,32 @@ public class TransaccionesBD {
 				Transaccion actual = new Transaccion(id, cant, c, ca, fechaN, comentario, tipo);
 
 				lista.add(actual);
-				
+
 			}
 		}
-		
+
 		double dinero = 0.0;
-		
+
 		for (int i = 0; i < lista.size(); i++) {
 			dinero += lista.get(i).getCantidad();
 		}
-		
+
 		String dineroS = dinero + "";
-		
+
 		return dineroS;
-		
+
 	}
 
+	public static void updateTransaccion(Transaccion trans) throws SQLException {
+
+		Conexion con = new Conexion();
+		Statement stm = con.abrirConexion();
+
+		String consulta = "UPDATE transaccion SET cantidad = " + trans.getCantidad() + ", cuenta = "+ trans.getCuenta().getId() +", categoria = '" 
+				+ trans.getCat().getNombre() + "', fecha = '" + trans.getFecha() + "', comentario = '" + trans.getComentario() + "', tipo = '" 
+				+ trans.getTipo() + "' WHERE id_transaccion = " + trans.getId();
+
+		stm.executeQuery(consulta);
+
+	}
 }
