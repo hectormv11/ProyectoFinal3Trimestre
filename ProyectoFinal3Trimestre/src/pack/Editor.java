@@ -59,6 +59,8 @@ public class Editor extends JFrame {
 	 * @throws SQLException 
 	 */
 	public Editor(Transaccion trans) throws SQLException {
+		
+		catSelect = trans.getCat();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(700, 100, 500, 600);

@@ -110,7 +110,6 @@ public class InicioSesion extends JFrame {
 					principal.show();
 					dispose();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					//e1.printStackTrace();
 					JOptionPane.showMessageDialog(null, "Error Usuario o contraseña incorreto");
 				}

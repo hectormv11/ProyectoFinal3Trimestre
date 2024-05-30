@@ -294,7 +294,7 @@ public class NuevaTransaccion extends JFrame {
 					Random random = new Random();
 					int numeroAleatorio = 10000 + random.nextInt(99999);
 
-					String rutaArchivoNuevo = NuevaTransaccion.class.getResource("/resources/").getPath()+numeroAleatorio;
+					String rutaArchivoNuevo = NuevaTransaccion.class.getResource("/resources/").getPath()+numeroAleatorio+".png";
 					File archivoNuevo = new File(rutaArchivoNuevo);
 
 					destino.renameTo(archivoNuevo);
@@ -305,6 +305,7 @@ public class NuevaTransaccion extends JFrame {
 						JOptionPane.showMessageDialog(null, "Problema desconocido, intentelo de nuevo");
 
 					}else {
+						System.out.println(archivoNuevo.getName());
 						NuevaCategoria nv = new NuevaCategoria(archivoNuevo.getName(), usuario_logeado, c);
 						nv.show();
 						dispose();

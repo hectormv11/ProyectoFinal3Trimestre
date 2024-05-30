@@ -24,6 +24,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Cursor;
 
 public class AñadirCuenta extends JFrame {
 
@@ -55,6 +56,7 @@ public class AñadirCuenta extends JFrame {
 		contentPane.setLayout(null);
 
 		JButton btnAtras = new JButton("");
+		btnAtras.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 

@@ -74,7 +74,7 @@ public class Registro extends JFrame {
         ((AbstractDocument) textUsuario.getDocument()).setDocumentFilter(new DocumentFilter() {
             @Override
             public void replace(FilterBypass fb, int offset, int length, String text, javax.swing.text.AttributeSet attrs) throws BadLocationException {
-                if (text.matches("[a-zA-Z0-9]*")) {
+                if (text.matches("[a-zA-Z0-9ñÑ]*")) {
                     super.replace(fb, offset, length, text, attrs);
                 } else {
                     JOptionPane.showMessageDialog(null, "El campo usuario solo puede contener letras y números.");
@@ -172,6 +172,7 @@ public class Registro extends JFrame {
                         UsuariosBD.registrarse(textUsuario.getText(), new String(passwordField.getPassword()), textCorreo.getText());
                         Usuario user = UsuariosBD.obtenerUsuario(textUsuario.getText());
                         CuentasBD.registrarCuenta("default", user, 0.0);
+                        JOptionPane.showMessageDialog(null, "Usuario registrado correctamente");
                     } catch (SQLException e1) {
     					JOptionPane.showMessageDialog(null, "Usuario ya registrado");
     					return;

@@ -71,6 +71,7 @@ public class PerfilDeUsuario extends JFrame {
 		});
 		
 		JButton añadirCuenta = new JButton("");
+		añadirCuenta.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		añadirCuenta.setToolTipText("Añadir o modificar cuentas");
 		añadirCuenta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
