@@ -38,11 +38,6 @@ public class BalanceEconomico extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel gastosSem = new JLabel("<dynamic>");
-		gastosSem.setHorizontalAlignment(SwingConstants.CENTER);
-		gastosSem.setBounds(397, 241, 66, 14);
-		String gSem = TransaccionesBD.getBalance(c, 3, "G");
-		
 		JButton btnAtras = new JButton("");
 		btnAtras.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAtras.addActionListener(new ActionListener() {
@@ -72,24 +67,29 @@ public class BalanceEconomico extends JFrame {
 		btnAtras.setBorderPainted(false);
 		btnAtras.setBounds(10, 11, 64, 64);
 		contentPane.add(btnAtras);
-		gastosSem.setText(gSem);
+		
+		JLabel gastosSem = new JLabel("<dynamic>");
+		gastosSem.setHorizontalAlignment(SwingConstants.CENTER);
+		gastosSem.setBounds(387, 241, 66, 14);
+		String gSem = TransaccionesBD.getBalance(c, 3, "G");
+		gastosSem.setText(gSem+"€");
 		contentPane.add(gastosSem);
 		
 		JLabel gastosAño = new JLabel("<dynamic>");
 		gastosAño.setHorizontalAlignment(SwingConstants.CENTER);
 		gastosAño.setBounds(20, 241, 138, 14);
 		String gAño = TransaccionesBD.getBalance(c, 1, "G");
-		gastosAño.setText(gAño);
+		gastosAño.setText(gAño+"€");
 		contentPane.add(gastosAño);
 		
 		JLabel gastosMes = new JLabel("<dynamic>");
 		gastosMes.setHorizontalAlignment(SwingConstants.CENTER);
-		gastosMes.setBounds(212, 241, 138, 14);
+		gastosMes.setBounds(210, 241, 138, 14);
 		String gMes = TransaccionesBD.getBalance(c, 2, "G");
-		gastosMes.setText(gMes);
+		gastosMes.setText(gMes+"€");
 		contentPane.add(gastosMes);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Gastosdel ultimo año          Gastos del ultimo mes         Gastos hoy");
+		JLabel lblNewLabel_1_1 = new JLabel("Gastos del ultimo año          Gastos del ultimo mes         Gastos hoy");
 		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1_1.setFont(new Font("Dialog", Font.BOLD, 13));
 		lblNewLabel_1_1.setBounds(10, 205, 464, 25);
@@ -97,26 +97,26 @@ public class BalanceEconomico extends JFrame {
 		
 		JLabel ingresosmes = new JLabel("New label");
 		ingresosmes.setHorizontalAlignment(SwingConstants.CENTER);
-		ingresosmes.setBounds(212, 138, 138, 14);
+		ingresosmes.setBounds(210, 138, 138, 14);
 		String iSem = TransaccionesBD.getBalance(c, 2, "I");
-		ingresosmes.setText(iSem);
+		ingresosmes.setText(iSem+"€");
 		contentPane.add(ingresosmes);
 		
 		JLabel ingresosHoy = new JLabel("New label");
 		ingresosHoy.setHorizontalAlignment(SwingConstants.CENTER);
-		ingresosHoy.setBounds(397, 138, 66, 14);
+		ingresosHoy.setBounds(387, 138, 66, 14);
 		String iDia = TransaccionesBD.getBalance(c, 3, "I");
-		ingresosHoy.setText(iDia);
+		ingresosHoy.setText(iDia+"€");
 		contentPane.add(ingresosHoy);
 		
 		JLabel ingresosAño = new JLabel("New label");
 		ingresosAño.setHorizontalAlignment(SwingConstants.CENTER);
 		ingresosAño.setBounds(20, 138, 138, 14);
 		String iAño = TransaccionesBD.getBalance(c, 1, "I");
-		ingresosAño.setText(iAño);
+		ingresosAño.setText(iAño+"€");
 		contentPane.add(ingresosAño);
 		
-		JLabel lblNewLabel_1 = new JLabel("Ingresos del ultimo año          Ingresos del ultimo mes         Ingresos hoy");
+		JLabel lblNewLabel_1 = new JLabel("Ingresos del ultimo año         Ingresos del ultimo mes       Ingresos hoy ");
 		lblNewLabel_1.setFont(new Font("Dialog", Font.BOLD, 13));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setBounds(10, 102, 464, 25);

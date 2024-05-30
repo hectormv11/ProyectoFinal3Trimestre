@@ -173,12 +173,15 @@ public class Registro extends JFrame {
                         Usuario user = UsuariosBD.obtenerUsuario(textUsuario.getText());
                         CuentasBD.registrarCuenta("default", user, 0.0);
                     } catch (SQLException e1) {
-                        e1.printStackTrace();
+    					JOptionPane.showMessageDialog(null, "Usuario ya registrado");
+    					return;
                     }
                     
                     Inicio i = new Inicio();
                     i.show();
                     dispose();
+                }else {
+					JOptionPane.showMessageDialog(null, "Algun campo vacio");
                 }
             }
         });

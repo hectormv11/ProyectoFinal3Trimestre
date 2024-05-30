@@ -316,6 +316,7 @@ public class NuevaTransaccion extends JFrame {
 
 			}
 		});
+		
 
 		JRadioButton redioButtonIngreso = new JRadioButton("Ingreso");
 		redioButtonIngreso.addItemListener(new ItemListener() {
@@ -381,6 +382,22 @@ public class NuevaTransaccion extends JFrame {
 
 						e1.printStackTrace();
 					}
+					
+					double saldoActualizado = c.getSaldo();
+					
+					if(tipo.equals("I")) {
+						saldoActualizado += Double.parseDouble(textField.getText());
+					}else {
+						saldoActualizado -= Double.parseDouble(textField.getText());
+					}
+					
+					try {
+						CuentasBD.actualizarCuenta(c.getNombre(), c, saldoActualizado);
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, "Error inesperado");
+						return;
+
+					}
 
 					try {
 						if(numero != 0) {
@@ -401,11 +418,7 @@ public class NuevaTransaccion extends JFrame {
 				}else {
 					JOptionPane.showMessageDialog(null, "Algun campo vacio o fecha de ejemplo usada");
 				}
-
-
-
-
-
+				
 			}
 		});
 		botonAñadir.setBounds(192, 531, 89, 23);
@@ -429,7 +442,7 @@ public class NuevaTransaccion extends JFrame {
 		textoNuevaTransaccion.setHorizontalAlignment(SwingConstants.CENTER);
 		textoNuevaTransaccion.setForeground(Color.WHITE);
 		textoNuevaTransaccion.setFont(new Font("Consolas", Font.PLAIN, 20));
-		textoNuevaTransaccion.setBounds(10, 11, 464, 34);
+		textoNuevaTransaccion.setBounds(84, 11, 327, 34);
 		contentPane.add(textoNuevaTransaccion);
 
 		JLabel linkLabel_1 = new JLabel("");

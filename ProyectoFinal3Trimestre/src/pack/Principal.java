@@ -456,7 +456,13 @@ public class Principal extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				Editor ed = new Editor(trans);
+				Editor ed = null;
+				try {
+					ed = new Editor(trans);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				ed.show();
 				dispose();
 

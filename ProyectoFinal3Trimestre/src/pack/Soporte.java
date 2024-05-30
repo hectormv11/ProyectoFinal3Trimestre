@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -15,6 +16,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import java.awt.Cursor;
 
 public class Soporte extends JFrame {
 
@@ -38,6 +40,7 @@ public class Soporte extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnAtras = new JButton("");
+		btnAtras.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -65,16 +68,23 @@ public class Soporte extends JFrame {
 		lblIconoBueno.setBounds(360, 11, 64, 64);
 		contentPane.add(lblIconoBueno);
 		
-		JButton btnEnviar = new JButton("Enviar");
-		btnEnviar.setBounds(173, 227, 89, 23);
-		contentPane.add(btnEnviar);
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 86, 414, 130);
 		contentPane.add(scrollPane);
 		
 		JTextArea textArea = new JTextArea();
 		scrollPane.setViewportView(textArea);
+		JButton btnEnviar = new JButton("Enviar");
+		btnEnviar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				textArea.setText("");
+				JOptionPane.showMessageDialog(null, "Gracias, recibiras un correo lo antes posible con ayuda sobre tu problema.");
+				
+			}
+		});
+		btnEnviar.setBounds(173, 227, 89, 23);
+		contentPane.add(btnEnviar);
 		
 		JLabel lblComentarios = new JLabel("Deja aqui tus comentarios");
 		lblComentarios.setFont(new Font("Dialog", Font.PLAIN, 15));

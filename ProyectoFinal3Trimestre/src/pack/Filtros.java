@@ -16,11 +16,16 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.DocumentFilter.FilterBypass;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ButtonGroup;
@@ -28,6 +33,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JTextField;
@@ -135,12 +143,53 @@ public class Filtros extends JFrame {
 		filtroFecha.setColumns(10);
 		filtroFecha.setBounds(236, 140, 150, 20);
 		contentPane.add(filtroFecha);
+		((AbstractDocument) filtroFecha.getDocument()).setDocumentFilter(new DocumentFilter() {
+			@Override
+			public void replace(FilterBypass fb, int offset, int length, String text, javax.swing.text.AttributeSet attrs) throws BadLocationException {
+				if (text.matches("[0-9-]*")) {
+					super.replace(fb, offset, length, text, attrs);
+				} else {
+					JOptionPane.showMessageDialog(null, "El campo fecha solo puede contener números y guiones con el formato yyyy-mm-dd.");
+				}
+			}
+		});
+		filtroFecha.setToolTipText("El campo fecha solo puede contener números y guiones con el formato yyyy-mm-dd.");
+		filtroFecha.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+
+				if(filtroFecha.getText().equals("")) {
+					filtroFecha.setText("2000-12-31");
+				}
+
+			}
+		});
+		filtroFecha.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(filtroFecha.getText().equals("2000-12-31")) {
+					filtroFecha.setText("");
+				}
+			}
+		});
+		filtroFecha.setText("2000-12-31");
 
 		filtroCantidad = new JTextField();
 		filtroCantidad.setBounds(236, 104, 150, 20);
 		contentPane.add(filtroCantidad);
 		filtroCantidad.setColumns(10);
 		filtroCantidad.setText("0.0");
+		((AbstractDocument) filtroCantidad.getDocument()).setDocumentFilter(new DocumentFilter() {
+			@Override
+			public void replace(FilterBypass fb, int offset, int length, String text, javax.swing.text.AttributeSet attrs) throws BadLocationException {
+				if (text.matches("[0-9.]*")) {
+					super.replace(fb, offset, length, text, attrs);
+				} else {
+					JOptionPane.showMessageDialog(null, "El campo cantidad solo puede contener números.");
+				}
+			}
+		});
+		filtroCantidad.setToolTipText("El campo cantidad solo puede contener números.");
 		filtroCantidad.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -215,14 +264,20 @@ public class Filtros extends JFrame {
 		btnAtras.setBounds(10, 11, 64, 64);
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				double cantidad = Double.parseDouble(filtroCantidad.getText());
 				Date utilDate = null;
-				if(!filtroFecha.getText().equals("")) {
+				if(!filtroFecha.getText().equals("2000-12-31")) {
 					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 					String dateString = filtroFecha.getText();
-					LocalDate localDate = LocalDate.parse(dateString,formatter);
-					utilDate = Date.valueOf(localDate);
+					try {
+						LocalDate localDate = LocalDate.parse(dateString,formatter);  // Convierte la cadena a LocalDate
+						utilDate = Date.valueOf(localDate);  // Convierte LocalDate a java.sql.Date
+
+					} catch (DateTimeParseException e1) {
+						JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto");
+						return;
+						// Maneja la excepción si la cadena no tiene el formato correcto
+					}
 				}
 				
 				String frase = "Ningun filtro aplicado";

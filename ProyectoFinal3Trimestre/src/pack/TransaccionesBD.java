@@ -189,8 +189,9 @@ public class TransaccionesBD {
 		String consulta = "UPDATE transaccion SET cantidad = " + trans.getCantidad() + ", cuenta = "+ trans.getCuenta().getId() +", categoria = '" 
 				+ trans.getCat().getNombre() + "', fecha = '" + trans.getFecha() + "', comentario = '" + trans.getComentario() + "', tipo = '" 
 				+ trans.getTipo() + "' WHERE id_transaccion = " + trans.getId();
-
-		stm.executeQuery(consulta);
+		
+		System.out.println(consulta);
+		stm.executeUpdate(consulta);
 
 	}
 }
