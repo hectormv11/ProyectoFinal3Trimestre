@@ -31,6 +31,7 @@ import javax.swing.JTextArea;
 import javax.swing.Box;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.Toolkit;
 
 
 public class Principal extends JFrame {
@@ -51,6 +52,7 @@ public class Principal extends JFrame {
 	 */
 	@SuppressWarnings("rawtypes")
 	public Principal(Usuario usuario_logeado, boolean arrayTrans, Transaccion[] arrT, String filtros) throws SQLException {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/resources/presupuesto (1).png")));
 		flag = arrayTrans;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

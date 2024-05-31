@@ -53,6 +53,7 @@ import java.awt.event.FocusEvent;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.BadLocationException;
+import java.awt.Toolkit;
 
 public class NuevaTransaccion extends JFrame {
 
@@ -77,6 +78,7 @@ public class NuevaTransaccion extends JFrame {
 	 * @throws SQLException 
 	 */
 	public NuevaTransaccion(Usuario usuario_logeado, Cuenta c) throws SQLException {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(NuevaTransaccion.class.getResource("/resources/presupuesto (1).png")));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(700, 100, 500, 600);

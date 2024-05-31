@@ -23,6 +23,7 @@ import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.awt.Toolkit;
 
 public class PerfilDeUsuario extends JFrame {
 
@@ -41,6 +42,7 @@ public class PerfilDeUsuario extends JFrame {
 	 * Create the frame.
 	 */
 	public PerfilDeUsuario(Usuario user) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(PerfilDeUsuario.class.getResource("/resources/presupuesto (1).png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(700, 100, 500, 600);
 		contentPane = new JPanel();

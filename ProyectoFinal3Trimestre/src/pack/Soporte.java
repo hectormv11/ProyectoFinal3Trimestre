@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.Cursor;
+import java.awt.Toolkit;
 
 public class Soporte extends JFrame {
 
@@ -31,6 +32,7 @@ public class Soporte extends JFrame {
 	 * Create the frame.
 	 */
 	public Soporte(Cuenta c, Transaccion[] trans) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Soporte.class.getResource("/resources/presupuesto (1).png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(700, 100, 450, 300);
 		contentPane = new JPanel();
