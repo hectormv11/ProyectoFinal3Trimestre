@@ -167,7 +167,7 @@ public class AñadirCuenta extends JFrame {
 						labelFotoCheck.setVisible(true);
 						lblNewLabel_3_1.setVisible(true);
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, "Nombre o saldo mal largos de lo permitido");
 						e1.printStackTrace();
 					}
 				}

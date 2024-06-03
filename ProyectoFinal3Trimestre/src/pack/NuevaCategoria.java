@@ -82,7 +82,7 @@ public class NuevaCategoria extends JFrame {
 					dispose();
 				} catch (SQLException e1) {
 					JOptionPane.showMessageDialog(null, "Nombre ya existente");
-					e1.printStackTrace();
+					//e1.printStackTrace();
 				}	
 			}
 		});

@@ -314,7 +314,8 @@ public class NuevaTransaccion extends JFrame {
 					}
 
 				}else {
-					System.out.println("-------");
+					JOptionPane.showMessageDialog(null, 
+							"Archivo seleccionado incorrectamente, intentelo de nuevo o pruebe con otro archivo");
 				}
 
 			}

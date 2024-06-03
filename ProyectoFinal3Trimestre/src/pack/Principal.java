@@ -10,10 +10,12 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JMenu;
 import javax.swing.JLabel;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
 
@@ -41,6 +43,7 @@ public class Principal extends JFrame {
 	private JLabel lblPerfil;
 	Cuenta c;
 	boolean flag;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -291,7 +294,7 @@ public class Principal extends JFrame {
 		for (int i = startIndex; i < trans.length; i++) {
 			panelContainer.add(getExamplePanel(trans[i]));
 		}
-		
+
 		JLabel lblSoporte = new JLabel("Soporte ");
 		lblSoporte.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSoporte.setIcon(new ImageIcon(Principal.class.getResource("/resources/centro-de-llamadas.png")));
@@ -309,7 +312,7 @@ public class Principal extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 				dispose();
 
 			}
@@ -325,7 +328,7 @@ public class Principal extends JFrame {
 		});
 		lblSoporte.setFont(new Font("Gill Sans MT", Font.PLAIN, 17));
 		mnNewMenu.add(lblSoporte);
-		
+
 		JLabel lblCerrarSesion = new JLabel("Cerrar Sesion ");
 		lblCerrarSesion.setHorizontalTextPosition(SwingConstants.LEADING);
 		lblCerrarSesion.setIcon(new ImageIcon(Principal.class.getResource("/resources/cerrar-sesion.png")));
@@ -348,12 +351,13 @@ public class Principal extends JFrame {
 		});
 		lblCerrarSesion.setFont(new Font("Gill Sans MT", Font.PLAIN, 17));
 		mnNewMenu.add(lblCerrarSesion);
-		
+
 
 		JLabel fondo = new JLabel("");
 		fondo.setIcon(new ImageIcon(Principal.class.getResource("/resources/fondoPizarra.jpg")));
 		fondo.setBounds(0, -32, 484, 550);
 		panelTransacciones.add(fondo);
+		
 
 	}
 
@@ -362,8 +366,8 @@ public class Principal extends JFrame {
 		//--------------------------------------------------------------------------------------------------------------------------//
 
 		JPanel panel = new JPanel();
-		Border border = BorderFactory.createLineBorder(Color.BLACK);
-		panel.setBorder(border);
+		panel.setBounds(10, 103, 464, 142);
+		getContentPane().add(panel);
 
 		JLabel cantidad = new JLabel("Cantidad:");
 
@@ -389,65 +393,7 @@ public class Principal extends JFrame {
 
 		JScrollPane scrollPane_1 = new JScrollPane();
 
-
-
 		JLabel lblNewLabel = new JLabel("");
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-				gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-						.addGap(10)
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel.createSequentialGroup()
-										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-												.addComponent(cantidad, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-												.addComponent(fecha, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-												.addComponent(comentario, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
-										.addGap(10)
-										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-												.addComponent(cantidadTexto, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
-												.addComponent(fechaTexto, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
-												.addGroup(gl_panel.createSequentialGroup()
-														.addGap(206)
-														.addComponent(categoria, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)))
-										.addGap(5)
-										.addComponent(lblNewLabel_5))
-								.addGroup(gl_panel.createSequentialGroup()
-										.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 338, GroupLayout.PREFERRED_SIZE)
-										.addGap(15)
-										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-												.addComponent(editar, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
-												.addGroup(gl_panel.createSequentialGroup()
-														.addGap(36)
-														.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))))))
-				);
-		gl_panel.setVerticalGroup(
-				gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-						.addGap(11)
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel.createSequentialGroup()
-										.addComponent(cantidad)
-										.addGap(11)
-										.addComponent(fecha)
-										.addGap(11)
-										.addComponent(comentario))
-								.addGroup(gl_panel.createSequentialGroup()
-										.addComponent(cantidadTexto)
-										.addGap(11)
-										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-												.addComponent(fechaTexto)
-												.addComponent(categoria)))
-								.addComponent(lblNewLabel_5))
-						.addGap(11)
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_panel.createSequentialGroup()
-										.addGap(9)
-										.addComponent(editar)
-										.addGap(10)
-										.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))))
-				);
 		JTextArea textArea = new JTextArea();
 		scrollPane_1.setViewportView(textArea);
 		textArea.setText(trans.getComentario());
@@ -470,6 +416,83 @@ public class Principal extends JFrame {
 
 			}
 		});
+
+		JButton eliminar = new JButton("Eliminar");
+
+		eliminar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				EstasDeAcuerdo eDA = new EstasDeAcuerdo(trans.getCuenta().getUser(), trans);
+				eDA.show();
+				dispose();
+
+			}
+		});
+
+
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+				gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+						.addGap(10)
+						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel.createSequentialGroup()
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+												.addComponent(cantidad, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+												.addComponent(fecha, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+												.addComponent(comentario, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
+										.addGap(10)
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+												.addComponent(cantidadTexto, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
+												.addGroup(gl_panel.createSequentialGroup()
+														.addGap(206)
+														.addComponent(categoria, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
+												.addComponent(fechaTexto, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE))
+										.addGap(3)
+										.addComponent(lblNewLabel_5, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panel.createSequentialGroup()
+										.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 338, GroupLayout.PREFERRED_SIZE)
+										.addGap(10)
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+												.addComponent(editar, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+												.addGroup(gl_panel.createSequentialGroup()
+														.addGap(42)
+														.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
+												.addComponent(eliminar, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)))))
+				);
+		gl_panel.setVerticalGroup(
+				gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+						.addGap(11)
+						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel.createSequentialGroup()
+										.addComponent(cantidad)
+										.addGap(11)
+										.addComponent(fecha)
+										.addGap(11)
+										.addComponent(comentario))
+								.addGroup(gl_panel.createSequentialGroup()
+										.addComponent(cantidadTexto)
+										.addGap(11)
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+												.addComponent(categoria)
+												.addComponent(fechaTexto)))
+								.addComponent(lblNewLabel_5, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
+						.addGap(8)
+						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel.createSequentialGroup()
+										.addGap(2)
+										.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panel.createSequentialGroup()
+										.addComponent(editar)
+										.addGap(2)
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+												.addGroup(gl_panel.createSequentialGroup()
+														.addGap(20)
+														.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+												.addComponent(eliminar)))))
+				);
 		panel.setLayout(gl_panel);
 		if(trans.getTipo().equals("I")) {
 			Color backgroundColor = new Color(168, 255, 150);
@@ -483,5 +506,7 @@ public class Principal extends JFrame {
 		//--------------------------------------------------------------------------------------------------------------------------//
 
 		return panel;
+
 	}
+
 }

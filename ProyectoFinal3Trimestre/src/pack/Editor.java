@@ -61,7 +61,7 @@ public class Editor extends JFrame {
 	 */
 	public Editor(Transaccion trans) throws SQLException {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Editor.class.getResource("/resources/presupuesto (1).png")));
-		
+
 		catSelect = trans.getCat();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -206,12 +206,12 @@ public class Editor extends JFrame {
 		contentPane.add(panelCategorias);
 		panelCategorias.setLayout(new GridLayout(0, 5, 0, 0));
 
-		JButton botonAñadir = new JButton("Añadir");
+		JButton botonAñadir = new JButton("Guardar");
 		botonAñadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				double numero = 0;
-				
+
 				if(numSeleccionados > 1){
 					JOptionPane.showMessageDialog(null, "Más de una categoria seleccionada, deseleccione toda y seleccione la que quiera");
 					return;
@@ -234,7 +234,7 @@ public class Editor extends JFrame {
 				}
 
 
-				nueva = new Transaccion(trans.getId(),numero, trans.getCuenta(), catSelect, sqlDate, textAreaComentario.getText(), tipo);
+				nueva = new Transaccion(trans.getId(), numero, trans.getCuenta(), catSelect, sqlDate, textAreaComentario.getText(), tipo);
 
 				try {
 					TransaccionesBD.updateTransaccion(nueva);
@@ -244,7 +244,30 @@ public class Editor extends JFrame {
 					e1.printStackTrace();
 				}
 
-				
+				if(!textFieldCantidad.getText().equals("0.0") || !textFieldCantidad.getText().equals("")) {
+					double saldoActualizado = trans.getCuenta().getSaldo();
+
+					if(trans.getTipo().equals("I")) {
+						saldoActualizado -= trans.getCantidad();
+					}else {
+						saldoActualizado += trans.getCantidad();
+					}
+
+					if(tipo.equals("I")) {
+						saldoActualizado += Double.parseDouble(textFieldCantidad.getText());
+					}else {
+						saldoActualizado -= Double.parseDouble(textFieldCantidad.getText());
+					}
+
+
+					try {
+						CuentasBD.actualizarCuenta(trans.getCuenta().getNombre(), trans.getCuenta(), saldoActualizado);
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, "Error inesperado");
+						return;
+
+					}
+				}
 
 			}
 		});

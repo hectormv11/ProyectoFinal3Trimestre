@@ -56,15 +56,15 @@ public class InicioSesion extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JButton btnNewButton_1 = new JButton("");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				Inicio i = new Inicio();
 				i.show();
 				dispose();
-				
+
 			}
 		});
 		btnNewButton_1.setIcon(new ImageIcon(InicioSesion.class.getResource("/resources/izquierda (1).png")));
@@ -119,26 +119,26 @@ public class InicioSesion extends JFrame {
 
 			}
 		});
-		
+
 		btnNewButton.setBounds(201, 307, 89, 23);
 		contentPane.add(btnNewButton);
-						
-						JButton btnNewButton_2 = new JButton("New button");
-						btnNewButton_2.setBorderPainted(false);
-						btnNewButton_2.setContentAreaFilled(false);
-						btnNewButton_2.setIcon(new ImageIcon(InicioSesion.class.getResource("/resources/dolar_128_.gif")));
-						btnNewButton_2.setBounds(188, 388, 128, 128);
-						contentPane.add(btnNewButton_2);
-								
-								JButton btnNewButton_3 = new JButton("New button");
-								btnNewButton_3.setBackground(new Color(255, 255, 255));
-								btnNewButton_3.setBorderPainted(false);
-								btnNewButton_3.setBounds(172, 377, 150, 150);
-								contentPane.add(btnNewButton_3);
-								
-										lblNewLabel = new JLabel("");
-										lblNewLabel.setIcon(new ImageIcon(InicioSesion.class.getResource("/resources/fondo-pantalla-fondo-concepto-negocio-patrones-fisuras-finanzas-o-economia_78677-9986 (1) (1).jpg")));
-										lblNewLabel.setBounds(0, 0, 484, 561);
-										contentPane.add(lblNewLabel);
+
+		JButton btnNewButton_2 = new JButton("");
+		btnNewButton_2.setBorderPainted(false);
+		btnNewButton_2.setContentAreaFilled(false);
+		btnNewButton_2.setIcon(new ImageIcon(InicioSesion.class.getResource("/resources/dolar_128_.gif")));
+		btnNewButton_2.setBounds(186, 388, 128, 128);
+		contentPane.add(btnNewButton_2);
+
+		JButton btnNewButton_3 = new JButton("");
+		btnNewButton_3.setBackground(new Color(255, 255, 255));
+		btnNewButton_3.setBorderPainted(false);
+		btnNewButton_3.setBounds(172, 377, 150, 150);
+		contentPane.add(btnNewButton_3);
+
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(InicioSesion.class.getResource("/resources/fondo-pantalla-fondo-concepto-negocio-patrones-fisuras-finanzas-o-economia_78677-9986 (1) (1).jpg")));
+		lblNewLabel.setBounds(0, 0, 484, 561);
+		contentPane.add(lblNewLabel);
 	}
 }

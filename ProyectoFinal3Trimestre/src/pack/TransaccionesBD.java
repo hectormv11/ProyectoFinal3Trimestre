@@ -194,4 +194,18 @@ public class TransaccionesBD {
 		stm.executeUpdate(consulta);
 
 	}
+	
+	public static void eliminarTransaccion(Transaccion trans) throws SQLException {
+
+		Conexion con = new Conexion();
+		Connection link = con.abrirConsulta();
+
+		String consulta = "DELETE FROM transaccion WHERE id_transaccion = ?";
+		
+		PreparedStatement ps = link.prepareStatement(consulta);
+		
+		ps.setInt(1, trans.getId());
+		ps.execute();
+
+	}
 }
