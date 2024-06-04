@@ -31,6 +31,7 @@ public class BalanceEconomico extends JFrame {
 	 * @throws SQLException 
 	 */
 	public BalanceEconomico(Cuenta c, Transaccion[] trans) throws SQLException {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(BalanceEconomico.class.getResource("/resources/presupuesto (1).png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(700, 100, 500, 360);

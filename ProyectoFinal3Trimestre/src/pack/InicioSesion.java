@@ -48,6 +48,7 @@ public class InicioSesion extends JFrame {
 	 * Create the frame.
 	 */
 	public InicioSesion() {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(InicioSesion.class.getResource("/resources/presupuesto (1).png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(700, 100, 500, 600);

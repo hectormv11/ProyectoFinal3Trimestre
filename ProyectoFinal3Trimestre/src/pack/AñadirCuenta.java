@@ -47,6 +47,7 @@ public class AñadirCuenta extends JFrame {
 	 * @throws SQLException 
 	 */
 	public AñadirCuenta(Usuario usuario_logeado) throws SQLException {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(700, 100, 500, 600);
 		contentPane = new JPanel();

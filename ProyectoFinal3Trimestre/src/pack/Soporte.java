@@ -32,6 +32,7 @@ public class Soporte extends JFrame {
 	 * Create the frame.
 	 */
 	public Soporte(Cuenta c, Transaccion[] trans) {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Soporte.class.getResource("/resources/presupuesto (1).png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(700, 100, 450, 300);

@@ -34,6 +34,7 @@ public class NuevaCategoria extends JFrame {
 	 * Create the frame.
 	 */
 	public NuevaCategoria(String img, Usuario user, Cuenta c) {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(NuevaCategoria.class.getResource("/resources/presupuesto (1).png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(700, 100, 450, 300);

@@ -60,6 +60,7 @@ public class Editor extends JFrame {
 	 * @throws SQLException 
 	 */
 	public Editor(Transaccion trans) throws SQLException {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Editor.class.getResource("/resources/presupuesto (1).png")));
 
 		catSelect = trans.getCat();

@@ -65,6 +65,7 @@ public class Filtros extends JFrame {
 	 * @throws SQLException 
 	 */
 	public Filtros(Cuenta c, Usuario usuario_logeado) throws SQLException {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Filtros.class.getResource("/resources/presupuesto (1).png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(700, 100, 500, 600);

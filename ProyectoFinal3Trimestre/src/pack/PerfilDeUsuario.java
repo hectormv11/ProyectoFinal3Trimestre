@@ -42,6 +42,7 @@ public class PerfilDeUsuario extends JFrame {
 	 * Create the frame.
 	 */
 	public PerfilDeUsuario(Usuario user) {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(PerfilDeUsuario.class.getResource("/resources/presupuesto (1).png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(700, 100, 500, 600);

@@ -1,7 +1,5 @@
 package pack;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -31,6 +29,7 @@ public class EstasDeAcuerdo extends JFrame {
 	 * Create the frame.
 	 */
 	public EstasDeAcuerdo(Usuario usuario_logeado, Transaccion trans) {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(700, 300, 450, 148);
 		contentPane = new JPanel();
